@@ -42,12 +42,12 @@ interface DeskDocAsset {
 // ─── Chapters (8 dossierpagina's) ───
 const chapters = [
   { id: 'belofte', title: 'De belofte', question: 'Welke ervaring willen we Sophie bieden?' },
-  { id: 'kracht', title: 'De kracht', question: 'Welke bewezen capabilities vormen het vertrekpunt?' },
-  { id: 'verbinding', title: 'De verbinding', question: 'Waarom leveren losse successen nog geen autonome organisatie op?' },
+  { id: 'kracht', title: 'Wat al werkt', question: 'Welke bewezen capabilities vormen het vertrekpunt?' },
+  { id: 'verbinding', title: 'Waar het nog breekt', question: 'Waarom leveren losse successen nog geen autonome organisatie op?' },
   { id: 'fundament', title: 'Het fundament', question: 'Wat moet verbonden en betrouwbaar worden?' },
   { id: 'mens', title: 'Mens & AI', question: 'Hoe werken mens en AI verantwoord samen?' },
-  { id: 'operatie', title: 'De operatie', question: 'Hoe gaan de onderdelen als één geheel samenwerken?' },
-  { id: 'waarheid', title: 'De waarheid', question: 'Werkt het ook wanneer het erop aankomt?' },
+  { id: 'operatie', title: 'De samenhangende operatie', question: 'Hoe gaan de onderdelen als één geheel samenwerken?' },
+  { id: 'waarheid', title: 'Het moment van de waarheid', question: 'Werkt het ook wanneer het erop aankomt?' },
   { id: 'droom', title: 'De droom', question: '' },
 ]
 
