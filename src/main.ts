@@ -55,7 +55,7 @@ const chapters = [
 const chapterPages = [
   {
     pageNum: 1,
-    title: 'De klantbelofte',
+    title: 'De belofte aan Sophie',
     subtitle: 'Eén vloeiende dienstverlening op een kwetsbaar moment',
     content: `
       <ul class="cp-list">
@@ -63,11 +63,11 @@ const chapterPages = [
         <li>Ze weet steeds waar zij aan toe is</li>
         <li>Ze krijgt snel duidelijkheid over eenvoudige onderdelen</li>
         <li>Ze krijgt menselijke uitleg wanneer oordeel nodig is</li>
-        <li>Ze hoeft niet zelf tussen Vanbreda, werkgever, verzekeraar en zorgverlener te coördineren</li>
+        <li>Ze hoeft niet zelf tussen werkgever, zorgverlener, verzekeraar en Vanbreda te coördineren</li>
       </ul>
       <div class="cp-flow">
         <div class="cp-flow__step">
-          <div class="cp-flow__label">Ziekte</div>
+          <div class="cp-flow__label">Ziek worden</div>
           <div class="cp-flow__need">Geruststelling</div>
         </div>
         <div class="cp-flow__arrow">→</div>
@@ -90,51 +90,84 @@ const chapterPages = [
           <div class="cp-flow__label">Duidelijkheid</div>
           <div class="cp-flow__need">Afronding</div>
         </div>
+      </div>
+      <div class="cp-pillars">
+        <span class="cp-pillar cp-pillar--active">Claims</span>
+        <span class="cp-pillar cp-pillar--active">Communicatie</span>
+        <span class="cp-pillar cp-pillar--active">B2B/B2I</span>
       </div>`,
-    footnote: 'Iedere ontwerpkeuze moet aantoonbaar bijdragen aan de ervaring van Sophie.',
+    footnote: 'Iedere ontwerpkeuze wordt uiteindelijk getoetst aan de ervaring van Sophie.',
   },
   {
     pageNum: 2,
     title: 'Vanbreda begint niet bij nul',
-    subtitle: 'De bestaande kracht',
+    subtitle: 'Er is al veel bewezen in productie',
     content: `
       <div class="cp-columns">
         <div class="cp-col">
           <div class="cp-col__title">Claims</div>
+          <span class="cp-stat">55%</span>
+          <span class="cp-stat-label">Volumegewogen STP</span>
           <ul class="cp-col__list">
-            <li>55% volumegewogen STP</li>
             <li>Digitale intake</li>
             <li>OCR-capability</li>
             <li>±200.000 claims/maand</li>
           </ul>
+          <div class="cp-miniflow">
+            <span>Document</span>
+            <span class="cp-miniflow__arrow">→</span>
+            <span>Data</span>
+            <span class="cp-miniflow__arrow">→</span>
+            <span>Beoordeling</span>
+          </div>
         </div>
         <div class="cp-col">
           <div class="cp-col__title">Communicatie</div>
+          <span class="cp-stat">~80%</span>
+          <span class="cp-stat-label">Calls via Voice AI</span>
           <ul class="cp-col__list">
-            <li>±80% calls via Voice AI</li>
             <li>±95% routeringsnauwkeurigheid</li>
             <li>Intentclassificatie</li>
             <li>Contextverrijking</li>
-            <li>Conceptantwoorden</li>
           </ul>
+          <div class="cp-miniflow">
+            <span>Contact</span>
+            <span class="cp-miniflow__arrow">→</span>
+            <span>Intent</span>
+            <span class="cp-miniflow__arrow">→</span>
+            <span>Antwoord</span>
+          </div>
         </div>
         <div class="cp-col">
           <div class="cp-col__title">B2B / B2I</div>
+          <span class="cp-stat">~87%</span>
+          <span class="cp-stat-label">STP Aansluitingen</span>
           <ul class="cp-col__list">
-            <li>±87% STP aansluitingen</li>
             <li>Digitale interfaces</li>
             <li>Partner- en beheerprocessen</li>
           </ul>
+          <div class="cp-miniflow">
+            <span>Partner</span>
+            <span class="cp-miniflow__arrow">→</span>
+            <span>Validatie</span>
+            <span class="cp-miniflow__arrow">→</span>
+            <span>Integratie</span>
+          </div>
         </div>
+      </div>
+      <div class="cp-connector">Bewezen capabilities — nog niet altijd één keten</div>
+      <div class="cp-pillars">
+        <span class="cp-pillar cp-pillar--active">Claims</span>
+        <span class="cp-pillar cp-pillar--active">Communicatie</span>
+        <span class="cp-pillar cp-pillar--active">B2B/B2I</span>
       </div>`,
-    footnote: 'De volgende stap is niet opnieuw beginnen, maar verbinden wat al waarde levert.',
+    footnote: 'De volgende stap is niet opnieuw beginnen, maar verbinden wat al aantoonbaar waarde levert.',
   },
   {
     pageNum: 3,
     title: 'De waarde zit in de verbinding',
-    subtitle: 'Mogelijke frictie tussen de onderdelen',
+    subtitle: 'Mogelijke frictie tussen de onderdelen — te valideren met Vanbreda',
     content: `
-      <div class="cp-note">Te valideren met Vanbreda</div>
       <ul class="cp-list">
         <li>Context reist niet altijd mee</li>
         <li>Informatie staat verspreid over systemen</li>
@@ -143,30 +176,24 @@ const chapterPages = [
         <li>Automatische stappen kunnen verborgen handwerk veroorzaken</li>
         <li>Lokale optimalisatie leidt niet automatisch tot <strong>end-to-end waarde</strong></li>
       </ul>
+      <div class="cp-note">Hypothese — te onderzoeken</div>
       <div class="cp-flow">
-        <div class="cp-flow__step">
-          <div class="cp-flow__label">Intake</div>
-        </div>
-        <div class="cp-flow__break">⚡</div>
-        <div class="cp-flow__step">
-          <div class="cp-flow__label">Classificatie</div>
-        </div>
-        <div class="cp-flow__break">⚡</div>
-        <div class="cp-flow__step">
-          <div class="cp-flow__label">Context</div>
-        </div>
-        <div class="cp-flow__break">⚡</div>
-        <div class="cp-flow__step">
-          <div class="cp-flow__label">Beslissing</div>
-        </div>
-        <div class="cp-flow__break">⚡</div>
-        <div class="cp-flow__step">
-          <div class="cp-flow__label">Uitvoering</div>
-        </div>
-        <div class="cp-flow__break">⚡</div>
-        <div class="cp-flow__step">
-          <div class="cp-flow__label">Communicatie</div>
-        </div>
+        <div class="cp-flow__step"><div class="cp-flow__label">Intake</div></div>
+        <div class="cp-flow__break">⚡<span class="cp-flow__break-label">overdracht</span></div>
+        <div class="cp-flow__step"><div class="cp-flow__label">Classificatie</div></div>
+        <div class="cp-flow__break">⚡<span class="cp-flow__break-label">ontbrekende data</span></div>
+        <div class="cp-flow__step"><div class="cp-flow__label">Context</div></div>
+        <div class="cp-flow__break">⚡<span class="cp-flow__break-label">menselijke correctie</span></div>
+        <div class="cp-flow__step"><div class="cp-flow__label">Beslissing</div></div>
+        <div class="cp-flow__break">⚡<span class="cp-flow__break-label">eigenaarschap</span></div>
+        <div class="cp-flow__step"><div class="cp-flow__label">Uitvoering</div></div>
+        <div class="cp-flow__break">⚡<span class="cp-flow__break-label">extra contact</span></div>
+        <div class="cp-flow__step"><div class="cp-flow__label">Communicatie</div></div>
+      </div>
+      <div class="cp-pillars">
+        <span class="cp-pillar cp-pillar--active">Claims</span>
+        <span class="cp-pillar cp-pillar--active">Communicatie</span>
+        <span class="cp-pillar cp-pillar--active">B2B/B2I</span>
       </div>`,
     footnote: 'De grootste frictie zit vaak niet in één taak, maar tussen teams, systemen en beslissingen.',
   },
@@ -175,37 +202,31 @@ const chapterPages = [
     title: 'De verbonden basis',
     subtitle: 'De ruggengraat van gecontroleerde autonomie',
     content: `
-      <div class="cp-note">Nodig over de drie pijlers heen</div>
-      <div class="cp-grid">
-        <div class="cp-grid__item">Gedeelde data</div>
-        <div class="cp-grid__item">Consistente identiteit</div>
-        <div class="cp-grid__item">Expliciete beslisregels</div>
-        <div class="cp-grid__item">Modulaire integraties</div>
-        <div class="cp-grid__item">Workflow & case mgmt</div>
-        <div class="cp-grid__item">End-to-end status</div>
-        <div class="cp-grid__item">Bronverwijzingen</div>
-        <div class="cp-grid__item">Toegangsbeheer</div>
-        <div class="cp-grid__item">Exception handling</div>
-      </div>
-      <div class="cp-layers">
+      <div class="cp-layers cp-layers--with-sidebar">
         <div class="cp-layer cp-layer--top">
           <div class="cp-layer__title">Ervaring</div>
           <div class="cp-layer__items">Verzekerde · Medewerker · Werkgever · Partner</div>
         </div>
         <div class="cp-layer">
-          <div class="cp-layer__title">Proces</div>
+          <div class="cp-layer__title">Processen</div>
           <div class="cp-layer__items">Claims · Communicatie · B2B/B2I</div>
         </div>
         <div class="cp-layer">
           <div class="cp-layer__title">Verbinding</div>
-          <div class="cp-layer__items">Orkestratie · Case management · Beslisregels</div>
+          <div class="cp-layer__items">Orkestratie · Case management · Beslisregels · Status</div>
         </div>
         <div class="cp-layer cp-layer--bottom">
           <div class="cp-layer__title">Fundament</div>
           <div class="cp-layer__items">Data · Masterdata · Identiteit · Integratie · Security</div>
         </div>
+        <div class="cp-layers__sidebar">Governance & Auditability</div>
+      </div>
+      <div class="cp-pillars">
+        <span class="cp-pillar cp-pillar--active">Claims</span>
+        <span class="cp-pillar cp-pillar--active">Communicatie</span>
+        <span class="cp-pillar cp-pillar--active">B2B/B2I</span>
       </div>`,
-    footnote: 'Autonomie begint niet bij een agent, maar bij een betrouwbare ruggengraat.',
+    footnote: 'Autonomie begint niet bij een agent, maar bij een betrouwbare en bestuurbare basis.',
   },
   {
     pageNum: 5,
@@ -226,33 +247,70 @@ const chapterPages = [
           <div class="cp-level__desc">Het systeem voert uit. De mens bewaakt kwaliteit en beleid.</div>
         </div>
       </div>
-      <div class="cp-note">Veranderende rollen</div>
-      <ul class="cp-list">
-        <li>Van verwerker naar <strong>exception specialist</strong></li>
-        <li>Van data-invoerder naar <strong>data steward</strong></li>
-        <li>Van teammanager naar <strong>end-to-end proceseigenaar</strong></li>
-        <li>Van modelgebruiker naar <strong>actieve feedbackgever</strong></li>
-        <li>Van standaardcontact naar <strong>empathisch klantadviseur</strong></li>
-      </ul>`,
+      <div class="cp-level-note">Meer autonomie vraagt meer expliciete grenzen, monitoring en verantwoordelijkheid.</div>
+      <div class="cp-role-groups">
+        <div class="cp-role-group">
+          <div class="cp-role-group__title">Klant & Case</div>
+          <div class="cp-role-group__items">Customer advisor<br>Exception specialist</div>
+        </div>
+        <div class="cp-role-group">
+          <div class="cp-role-group__title">Proces & Kennis</div>
+          <div class="cp-role-group__items">Process owner<br>Knowledge owner</div>
+        </div>
+        <div class="cp-role-group">
+          <div class="cp-role-group__title">Data & AI</div>
+          <div class="cp-role-group__items">Data steward<br>Model steward</div>
+        </div>
+      </div>
+      <div class="cp-pillars">
+        <span class="cp-pillar cp-pillar--active">Claims</span>
+        <span class="cp-pillar cp-pillar--active">Communicatie</span>
+        <span class="cp-pillar cp-pillar--active">B2B/B2I</span>
+      </div>`,
     footnote: 'Autonomie betekent niet minder verantwoordelijkheid, maar explicietere verantwoordelijkheid.',
   },
   {
     pageNum: 6,
     title: 'De samenhangende operatie',
-    subtitle: 'Eén Health Care operating model',
+    subtitle: 'Eén Health Care operating model over de drie pijlers heen',
     content: `
-      <div class="cp-note">Wat de organisatie in 2030 kan</div>
-      <ul class="cp-list">
-        <li>Eén case over de volledige keten volgen</li>
-        <li>Context automatisch beschikbaar maken</li>
-        <li>Routinewerk gecontroleerd automatiseren</li>
-        <li>Onzekerheid <strong>herkennen</strong></li>
-        <li>De juiste expert inschakelen</li>
-        <li>Klant en medewerker dezelfde status tonen</li>
-        <li>Elke beslissing herleiden</li>
-        <li>Correcties als leersignaal gebruiken</li>
-        <li>Prestaties, risico's en uitzonderingen bewaken</li>
-      </ul>`,
+      <div class="cp-operating-model">
+        <div class="cp-om__col">
+          <div class="cp-om__col-title">Inkomende wereld</div>
+          <div class="cp-om__item">Verzekerde</div>
+          <div class="cp-om__item">Werkgever</div>
+          <div class="cp-om__item">Zorgverlener</div>
+          <div class="cp-om__item">Verzekeraar</div>
+          <div class="cp-om__item">Partner</div>
+        </div>
+        <div class="cp-om__col">
+          <div class="cp-om__col-title">HC Operating Model</div>
+          <div class="cp-om__pillar">Claims</div>
+          <div class="cp-om__pillar">Communicatie</div>
+          <div class="cp-om__pillar">B2B / B2I</div>
+          <div class="cp-om__connectors">
+            <div class="cp-om__connector">Orkestratie</div>
+            <div class="cp-om__connector">Gedeelde data & kennis</div>
+            <div class="cp-om__connector">Expliciete beslisregels</div>
+            <div class="cp-om__connector">Case management</div>
+            <div class="cp-om__connector">Menselijke regie</div>
+            <div class="cp-om__connector">Monitoring</div>
+          </div>
+        </div>
+        <div class="cp-om__col">
+          <div class="cp-om__col-title">Ervaren waarde</div>
+          <div class="cp-om__item">Duidelijke status</div>
+          <div class="cp-om__item">Snelle afhandeling</div>
+          <div class="cp-om__item">Persoonlijke ondersteuning</div>
+          <div class="cp-om__item">Correcte betaling</div>
+          <div class="cp-om__item">Minder herhaling</div>
+        </div>
+      </div>
+      <div class="cp-pillars">
+        <span class="cp-pillar cp-pillar--active">Claims</span>
+        <span class="cp-pillar cp-pillar--active">Communicatie</span>
+        <span class="cp-pillar cp-pillar--active">B2B/B2I</span>
+      </div>`,
     footnote: 'De klant ervaart één dienstverlening, ook wanneer achter de schermen meerdere systemen en partijen samenwerken.',
   },
   {
@@ -261,7 +319,7 @@ const chapterPages = [
     subtitle: 'Sophie\'s claim in 2030',
     content: `
       <ul class="cp-list cp-list--numbered">
-        <li><strong>Sophie wordt opgenomen</strong> — buitenlandse spoedopname, onzekerheid over dekking</li>
+        <li><strong>Opname</strong> — Sophie wordt onverwacht opgenomen tijdens een reis</li>
         <li><strong>Intake</strong> — documenten worden herkend, vertaald en gekoppeld</li>
         <li><strong>Context</strong> — polis, werkgever, claimhistorie en communicatie komen samen</li>
         <li><strong>Automatische verwerking</strong> — eenvoudige onderdelen worden goedgekeurd</li>
@@ -269,8 +327,60 @@ const chapterPages = [
         <li><strong>Menselijk oordeel</strong> — een claimspecialist beoordeelt de uitzondering</li>
         <li><strong>Communicatie</strong> — Sophie ontvangt één duidelijk, persoonlijk antwoord</li>
         <li><strong>Afronding</strong> — juiste betaling voorbereid, dubbele betaling voorkomen, feedback opgeslagen</li>
-      </ul>`,
-    footnote: 'Niet een demo. Niet een pilot. Dit is hoe het werkt als alles samenkomt.',
+      </ul>
+      <div class="cp-swimlanes">
+        <div class="cp-swimlane">
+          <div class="cp-swimlane__label">Sophie</div>
+          <div class="cp-swimlane__steps">
+            <div class="cp-swimlane__step cp-swimlane__step--m">Ziek</div>
+            <span class="cp-swimlane__arrow">→</span>
+            <div class="cp-swimlane__step cp-swimlane__step--a">Upload</div>
+            <span class="cp-swimlane__arrow">→</span>
+            <div class="cp-swimlane__step cp-swimlane__step--m">Vraag</div>
+            <span class="cp-swimlane__arrow">→</span>
+            <div class="cp-swimlane__step cp-swimlane__step--a">Update</div>
+            <span class="cp-swimlane__arrow">→</span>
+            <div class="cp-swimlane__step cp-swimlane__step--g">Duidelijkheid</div>
+          </div>
+        </div>
+        <div class="cp-swimlane">
+          <div class="cp-swimlane__label">Operatie</div>
+          <div class="cp-swimlane__steps">
+            <div class="cp-swimlane__step cp-swimlane__step--a">Herkennen</div>
+            <span class="cp-swimlane__arrow">→</span>
+            <div class="cp-swimlane__step cp-swimlane__step--a">Koppelen</div>
+            <span class="cp-swimlane__arrow">→</span>
+            <div class="cp-swimlane__step cp-swimlane__step--g">Beslissen</div>
+            <span class="cp-swimlane__arrow">→</span>
+            <div class="cp-swimlane__step cp-swimlane__step--m">Escaleren</div>
+            <span class="cp-swimlane__arrow">→</span>
+            <div class="cp-swimlane__step cp-swimlane__step--a">Communiceren</div>
+          </div>
+        </div>
+        <div class="cp-swimlane">
+          <div class="cp-swimlane__label">Expertise</div>
+          <div class="cp-swimlane__steps">
+            <div class="cp-swimlane__step cp-swimlane__step--m">Beoordelen</div>
+            <span class="cp-swimlane__arrow">→</span>
+            <div class="cp-swimlane__step cp-swimlane__step--m">Uitleggen</div>
+            <span class="cp-swimlane__arrow">→</span>
+            <div class="cp-swimlane__step cp-swimlane__step--m">Goedkeuren</div>
+            <span class="cp-swimlane__arrow">→</span>
+            <div class="cp-swimlane__step cp-swimlane__step--g">Leren</div>
+          </div>
+        </div>
+      </div>
+      <div class="cp-swimlane-legend">
+        <span><span class="cp-swimlane-legend__dot cp-swimlane-legend__dot--a"></span> Autonoom</span>
+        <span><span class="cp-swimlane-legend__dot cp-swimlane-legend__dot--g"></span> Gecontroleerd</span>
+        <span><span class="cp-swimlane-legend__dot cp-swimlane-legend__dot--m"></span> Menselijk</span>
+      </div>
+      <div class="cp-pillars">
+        <span class="cp-pillar cp-pillar--active">Claims</span>
+        <span class="cp-pillar cp-pillar--active">Communicatie</span>
+        <span class="cp-pillar">B2B/B2I</span>
+      </div>`,
+    footnote: 'Hier wordt zichtbaar of de organisatie werkelijk als één geheel werkt.',
   },
   {
     pageNum: 8,
@@ -289,7 +399,7 @@ const chapterPages = [
         <ul class="cp-reveal__list">
           <li>AI het routinewerk draagt</li>
           <li>processen en informatie als één keten samenwerken</li>
-          <li>onzekerheid wordt herkend</li>
+          <li>onzekerheid tijdig wordt herkend</li>
           <li>menselijk oordeel beschikbaar is waar het verschil maakt</li>
           <li>iedere interactie bijdraagt aan verbetering</li>
         </ul>
@@ -321,10 +431,16 @@ const chapterPages = [
             <span><strong>Menselijk waar het telt</strong> — bij uitzonderingen, interpretatie en empathie</span>
           </div>
         </div>
+
+        <div class="cp-cta-group">
+          <a class="cp-cta cp-cta--primary" href="/vanbreda-healthcaroperatie.pdf" target="_blank">Bekijk de droom in één overzicht</a>
+          <a class="cp-cta cp-cta--secondary" href="/vanbreda-healthcaroperatie.pdf" download>Download als PDF</a>
+        </div>
       </div>`,
-    footnote: 'De roadmap, architectuur, businesscase en aanpak die deze droom uitvoerbaar maken, zijn opgenomen in onze formele RFI-beantwoording.',
+    footnote: 'Haar ervaring in 2030 begint met de keuzes die we vandaag maken.',
   },
 ]
+
 
 // ─── SVG icons per chapter ───
 const chapterIcons = [
