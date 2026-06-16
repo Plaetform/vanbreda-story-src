@@ -252,6 +252,39 @@ body {
   color: rgba(0,0,0,.6);
 }
 
+.desk-page__pagenum {
+  position: absolute;
+  bottom: 20px;
+  right: 24px;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(0,0,0,.15);
+  letter-spacing: .1em;
+  z-index: 5;
+}
+
+/* ── Progressive reveal ── */
+.desk-page__reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity .6s ease, transform .6s ease, max-height .6s ease;
+}
+
+.desk-page__paper--step-1 .desk-page__reveal--1,
+.desk-page__paper--step-2 .desk-page__reveal--1,
+.desk-page__paper--step-3 .desk-page__reveal--1,
+.desk-page__paper--step-2 .desk-page__reveal--2,
+.desk-page__paper--step-3 .desk-page__reveal--2,
+.desk-page__paper--step-3 .desk-page__reveal--3 {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 800px;
+  overflow: visible;
+}
+
 .desk-page__graphic {
   position: absolute;
   top: 16px;

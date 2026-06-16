@@ -337,6 +337,44 @@ const chapterIcons = [
   `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><path d="M32 6L58 32 32 58 6 32z" fill="#2C8C99" opacity=".06"/><path d="M32 16L48 32 32 48 16 32z" fill="#2C8C99" opacity=".1"/><circle cx="32" cy="32" r="4" fill="#2C8C99" opacity=".2"/></svg>`,
 ]
 
+// ─── Page HTML helper ───
+function renderPageHTML(n: number): string {
+  const ch = chapters[n]
+  const cp = chapterPages[n]
+  const drops = droppedPerChapter[n]
+  const stepClass = `desk-page__paper--step-${Math.min(drops, 3)}`
+  const completeClass = drops >= 3 ? 'desk-page__paper--complete' : ''
+
+  return `
+    <div class="desk-page" id="desk-page">
+      <div class="desk-page__added">${drops >= 3 ? 'Toegevoegd aan het dossier' : 'Bouw deze pagina op'}</div>
+      <div class="desk-page__paper ${stepClass} ${completeClass}" id="desk-paper">
+        <button class="desk-page__close" id="page-close" title="Sluit pagina">✕</button>
+        <div class="desk-page__pagenum">${cp.pageNum} / 7</div>
+        <div class="desk-page__reveal desk-page__reveal--1">
+          <div class="desk-page__graphic">${chapterIcons[n]}</div>
+          <div class="desk-page__header">
+            <div class="desk-page__number">Pagina ${cp.pageNum} van 7</div>
+            <div class="desk-page__title">${cp.title}</div>
+            <div class="desk-page__subtitle">${cp.subtitle}</div>
+          </div>
+        </div>
+        <div class="desk-page__reveal desk-page__reveal--2">
+          <div class="desk-page__body">${cp.content}</div>
+        </div>
+        <div class="desk-page__reveal desk-page__reveal--3">
+          <div class="desk-page__footnote">${cp.footnote}</div>
+        </div>
+        <div class="desk-page__drop" id="page-drop">
+          ${drops >= 3
+            ? '<div class="desk-page__drop-done">✓ Pagina compleet</div><button class="desk-page__next" id="page-next">Volgende fase →</button>'
+            : `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${drops}/3</div>`}
+        </div>
+      </div>
+      <div class="desk-page__question">${ch.question}</div>
+    </div>`
+}
+
 // ─── Render ───
 function render() {
   const app = document.querySelector<HTMLDivElement>('#app')!
@@ -417,32 +455,16 @@ function renderDesk(): string {
   <!-- Central dossier: closed folder OR open page -->
   <div class="desk-center" id="desk-center">
     ${dossierOpen ? (pageMinimized ? `
-    <div class="desk-page-mini" id="desk-page-mini">
-      <div class="desk-page-mini__label">Pagina ${cp.pageNum} van 7 · ${cp.title}</div>
-      <div class="desk-page-mini__hint">Klik om te openen</div>
-    </div>
-    ` : `
-    <div class="desk-page" id="desk-page">
-      <div class="desk-page__added">Toegevoegd aan het dossier</div>
-      <div class="desk-page__paper ${droppedPerChapter[currentChapter] >= 3 ? 'desk-page__paper--complete' : ''}" id="desk-paper">
-        <button class="desk-page__close" id="page-close" title="Sluit pagina">✕</button>
-        <div class="desk-page__graphic">${chapterIcons[currentChapter]}</div>
-        <div class="desk-page__header">
-          <div class="desk-page__number">Pagina ${cp.pageNum} van 7</div>
-          <div class="desk-page__title">${cp.title}</div>
-          <div class="desk-page__subtitle">${cp.subtitle}</div>
-        </div>
-        <div class="desk-page__body">${cp.content}</div>
-        <div class="desk-page__drop" id="page-drop">
-          ${droppedPerChapter[currentChapter] >= 3 
-            ? '<div class="desk-page__drop-done">✓ Pagina compleet</div><button class="desk-page__next" id="page-next">Volgende fase →</button>' 
-            : `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${droppedPerChapter[currentChapter]}/3</div>`}
-        </div>
-        <div class="desk-page__footnote">${cp.footnote}</div>
+    <div class="desk-folder" id="desk-folder">
+      <div class="desk-folder__front">
+        <div class="desk-folder__stamp">HEALTH CARE 2030</div>
+        <div class="desk-folder__title">AE × Vanbreda</div>
+        <div class="desk-folder__sub">Status: in reconstructie</div>
+        <div class="desk-folder__label">VERTROUWELIJK</div>
       </div>
-      <div class="desk-page__question">${ch.question}</div>
+      <div class="desk-folder__hint">Klik om te openen</div>
     </div>
-    `) : `
+    ` : renderPageHTML(currentChapter)) : `
     <div class="desk-folder" id="desk-folder">
       <div class="desk-folder__front">
         <div class="desk-folder__stamp">HEALTH CARE 2030</div>
@@ -933,7 +955,9 @@ function bindPageEvents() {
     const assetId = (e as DragEvent).dataTransfer?.getData('text/plain')
     if (!assetId || droppedPerChapter[currentChapter] >= 3) return
     
+    const prevDrops = droppedPerChapter[currentChapter]
     droppedPerChapter[currentChapter]++
+    const newDrops = droppedPerChapter[currentChapter]
     
     // Animate the dragged asset shrinking
     const dragged = document.getElementById(assetId)
@@ -943,15 +967,25 @@ function bindPageEvents() {
       dragged.style.transform += ' scale(0.7)'
     }
 
+    // Update step class for progressive reveal
+    paper.classList.remove(`desk-page__paper--step-${prevDrops}`)
+    paper.classList.add(`desk-page__paper--step-${newDrops}`)
+
+    // Update "added" label
+    const addedLabel = paper.closest('.desk-page')?.querySelector('.desk-page__added') as HTMLElement
+    if (addedLabel && newDrops >= 3) {
+      addedLabel.textContent = 'Toegevoegd aan het dossier'
+    }
+
     // Update drop zone
     const dropZone = document.getElementById('page-drop')
     if (dropZone) {
-      if (droppedPerChapter[currentChapter] >= 3) {
+      if (newDrops >= 3) {
         dropZone.innerHTML = '<div class="desk-page__drop-done">✓ Pagina compleet</div><button class="desk-page__next" id="page-next">Volgende fase →</button>'
         paper.classList.add('desk-page__paper--complete')
         document.getElementById('page-next')?.addEventListener('click', () => switchChapter(currentChapter + 1))
       } else {
-        dropZone.innerHTML = `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${droppedPerChapter[currentChapter]}/3</div>`
+        dropZone.innerHTML = `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${newDrops}/3</div>`
       }
     }
   })
@@ -978,34 +1012,12 @@ function switchChapter(n: number) {
   }
 
   // Update central dossier page
-  const ch = chapters[n]
-  const cp = chapterPages[n]
   pageMinimized = false
   const center = document.getElementById('desk-center')
   if (center) {
     center.style.opacity = '0'
     setTimeout(() => {
-      center.innerHTML = `
-        <div class="desk-page" id="desk-page">
-          <div class="desk-page__added">Toegevoegd aan het dossier</div>
-          <div class="desk-page__paper ${droppedPerChapter[n] >= 3 ? 'desk-page__paper--complete' : ''}" id="desk-paper">
-            <button class="desk-page__close" id="page-close" title="Sluit pagina">✕</button>
-            <div class="desk-page__graphic">${chapterIcons[n]}</div>
-            <div class="desk-page__header">
-              <div class="desk-page__number">Pagina ${cp.pageNum} van 7</div>
-              <div class="desk-page__title">${cp.title}</div>
-              <div class="desk-page__subtitle">${cp.subtitle}</div>
-            </div>
-            <div class="desk-page__body">${cp.content}</div>
-            <div class="desk-page__drop" id="page-drop">
-              ${droppedPerChapter[n] >= 3
-                ? '<div class="desk-page__drop-done">✓ Pagina compleet</div><button class="desk-page__next" id="page-next">Volgende fase →</button>'
-                : `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${droppedPerChapter[n]}/3</div>`}
-            </div>
-            <div class="desk-page__footnote">${cp.footnote}</div>
-          </div>
-          <div class="desk-page__question">${ch.question}</div>
-        </div>`
+      center.innerHTML = renderPageHTML(n)
       center.style.opacity = '1'
       bindPageEvents()
     }, 300)
