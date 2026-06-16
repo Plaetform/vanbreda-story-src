@@ -1,4 +1,7 @@
 import './style.css'
+import './iphone-mockup.css'
+import { signaleren, begrijpen, begeleiden, verbinden, beslissen, ondersteunen, herstellen } from './scenes'
+import type { SceneModule } from './scenes'
 import { renderCover } from './pages/cover'
 import { renderPersona } from './pages/persona'
 import { renderCasus } from './pages/casus'
@@ -456,209 +459,555 @@ const dossierPages = [
   { label: 'Open Vragen',     render: renderOpenVragen },
 ]
 
-const deskAssets: DeskAsset[] = [
-  // ── Ch0: De belofte aan Sophie ──
-  { id: 'klantbelofte', label: 'Sophie\'s Brief', sublabel: '"Ik wil mijn verhaal maar één keer hoeven vertellen."',
-    image: '/img-klantbelofte.png', top: '8%', left: '8%', rotation: -3, width: '13vw', style: 'document', chapters: [0] },
-  { id: 'sophie-persona', label: 'Persona Sophie', sublabel: '41 · Marketing Director · Pharma International',
-    image: '/img-sophie-persona.png', top: '55%', left: '74%', rotation: 4, width: '12vw', style: 'document', chapters: [0] },
-  { id: 'zakenreis', label: 'De Zakenreis', sublabel: 'Lyon, dag één — alles nog normaal.',
-    image: '/img-zakenreis.png', top: '8%', left: '72%', rotation: 5, width: '12vw', style: 'photo', chapters: [0] },
-  { id: 'klantvragen', label: 'Klantvragen', sublabel: 'De eerste vragen die Sophie zich stelt.',
-    image: '/img-klantvragen.png', top: '55%', left: '6%', rotation: -5, width: '10vw', style: 'sketch', chapters: [0] },
-  { id: 'napkin', label: 'Klantreisschets', sublabel: 'De eerste schets vanuit Sophie\'s ervaring.',
-    image: '/img-napkin.png', top: '30%', left: '4%', rotation: 3, width: '11vw', style: 'sketch', chapters: [0] },
-
-  // ── Ch1: Vanbreda begint niet bij nul ──
-  { id: 'voice-ai-stats', label: 'Voice AI Stats', sublabel: '~80% calls via Voice AI · 95% routering',
-    image: '/img-voice-ai-stats.png', top: '8%', left: '8%', rotation: -4, width: '12vw', style: 'document', chapters: [1] },
-  { id: 'claims-stp', label: 'Claims STP', sublabel: '55% volumegewogen STP · 200K claims/maand',
-    image: '/img-claims-stp.png', top: '8%', left: '72%', rotation: 3, width: '12vw', style: 'document', chapters: [1] },
-  { id: 'b2b-stp', label: 'B2B/B2I Stats', sublabel: '~87% STP bij aansluitingen',
-    image: '/img-b2b-stp.png', top: '55%', left: '74%', rotation: -3, width: '11vw', style: 'document', chapters: [1] },
-  { id: 'intent-classifier', label: 'Intentclassificatie', sublabel: 'Inkomende vraag → herkende intent → routing',
-    image: '/img-intent-classifier.png', top: '55%', left: '6%', rotation: 5, width: '12vw', style: 'document', chapters: [1] },
-  { id: 'rpa-schets', label: 'Integratieschets', sublabel: 'Voice AI → Classifier → RPA → Kernapplicatie',
-    image: '/img-rpa-schets.png', top: '30%', left: '4%', rotation: -2, width: '11vw', style: 'sketch', chapters: [1] },
-
-  // ── Ch2: De waarde zit in de verbinding ──
-  { id: 'value-leakage', label: 'Value Leakage', sublabel: 'Waar lekt de waarde weg? Hypothese — te valideren.',
-    image: '/img-value-leakage.png', top: '8%', left: '8%', rotation: -3, width: '13vw', style: 'document', chapters: [2] },
-  { id: 'pizza', label: 'Werksessie', sublabel: 'Samen de keten onderzoeken — co-creatie.',
-    image: '/img-pizza-bw.png', top: '55%', left: '74%', rotation: 4, width: '12vw', style: 'polaroid', chapters: [2] },
-  { id: 'postit', label: 'Knelpunten', sublabel: '"klant vertelt verhaal opnieuw" · "wie is eigenaar?"',
-    image: '/img-postit-wall.png', top: '8%', left: '72%', rotation: 3, width: '12vw', style: 'photo', chapters: [2] },
-  { id: 'papieren-dossier', label: 'Versnipperd', sublabel: 'De fysieke manifestatie van data-silo\'s.',
-    image: '/img-papieren-dossier.png', top: '55%', left: '6%', rotation: -5, width: '11vw', style: 'photo', chapters: [2] },
-  { id: 'observatie', label: 'Observatie', sublabel: '"Automatisch verwerkt ≠ automatisch zonder handwerk."',
-    image: '/img-observatie-notitie.png', top: '30%', left: '4%', rotation: 2, width: '10vw', style: 'sketch', chapters: [2] },
-
-  // ── Ch3: De verbonden basis ──
-  { id: 'architecture', label: 'Architectuurschets', sublabel: 'Lagen: ervaring, processen, orkestratie, data.',
-    image: '/img-architecture.png', top: '8%', left: '8%', rotation: -4, width: '12vw', style: 'sketch', chapters: [3] },
-  { id: 'golden-record', label: 'Golden Record', sublabel: 'Sophie als single source of truth — alles verbonden.',
-    image: '/img-golden-record.png', top: '8%', left: '72%', rotation: 3, width: '13vw', style: 'document', chapters: [3] },
-  { id: 'beslisregel', label: 'Beslisregel', sublabel: 'Buitenlandse spoedopname → automatisch voorstel.',
-    image: '/img-beslisregel.png', top: '55%', left: '6%', rotation: 5, width: '12vw', style: 'document', chapters: [3] },
-  { id: 'blueprint', label: 'Integratiekaart', sublabel: 'Werkgever · Zorgverlener · Vanbreda · Verzekeraar.',
-    image: '/img-blueprint-flow.png', top: '55%', left: '74%', rotation: -3, width: '12vw', style: 'document', chapters: [3] },
-  { id: 'audit-trail', label: 'Audit Trail', sublabel: 'Document ontvangen → beoordeeld → gecommuniceerd.',
-    image: '/img-audit-trail.png', top: '30%', left: '76%', rotation: 2, width: '11vw', style: 'document', chapters: [3] },
-
-  // ── Ch4: Menselijke regie ──
-  { id: 'trainingskaart', label: 'Besliskaart', sublabel: 'Wanneer grijp ik in? Een beslisboom voor mens en AI.',
-    image: '/img-trainingskaart.png', top: '8%', left: '8%', rotation: -3, width: '12vw', style: 'document', chapters: [4] },
-  { id: 'rolkaart-exception', label: 'Exception Specialist', sublabel: 'Beoordeelt uitzonderingen · valideert onzekerheid.',
-    image: '/img-rolkaart-exception.png', top: '8%', left: '72%', rotation: 4, width: '12vw', style: 'document', chapters: [4] },
-  { id: 'rolkaart-steward', label: 'Data & Model Steward', sublabel: 'Bewaakt datakwaliteit · monitort modelprestaties.',
-    image: '/img-rolkaart-steward.png', top: '55%', left: '74%', rotation: -4, width: '11vw', style: 'document', chapters: [4] },
-  { id: 'memo-medewerker', label: 'Quote Thomas V.', sublabel: '"Ik kan me richten op de beslissing die echt mijn oordeel vraagt."',
-    image: '/img-memo-medewerker.png', top: '55%', left: '6%', rotation: 5, width: '12vw', style: 'document', chapters: [4] },
-  { id: 'leiderschap-memo', label: 'Leiderschapsmemo', sublabel: '"Eigenaarschap en kwaliteit blijven menselijk belegd."',
-    image: '/img-leiderschap-memo.png', top: '30%', left: '4%', rotation: -2, width: '11vw', style: 'document', chapters: [4] },
-
-  // ── Ch5: De samenhangende operatie ──
-  { id: 'cross-pillar', label: 'Cross-pillar Case', sublabel: 'Eén case doorloopt Claims · Communicatie · B2B/B2I.',
-    image: '/img-cross-pillar.png', top: '8%', left: '8%', rotation: -4, width: '13vw', style: 'sketch', chapters: [5] },
-  { id: 'control-room', label: 'Control Room', sublabel: '847 claims verwerkt, STP 82%, doorlooptijd 1u42m.',
-    image: '/img-control-room.png', top: '8%', left: '72%', rotation: 3, width: '12vw', style: 'document', chapters: [5] },
-  { id: 'case-timeline', label: 'Case Timeline', sublabel: 'Document binnen → identiteit → polis → expert → klant.',
-    image: '/img-case-timeline.png', top: '55%', left: '6%', rotation: 5, width: '12vw', style: 'document', chapters: [5] },
-  { id: 'orchestratie', label: 'Orkestratie', sublabel: 'Case coordinator verbindt systemen, AI, mens en partners.',
-    image: '/img-orchestratie.png', top: '55%', left: '74%', rotation: -3, width: '11vw', style: 'sketch', chapters: [5] },
-  { id: 'feedbackloop', label: 'Feedbackloop', sublabel: 'Uitkomst → correctie → analyse → verbeteren → meten.',
-    image: '/img-feedbackloop.png', top: '30%', left: '76%', rotation: 2, width: '11vw', style: 'document', chapters: [5] },
-
-  // ── Ch6: Het moment van de waarheid ──
-  { id: 'ziekenhuis-factuur', label: 'Ziekenhuisfactuur', sublabel: 'Hôpital Édouard Herriot · Lyon · €4.847,50',
-    image: '/img-ziekenhuis-factuur.png', top: '6%', left: '6%', rotation: -3, width: '12vw', style: 'document', chapters: [6] },
-  { id: 'ontslagverslag', label: 'Ontslagverslag', sublabel: 'Compte rendu de sortie — Franstalig met markering.',
-    image: '/img-ontslagverslag.png', top: '6%', left: '72%', rotation: 4, width: '11vw', style: 'document', chapters: [6] },
-  { id: 'telefoon-transcript', label: 'Transcript', sublabel: 'Sophie belt · Voice AI herkent intent · overdracht.',
-    image: '/img-telefoon-transcript.png', top: '25%', left: '76%', rotation: -2, width: '11vw', style: 'document', chapters: [6] },
-  { id: 'faxbericht', label: 'AI Decision Record', sublabel: 'Voorstel · confidence 87% · escalatie vereist.',
-    image: '/img-faxbericht.png', top: '50%', left: '74%', rotation: 5, width: '11vw', style: 'document', chapters: [6] },
-  { id: 'interne-nota', label: 'Notitie Specialist', sublabel: 'Spoedopname gedekt. Comfortkost uitgesloten.',
-    image: '/img-interne-nota.png', top: '55%', left: '6%', rotation: -4, width: '12vw', style: 'document', chapters: [6] },
-  { id: 'duplicaat-alert', label: 'Duplicaatwaarschuwing', sublabel: '99,3% overeenkomst — actie vereist.',
-    image: '/img-duplicaat-alert.png', top: '30%', left: '4%', rotation: 3, width: '10vw', style: 'document', chapters: [6] },
-  { id: 'klantbericht', label: 'Klantbericht', sublabel: '"U hoeft voorlopig niets te doen."',
-    image: '/img-klantbericht.png', top: '70%', left: '22%', rotation: -2, width: '10vw', style: 'document', chapters: [6] },
-  { id: 'betalingsoverzicht', label: 'Betalingsoverzicht', sublabel: 'Goedgekeurd · afgewezen · gereserveerd.',
-    image: '/img-betalingsoverzicht.png', top: '70%', left: '55%', rotation: 4, width: '11vw', style: 'document', chapters: [6] },
-
-  // ── Ch7: De droom ──
-  { id: 'sophie-family', label: 'Thuis', sublabel: 'Sophie met haar gezin, drie maanden later.',
-    image: '/img-sophie-family.png', top: '6%', left: '6%', rotation: -4, width: '13vw', style: 'polaroid', chapters: [7] },
-  { id: 'sophie-business', label: 'Op kantoor', sublabel: 'Terug in haar element als Marketing Director.',
-    image: '/img-sophie-business.png', top: '6%', left: '74%', rotation: 5, width: '12vw', style: 'polaroid', chapters: [7] },
-  { id: 'sophie-travel', label: 'Onderweg', sublabel: 'Weer op zakenreis — zonder zorgen.',
-    image: '/img-sophie-travel.png', top: '55%', left: '4%', rotation: 3, width: '11vw', style: 'polaroid', chapters: [7] },
-  { id: 'sophie-cafe', label: 'Even pauze', sublabel: 'Een moment voor zichzelf.',
-    image: '/img-sophie-cafe.png', top: '40%', left: '78%', rotation: -3, width: '11vw', style: 'polaroid', chapters: [7] },
-  { id: 'sophie-garden', label: 'In de tuin', sublabel: 'Gewoon thuis, gewoon gelukkig.',
-    image: '/img-sophie-garden.png', top: '65%', left: '72%', rotation: 6, width: '11vw', style: 'polaroid', chapters: [7] },
-]
+// Desk assets cleared — clean background for the new story-driven experience
+const deskAssets: DeskAsset[] = []
 
 
 const deskDocAssets: DeskDocAsset[] = []
 
 // ─── State ───
-let dossierOpen = false
-let currentPage = 0
-let currentChapter = 0
+let viewerOpen = false
+let currentViewerPage = 0
 let zoomedAsset: string | null = null
 let audioPlaying = false
 let audioEl: HTMLAudioElement | null = null
-let droppedPerChapter = [0, 0, 0, 0, 0, 0, 0, 0]
-let pageMinimized = false
-let celebrationShown = false
+let activeTimers: ReturnType<typeof setTimeout>[] = []
+let targetScrollTop = 0
+let currentScrollTop = 0
+let scrollAnimationId = 0
+let currentPageIndex = 0
 
-// Drops required per chapter: 3 = full onboarding, 1 = pattern, 0 = auto-reveal
-const requiredDrops = [3, 1, 0, 0, 0, 0, 0, 0]
+// ─── Heartbeat Generator (Web Audio API) ───
+class HeartbeatGenerator {
+  private ctx: AudioContext | null = null
+  private intervalId: any = null
 
+  start() {
+    if (this.ctx) return
+    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext
+    if (!AudioContextClass) return
+    this.ctx = new AudioContextClass()
+    
+    this.intervalId = setInterval(() => {
+      this.playThump(0)
+      this.playThump(0.15)
+    }, 1200)
+  }
 
-// ─── Folder HTML helper ───
-function renderFolderHTML(hint = 'Klik om het dossier te openen'): string {
-  return `
-    <div class="desk-folder" id="desk-folder">
-      <div class="desk-folder__front">
-        <div class="desk-folder__stamp">HEALTH CARE 2030</div>
-        <div class="desk-folder__title">AE × Vanbreda</div>
-        <div class="desk-folder__sub">Status: in reconstructie</div>
-        <div class="desk-folder__label">VERTROUWELIJK</div>
-        <div class="desk-folder__logos">
-          <img src="/ae-logo.png" alt="AE">
-          <img src="/vanbreda-logo.svg" alt="Vanbreda">
-        </div>
-      </div>
-      <div class="desk-folder__hint">${hint}</div>
-    </div>`
+  stop() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId)
+      this.intervalId = null
+    }
+    if (this.ctx) {
+      this.ctx.close()
+      this.ctx = null
+    }
+  }
+
+  private playThump(delay: number) {
+    if (!this.ctx) return
+    const time = this.ctx.currentTime + delay
+    
+    const osc = this.ctx.createOscillator()
+    const gain = this.ctx.createGain()
+    
+    osc.type = 'sine'
+    osc.frequency.setValueAtTime(55, time)
+    osc.frequency.exponentialRampToValueAtTime(10, time + 0.2)
+    
+    gain.gain.setValueAtTime(0.6, time)
+    gain.gain.exponentialRampToValueAtTime(0.01, time + 0.25)
+    
+    osc.connect(gain)
+    gain.connect(this.ctx.destination)
+    
+    osc.start(time)
+    osc.stop(time + 0.3)
+  }
 }
 
-// ─── Page HTML helper ───
-function renderPageHTML(n: number): string {
-  const ch = chapters[n]
-  const cp = chapterPages[n]
-  const drops = droppedPerChapter[n]
-  const needed = requiredDrops[n]
-  const isAutoReveal = needed === 0
-  const isLastPage = n === chapters.length - 1
+const heartbeat = new HeartbeatGenerator()
 
-  // For auto-reveal pages or completed pages, show all content
-  const effectiveDrops = isAutoReveal || (drops >= needed) ? 3 : drops
-  const stepClass = `desk-page__paper--step-${Math.min(effectiveDrops, 3)}`
-  const isComplete = effectiveDrops >= needed && needed > 0
-  const completeClass = isComplete ? 'desk-page__paper--complete' : ''
-  const autoClass = isAutoReveal ? 'desk-page__paper--auto' : ''
-
-  // Show drop zone only when drops still needed
-  const showDrop = needed > 0 && drops < needed
-  const dropHTML = showDrop
-    ? `<div class="desk-page__drop" id="page-drop">
-         <div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${drops}/${needed}</div>
-       </div>`
-    : ''
-
-  // Show nav sidebar when page has content visible
-  const showNav = effectiveDrops >= needed || isAutoReveal
-  const prevDisabled = n === 0 ? ' desk-page__nav-btn--disabled' : ''
-  const nextDisabled = n === chapters.length - 1 ? ' desk-page__nav-btn--disabled' : ''
-  const navHTML = showNav
-    ? `<div class="desk-page__nav-sidebar">
-         <button class="desk-page__nav-btn${prevDisabled}" id="page-prev" title="Vorig hoofdstuk">‹</button>
-         <div class="desk-page__nav-counter">${n + 1}<span>/</span>${chapters.length}</div>
-         <button class="desk-page__nav-btn${nextDisabled}" id="page-next-ch" title="Volgend hoofdstuk">›</button>
-       </div>`
-    : ''
-
-  return `
-    <div class="desk-page" id="desk-page">
-      ${ch.question ? `<div class="desk-page__question">${ch.question}</div>` : ''}
-      <div class="desk-page__paper ${stepClass} ${completeClass} ${autoClass}" id="desk-paper">
-        <button class="desk-page__close" id="page-close" title="Sluit pagina">✕</button>
-        <div class="desk-page__pagenum">${cp.pageNum} / 8</div>
-        <div class="desk-page__reveal desk-page__reveal--1">
-          <div class="desk-page__graphic">${chapterIcons[n]}</div>
-          <div class="desk-page__header">
-            <div class="desk-page__number">Pagina ${cp.pageNum} van 8</div>
-            <div class="desk-page__title">${cp.title}</div>
-            <div class="desk-page__subtitle">${cp.subtitle}</div>
-          </div>
-        </div>
-        <div class="desk-page__reveal desk-page__reveal--2">
-          <div class="desk-page__body">${cp.content}</div>
-        </div>
-        <div class="desk-page__reveal desk-page__reveal--3">
-          <div class="desk-page__footnote">${cp.footnote}</div>
-        </div>
-        ${dropHTML}
-      </div>
-      ${navHTML}
-    </div>`
+// ─── Pages Definition (Linear Story Flow) ───
+interface Page {
+  type: 'splash' | 'letter' | 'title' | 'video' | 'content'
+  id: string
+  label: string
+  date?: string
+  quote?: string
+  videoSrc?: string
+  subtitles?: Subtitle[]
+  sceneIndex?: number
 }
 
-// ─── Render ───
+const pages: Page[] = [
+  { type: 'splash', id: 'splash', label: 'Welkom' },
+  { type: 'letter', id: 'letter', label: 'Een brief van Sophie' },
+  { type: 'title', id: 'title-1', label: 'Het moment van pijn', date: '8 april 2030 · Lyon', quote: 'Ik kan het alleen, maar hou me vast als het nodig is.' },
+  { type: 'video', id: 'video-pain', label: 'Het moment van pijn', videoSrc: '/video/Sophie_gets_stomach_pain_202606162156.mp4', subtitles: [] },
+  { type: 'content', id: 'signaleren', label: 'Sophie vraagt om hulp', sceneIndex: 0 },
+  { type: 'content', id: 'begrijpen', label: 'De keten komt in beweging', sceneIndex: 1 },
+  { type: 'video', id: 'video-ambulance', label: 'Onderweg naar het ziekenhuis', videoSrc: '/video/Ambulance_arrives_at_hospital_202606162155.mp4', subtitles: [] },
+  { type: 'content', id: 'begeleiden', label: 'Het ziekenhuis verwacht haar', sceneIndex: 2 },
+  { type: 'title', id: 'title-2', label: 'De ochtend erna', date: '9 april 2030 · Hôpital Saint-Claire', quote: 'De spoedoperatie is achter de rug.' },
+  { type: 'video', id: 'video-morning', label: 'De ochtend erna', videoSrc: '/video/Morning_after_surgery_202606162156.mp4', subtitles: [] },
+  { type: 'content', id: 'verbinden', label: 'Wat gebeurt er nu?', sceneIndex: 3 },
+  { type: 'content', id: 'beslissen', label: 'Sophie krijgt regie', sceneIndex: 4 },
+  { type: 'title', id: 'title-3', label: 'Naar huis', date: '12 april 2030 · Hôpital Saint-Claire', quote: 'Eigen haard is goud waard.' },
+  { type: 'video', id: 'video-discharge', label: 'Naar huis', videoSrc: '/video/Sophie_discharged_202606162242.mp4', subtitles: [] },
+  { type: 'content', id: 'ondersteunen', label: 'Veilig naar huis', sceneIndex: 5 },
+  { type: 'video', id: 'video-outtro', label: 'Drie maanden later', videoSrc: '/video/outtro-sophie.mp4', subtitles: [
+    { t: 0, s: 'Drie maanden geleden lag ik onverwacht in een ziekenhuis in Frankrijk.' },
+    { t: 5, s: 'Nu ben ik weer thuis bij mijn gezin.' },
+    { t: 9, s: 'Ik hoefde mijn verhaal maar één keer te vertellen. Ik wist waar ik aan toe was. En toen het echt nodig was, was er iemand die me begreep.' },
+    { t: 17, s: 'Wat voor mij in 2030 vanzelfsprekend voelde, begon bij wat jullie in 2026 besloten te bouwen.' },
+    { t: 23, s: 'Dank jullie wel, Vanbreda en AE.' }
+  ] },
+  { type: 'title', id: 'title-vision', label: 'De onzichtbare keten', date: '', quote: 'Ik hoefde mijn verhaal maar één keer te vertellen.' },
+  { type: 'content', id: 'herstellen', label: 'De onzichtbare keten van zorg', sceneIndex: 6 },
+]
+
+// ─── Page Navigation Helpers ───
+function getContentPages(): { page: Page, globalIndex: number }[] {
+  return pages
+    .map((p, i) => ({ page: p, globalIndex: i }))
+    .filter(x => x.page.type === 'content')
+}
+
+function getContentStepNumber(globalIndex: number): number {
+  const contentPages = getContentPages()
+  const idx = contentPages.findIndex(x => x.globalIndex === globalIndex)
+  return idx >= 0 ? idx + 1 : 0
+}
+
+function getTotalContentSteps(): number {
+  return getContentPages().length
+}
+
+// ─── Cutscene Player ───
+interface Subtitle {
+  t: number
+  s: string
+}
+
+function playCutscene(
+  videoSrc: string,
+  subtitles: Subtitle[],
+  onComplete: () => void,
+  titleCard?: { date: string, title: string }
+) {
+  const player = document.getElementById('cutscene-player')
+  const video = document.getElementById('cutscene-video') as HTMLVideoElement | null
+  const subBox = document.getElementById('cutscene-subtitles')
+  const skipBtn = document.getElementById('cutscene-skip-btn')
+  const titleCardEl = document.getElementById('cutscene-title-card')
+  const titleDateEl = document.getElementById('cutscene-date')
+  const titleTextEl = document.getElementById('cutscene-title')
+  
+  if (!player || !video) {
+    onComplete()
+    return
+  }
+
+  clearActiveTimers()
+  
+  // Duck background music
+  if (audioEl) audioEl.volume = 0.05
+  
+  // Setup subtitles box
+  if (subBox) {
+    subBox.style.display = subtitles.length > 0 ? 'block' : 'none'
+    subBox.textContent = ''
+  }
+
+  // Setup video
+  video.src = videoSrc
+  video.load()
+  
+  player.classList.add('cutscene-player--visible')
+  
+  let subtitleInterval: any = null
+  let titleTimeoutId: any = null
+  let titleFadeTimeoutId: any = null
+  
+  const endCutscene = () => {
+    if (subtitleInterval) clearInterval(subtitleInterval)
+    if (titleTimeoutId) clearTimeout(titleTimeoutId)
+    if (titleFadeTimeoutId) clearTimeout(titleFadeTimeoutId)
+    
+    video.pause()
+    player.classList.remove('cutscene-player--visible')
+    if (audioEl) audioEl.volume = 0.25
+    
+    if (titleCardEl) {
+      titleCardEl.classList.remove('cutscene-title-card--visible')
+      titleCardEl.style.display = 'none'
+    }
+    video.style.display = 'block'
+    if (skipBtn) skipBtn.style.display = 'block'
+    
+    // Unbind listeners
+    video.onended = null
+    if (skipBtn) skipBtn.onclick = null
+    
+    onComplete()
+  }
+
+  video.onended = endCutscene
+  if (skipBtn) skipBtn.onclick = endCutscene
+
+  const startVideoPlayback = () => {
+    video.play().then(() => {
+      if (subtitles.length > 0) {
+        subtitleInterval = setInterval(() => {
+          const time = video.currentTime
+          const activeSub = subtitles.slice().reverse().find(s => time >= s.t)
+          if (subBox && activeSub) {
+            subBox.textContent = activeSub.s
+          }
+        }, 200)
+      }
+    }).catch(() => {
+      endCutscene()
+    })
+  }
+
+  if (titleCard && titleCardEl && titleDateEl && titleTextEl) {
+    // Hide video and skip button during title card
+    video.style.display = 'none'
+    if (skipBtn) skipBtn.style.display = 'none'
+
+    titleDateEl.textContent = titleCard.date
+    titleTextEl.textContent = titleCard.title
+    titleCardEl.style.display = 'flex'
+
+    // Force reflow and fade in
+    titleFadeTimeoutId = setTimeout(() => {
+      titleCardEl.classList.add('cutscene-title-card--visible')
+    }, 50)
+
+    // Wait 3.5 seconds, then fade out and play
+    titleTimeoutId = setTimeout(() => {
+      titleCardEl.classList.remove('cutscene-title-card--visible')
+      titleFadeTimeoutId = setTimeout(() => {
+        titleCardEl.style.display = 'none'
+        video.style.display = 'block'
+        if (skipBtn) skipBtn.style.display = 'block'
+        startVideoPlayback()
+      }, 800) // fade out duration
+    }, 3500)
+  } else {
+    if (titleCardEl) titleCardEl.style.display = 'none'
+    video.style.display = 'block'
+    if (skipBtn) skipBtn.style.display = 'block'
+    startVideoPlayback()
+  }
+}
+
+// ─── Scene Modules (indexed by sceneIndex) ───
+const sceneModules: SceneModule[] = [
+  signaleren,  // 0
+  begrijpen,   // 1
+  begeleiden,  // 2
+  verbinden,   // 3
+  beslissen,   // 4
+  ondersteunen,// 5
+  herstellen   // 6
+]
+
+// ─── Scene HTML Renderers ───
+function renderSceneHTML(index: number): string {
+  return sceneModules[index]?.render() ?? ''
+}
+
+// ─── Scene Interactions & Timers ───
+function clearActiveTimers() {
+  activeTimers.forEach(t => clearTimeout(t))
+  activeTimers = []
+  // Cleanup any scene-specific resources (audio, etc.)
+  sceneModules.forEach(m => m.cleanup?.())
+}
+
+function bindSceneEvents(index: number) {
+  clearActiveTimers()
+  const mod = sceneModules[index]
+  if (!mod) return
+
+  // Scene 6 (herstellen) needs extra callbacks for viewer + reset
+  if (index === 6) {
+    mod.bind(() => navigateForward(), activeTimers, {
+      openViewer: () => {
+        viewerOpen = true
+        currentViewerPage = 0
+        updateViewer()
+        document.getElementById('viewer')?.classList.add('viewer--open')
+      },
+      resetToSplash: () => {
+        currentPageIndex = 0
+        showPage(0)
+      }
+    })
+  } else {
+    mod.bind(() => navigateForward(), activeTimers)
+  }
+}
+// ─── Page-Based Navigation ───
+function navigateForward() {
+  if (currentPageIndex >= pages.length - 1) return
+  currentPageIndex++
+  showPage(currentPageIndex)
+}
+
+function navigateBack() {
+  if (currentPageIndex <= 0) return
+  // Skip video/title pages when going back — jump to previous content/letter/splash
+  let target = currentPageIndex - 1
+  while (target > 0 && (pages[target].type === 'video' || pages[target].type === 'title')) {
+    target--
+  }
+  currentPageIndex = target
+  showPage(currentPageIndex)
+}
+
+function showPage(index: number, fromPopState = false) {
+  const page = pages[index]
+  if (!page) return
+
+  // Push browser history for content, letter, and splash pages (not auto-advancing title/video)
+  if (!fromPopState && (page.type === 'content' || page.type === 'letter' || page.type === 'splash')) {
+    history.pushState({ pageIndex: index }, '', `#${page.id}`)
+  }
+
+  clearActiveTimers()
+  
+  const nav = document.getElementById('chapter-nav')
+  const center = document.getElementById('desk-center')
+  const splash = document.getElementById('splash')
+  const letterOverlay = document.getElementById('letter-overlay')
+
+
+  // Hide scene background for non-content pages
+  const sceneBgEl = document.getElementById('scene-background')
+  if (page.type !== 'content' && sceneBgEl) {
+    sceneBgEl.classList.remove('scene-background--visible')
+  }
+
+  switch (page.type) {
+    case 'splash': {
+      // Show splash, hide everything else
+      if (nav) nav.style.display = 'none'
+      if (center) center.innerHTML = ''
+      if (splash) {
+        splash.classList.remove('splash--hidden')
+        splash.style.display = ''
+      }
+      if (letterOverlay) letterOverlay.classList.remove('letter-overlay--visible')
+      break
+    }
+
+    case 'letter': {
+      // Open the letter overlay
+      if (nav) nav.style.display = 'none'
+      if (center) center.innerHTML = ''
+      // Trigger openLetter via click on desk-brief (it handles the overlay)
+      document.getElementById('desk-brief')?.click()
+      break
+    }
+
+    case 'title': {
+      // Show title card full-screen, then auto-advance
+      if (nav) nav.style.display = 'none'
+      if (letterOverlay) letterOverlay.classList.remove('letter-overlay--visible')
+
+      const player = document.getElementById('cutscene-player')
+      const titleCardEl = document.getElementById('cutscene-title-card')
+      const titleDateEl = document.getElementById('cutscene-date')
+      const titleTextEl = document.getElementById('cutscene-title')
+      const video = document.getElementById('cutscene-video') as HTMLVideoElement | null
+      const skipBtn = document.getElementById('cutscene-skip-btn')
+
+      if (player && titleCardEl && titleDateEl && titleTextEl) {
+        // Hide video elements, show title card
+        if (video) video.style.display = 'none'
+        if (skipBtn) skipBtn.style.display = 'none'
+
+        titleDateEl.textContent = page.date || page.label || ''
+        titleTextEl.textContent = page.quote || ''
+        titleCardEl.style.display = 'flex'
+
+        if (audioEl) audioEl.volume = 0.05
+        player.classList.add('cutscene-player--visible')
+
+        // Fade in after reflow
+        activeTimers.push(setTimeout(() => {
+          titleCardEl.classList.add('cutscene-title-card--visible')
+        }, 50))
+
+        // After 4.5 seconds, fade out and auto-advance
+        activeTimers.push(setTimeout(() => {
+          titleCardEl.classList.remove('cutscene-title-card--visible')
+          activeTimers.push(setTimeout(() => {
+            titleCardEl.style.display = 'none'
+            player.classList.remove('cutscene-player--visible')
+            if (audioEl) audioEl.volume = 0.25
+            navigateForward()
+          }, 800))
+        }, 4500))
+      } else {
+        // Fallback: skip title
+        navigateForward()
+      }
+      break
+    }
+
+    case 'video': {
+      // Play video cutscene full-screen, then auto-advance
+      if (nav) nav.style.display = 'none'
+      if (letterOverlay) letterOverlay.classList.remove('letter-overlay--visible')
+
+      // For outtro: show family photos floating around the video
+      const isOuttro = page.id === 'video-outtro'
+
+      playCutscene(
+        page.videoSrc || '',
+        page.subtitles || [],
+        () => {
+          // Remove polaroids before navigating
+          document.querySelectorAll('.outtro-polaroid').forEach(el => el.remove())
+          navigateForward()
+        }
+      )
+
+      if (isOuttro) {
+        const photos = [
+          { src: '/img-sophie-family.png', delay: 3, x: '5%', y: '8%', rot: -8 },
+          { src: '/img-sophie-garden.png', delay: 7, x: '72%', y: '6%', rot: 5 },
+          { src: '/img-sophie-happy.png', delay: 11, x: '3%', y: '58%', rot: 6 },
+          { src: '/img-sophie-travel.png', delay: 16, x: '74%', y: '55%', rot: -4 },
+          { src: '/img-sophie-cafe.png', delay: 20, x: '38%', y: '3%', rot: 3 },
+        ]
+        const cutscenePlayer = document.getElementById('cutscene-player')
+        photos.forEach(p => {
+          activeTimers.push(setTimeout(() => {
+            if (!cutscenePlayer) return
+            const polaroid = document.createElement('div')
+            polaroid.className = 'outtro-polaroid'
+            polaroid.style.cssText = `left:${p.x}; top:${p.y}; --rot:${p.rot}deg;`
+            polaroid.innerHTML = `<img src="${p.src}" alt="" />`
+            cutscenePlayer.appendChild(polaroid)
+          }, p.delay * 1000))
+        })
+      }
+      break
+    }
+
+    case 'content': {
+      // Render the scene content and show bottom nav
+      if (nav) nav.style.display = 'flex'
+      if (letterOverlay) letterOverlay.classList.remove('letter-overlay--visible')
+
+      const sceneIdx = page.sceneIndex ?? 0
+      const sceneBackgrounds = [
+        '/bg-signaleren.png',   // 0
+        '/bg-begrijpen.png',    // 1
+        '/bg-begeleiden.png',   // 2
+        '/bg-verbinden.png',    // 3
+        '/bg-beslissen.png',    // 4
+        '/bg-ondersteunen.png', // 5
+        '/bg-herstellen.png',   // 6
+      ]
+
+      if (sceneIdx !== 0) {
+        heartbeat.stop()
+      }
+
+      // Set scene background
+      const sceneBg = document.getElementById('scene-background')
+      if (sceneBg) {
+        sceneBg.style.backgroundImage = `url('${sceneBackgrounds[sceneIdx] || ''}')`
+        sceneBg.classList.add('scene-background--visible')
+      }
+
+      if (center) {
+        center.style.opacity = '0'
+        setTimeout(() => {
+          center.innerHTML = renderSceneHTML(sceneIdx)
+          center.style.opacity = '1'
+          bindSceneEvents(sceneIdx)
+        }, 200)
+      }
+
+      updateBottomNav(index)
+      break
+    }
+  }
+}
+
+function updateBottomNav(pageIndex: number) {
+  const prevBtn = document.getElementById('chapter-nav-prev') as HTMLButtonElement | null
+  const nextBtn = document.getElementById('chapter-nav-next') as HTMLButtonElement | null
+  const statusEl = document.getElementById('chapter-nav-status')
+
+  const page = pages[pageIndex]
+
+  if (prevBtn) {
+    // Always allow going back (will go to letter or splash)
+    prevBtn.removeAttribute('disabled')
+  }
+
+  if (nextBtn) {
+    if (pageIndex >= pages.length - 1) {
+      nextBtn.setAttribute('disabled', 'true')
+    } else {
+      nextBtn.removeAttribute('disabled')
+    }
+  }
+
+  if (statusEl && page) {
+    statusEl.textContent = `${page.label}`
+  }
+}
+
+// ─── Render Dossier Detail Viewer (Deep Dive) ───
+
+function navigateViewerPage(dir: number) {
+  const next = currentViewerPage + dir
+  if (next < 0 || next >= dossierPages.length) return
+  currentViewerPage = next
+  updateViewer()
+}
+
+function updateViewer() {
+  const content = document.getElementById('viewer-content')
+  if (content) {
+    content.style.opacity = '0'
+    setTimeout(() => {
+      content.innerHTML = dossierPages[currentViewerPage].render()
+      content.style.opacity = '1'
+    }, 200)
+  }
+
+  // Update dots
+  document.querySelectorAll('.viewer__dot').forEach((dot, i) => {
+    dot.classList.toggle('viewer__dot--active', i === currentViewerPage)
+  })
+
+  // Update counter
+  const counter = document.querySelector('.viewer__counter')
+  if (counter) counter.textContent = `${dossierPages[currentViewerPage].label} · ${currentViewerPage + 1} / ${dossierPages.length}`
+
+  // Update nav buttons
+  document.getElementById('viewer-prev')?.classList.toggle('viewer__nav--disabled', currentViewerPage === 0)
+  document.getElementById('viewer-next')?.classList.toggle('viewer__nav--disabled', currentViewerPage === dossierPages.length - 1)
+}
+
+function closeDossier() {
+  viewerOpen = false
+  document.getElementById('viewer')?.classList.remove('viewer--open')
+}
+
+// ─── Render Desk ───
 function render() {
   const app = document.querySelector<HTMLDivElement>('#app')!
   app.innerHTML = renderDesk()
@@ -667,48 +1016,18 @@ function render() {
 }
 
 function renderDesk(): string {
-  const assets = deskAssets.map(a => `
-    <div class="desk-asset desk-asset--${a.style}" 
-         id="asset-${a.id}"
-         data-asset="${a.id}"
-         data-chapters="${a.chapters.join(',')}"
-         data-orig-top="${a.top}"
-         data-orig-left="${a.left}"
-         draggable="true"
-         style="top:${a.top}; left:${a.left}; transform:rotate(${a.rotation}deg); width:${a.width}; ${a.chapters.includes(currentChapter) ? '' : 'opacity:0; pointer-events:none;'}"
-         title="${a.label}">
-      <img src="${a.image}" alt="${a.label}" draggable="false">
-      <div class="desk-asset__tooltip">${a.label}</div>
-    </div>
-  `).join('')
-
-  const docItems = deskDocAssets.map(d => `
-    <div class="desk-doc desk-doc--${d.docStyle}"
-         id="doc-${d.id}"
-         data-doc="${d.id}"
-         data-chapters="${d.chapters.join(',')}"
-         style="top:${d.top}; left:${d.left}; transform:rotate(${d.rotation}deg); width:${d.width}; ${d.chapters.includes(currentChapter) ? '' : 'opacity:0; pointer-events:none;'}"
-         title="${d.label}">
-      <div class="desk-doc__mini">
-        <div class="desk-doc__mini-title">${d.label}</div>
-        <div class="desk-doc__mini-lines"></div>
-      </div>
-      <div class="desk-doc__tooltip">${d.sublabel}</div>
-    </div>
-  `).join('')
-
-  const chapterNav = chapters.map((ch, i) => `
-    <button class="chapter-nav__dot ${i === currentChapter ? 'chapter-nav__dot--active' : ''}" data-chapter="${i}">
-      <span class="chapter-nav__num">${i + 1}</span>
-      <span class="chapter-nav__label">${ch.title}</span>
+  const chapterNavHTML = `
+    <button class="chapter-nav__btn chapter-nav__btn--prev" id="chapter-nav-prev">
+      ← Terug
     </button>
-  `).join('')
-
-  const ch = chapters[currentChapter]
-  const cp = chapterPages[currentChapter]
+    <div class="chapter-nav__status" id="chapter-nav-status"></div>
+    <button class="chapter-nav__btn chapter-nav__btn--next" id="chapter-nav-next">
+      Vervolg →
+    </button>
+  `
 
   const pageDots = dossierPages.map((_, i) =>
-    `<div class="viewer__dot ${i === currentPage ? 'viewer__dot--active' : ''}" data-page="${i}"></div>`
+    `<div class="viewer__dot ${i === currentViewerPage ? 'viewer__dot--active' : ''}" data-page="${i}"></div>`
   ).join('')
 
   return `
@@ -723,42 +1042,39 @@ function renderDesk(): string {
     <div class="splash__label">VERTROUWELIJK DOSSIER</div>
     <div class="splash__title">AFKOMSTIG UIT 2030</div>
     <div class="splash__subtitle">Open alleen als je bereid bent de toekomst te veranderen.</div>
-    <div class="splash__sound-notice" id="splash-sound">🔊 Zet je geluid aan voor de volledige ervaring</div>
+    <div class="splash__sound-notice" id="splash-sound">🎧 beste ervaring met geluid</div>
     <button class="splash__btn" id="splash-btn">Maak kennis met Sophie →</button>
   </div>
 </div>
 
 <div class="desk" id="desk">
+  <!-- Scene background (before desk so CSS ~ selector works) -->
+  <div class="scene-background" id="scene-background"></div>
+
   <div class="desk__bg"></div>
   <div class="desk__vignette"></div>
-  ${assets}
-  ${docItems}
-  <div class="desk-peek desk-peek--1" style="top:42%;left:47%;transform:rotate(-12deg);"></div>
-  <div class="desk-peek desk-peek--2" style="top:44%;left:54%;transform:rotate(8deg);"></div>
-  <div class="desk-peek desk-peek--3" style="top:58%;left:46%;transform:rotate(14deg);"></div>
 
-  <!-- Central dossier: closed folder OR open page -->
-  <div class="desk-center" id="desk-center">
-    ${dossierOpen ? (pageMinimized ? renderFolderHTML('Klik om te openen') : renderPageHTML(currentChapter)) : renderFolderHTML()}
-  </div>
+  <!-- Central content container -->
+  <div class="desk-center" id="desk-center"></div>
 
-  <div class="desk-brief" id="desk-brief">
+  <div class="desk-brief" id="desk-brief" style="opacity: 0.8; display: none;">
     <div class="desk-brief__envelope">
       <div class="desk-brief__to">Sophie De Winter</div>
-      <div class="desk-brief__subtitle">Brief · 17 april 2030</div>
+      <div class="desk-brief__subtitle">Brief van Sophie</div>
     </div>
   </div>
+  
   <button class="desk__audio" id="btn-audio" title="Muziek aan/uit">🔊</button>
   <audio id="bg-audio" loop preload="auto">
     <source src="/audio/Yair Cohen - Rise Within.mp3" type="audio/mpeg">
   </audio>
 </div>
 
-<div class="chapter-nav" id="chapter-nav">
-  ${chapterNav}
+<div class="chapter-nav" id="chapter-nav" style="display:none;">
+  ${chapterNavHTML}
 </div>
 
-<!-- Footer (always visible, above overlays) -->
+<!-- Footer -->
 <div class="desk__footer" id="global-footer">
   <span class="desk__footer-text">Gemaakt door</span>
   <img src="/ae-logo.png" alt="AE" class="desk__footer-logo desk__footer-logo--ae">
@@ -766,37 +1082,18 @@ function renderDesk(): string {
   <img src="/vanbreda-logo-white.svg" alt="Vanbreda" class="desk__footer-logo desk__footer-logo--vb">
 </div>
 
-<div class="viewer ${dossierOpen ? 'viewer--open' : ''}" id="viewer">
+<!-- Deep Dive Viewer Overlay -->
+<div class="viewer ${viewerOpen ? 'viewer--open' : ''}" id="viewer">
   <div class="viewer__backdrop" id="viewer-backdrop"></div>
   <div class="viewer__container">
     <button class="viewer__close" id="viewer-close" title="Sluiten">✕</button>
-    <button class="viewer__nav viewer__nav--prev ${currentPage === 0 ? 'viewer__nav--disabled' : ''}" id="viewer-prev">‹</button>
-    <button class="viewer__nav viewer__nav--next ${currentPage === dossierPages.length - 1 ? 'viewer__nav--disabled' : ''}" id="viewer-next">›</button>
-    <div class="viewer__content" id="viewer-content">${dossierPages[currentPage].render()}</div>
+    <button class="viewer__nav viewer__nav--prev ${currentViewerPage === 0 ? 'viewer__nav--disabled' : ''}" id="viewer-prev">‹</button>
+    <button class="viewer__nav viewer__nav--next ${currentViewerPage === dossierPages.length - 1 ? 'viewer__nav--disabled' : ''}" id="viewer-next">›</button>
+    <div class="viewer__content" id="viewer-content">${dossierPages[currentViewerPage].render()}</div>
     <div class="viewer__footer">
       <div class="viewer__dots">${pageDots}</div>
-      <div class="viewer__counter">${dossierPages[currentPage].label} · ${currentPage + 1} / ${dossierPages.length}</div>
+      <div class="viewer__counter">${dossierPages[currentViewerPage].label} · ${currentViewerPage + 1} / ${dossierPages.length}</div>
     </div>
-  </div>
-</div>
-
-<div class="zoom ${zoomedAsset ? 'zoom--open' : ''}" id="zoom">
-  <div class="zoom__backdrop" id="zoom-backdrop"></div>
-  <div class="zoom__container" id="zoom-container">
-    <button class="zoom__close" id="zoom-close">✕</button>
-    <div class="zoom__content" id="zoom-content"></div>
-    <div class="zoom__label" id="zoom-label"></div>
-  </div>
-</div>
-
-<div class="video-modal" id="video-modal">
-  <div class="video-modal__backdrop" id="video-modal-backdrop"></div>
-  <div class="video-modal__container">
-    <button class="video-modal__close" id="video-modal-close">✕</button>
-    <video id="sophie-video" poster="/img-sophie-portrait.png" controls preload="none">
-      <source src="/video/sophie.mp4" type="video/mp4">
-    </video>
-    <div class="video-modal__caption">Sophie De Winter — haar boodschap aan het team</div>
   </div>
 </div>
 
@@ -808,24 +1105,26 @@ function renderDesk(): string {
         <div class="letter__audio-btn" id="letter-audio-btn" title="Sophie's stem afspelen">
           <span id="letter-audio-icon">▶</span>
         </div>
-        <div class="letter__date">17 april 2030</div>
-        <div class="letter__body">
-          <p>Hallo.</p>
-          <p>Mijn naam is Sophie De Winter. En voor jullie is het nu 2026.</p>
-          <p>Voor mij is het 17 april 2030.</p>
-          <p>Vorige week was ik voor mijn werk in Frankrijk. Wat een gewone zakenreis had moeten worden, eindigde onverwacht in het ziekenhuis. Hevige pijn, onderzoeken en uiteindelijk een spoedoperatie.</p>
-          <p>Ik was alleen, in een ander land, en ik wist niet wat mijn verzekering zou dekken. Welke documenten ik moest opsturen. Wie ik moest bellen. Of ik zelf duizenden euro's zou moeten betalen.</p>
-          <p>Jullie hebben mijn dossier voor je.</p>
-          <p>Voor jullie is het een toekomstscenario. Voor mij is het op dit moment heel echt.</p>
-          <p>De komende jaren gaan Vanbreda en AE keuzes maken over processen, data, technologie en AI. Maar wanneer het erop aankomt, gaat die samenwerking niet over systemen. Ze gaat over mensen zoals ik.</p>
-          <p>Ik vraag jullie daarom om goed voor mij te zorgen.</p>
-          <p>Zorg dat ik mijn verhaal maar één keer hoef te vertellen. Dat mijn documenten en gegevens op de juiste plek terechtkomen. Dat eenvoudige stappen snel en automatisch verlopen. En dat er een mens voor mij klaarstaat wanneer oordeel, uitleg of empathie nodig is.</p>
-          <p>De beslissingen die jullie in 2026 nemen, bepalen welke ervaring ik in 2030 heb.</p>
-          <p class="letter__closing">Ik vertrouw op jullie.</p>
-          <div class="letter__signature">Sophie</div>
+        <div class="letter__scroller" id="letter-scroller">
+          <div class="letter__date">17 april 2030</div>
+          <div class="letter__body">
+            <p>Hallo.</p>
+            <p>Mijn naam is Sophie De Winter. En voor jullie is het nu 2026.</p>
+            <p>Voor mij is het 17 april 2030.</p>
+            <p>Vorige week was ik voor mijn werk in Frankrijk. Wat een gewone zakenreis had moeten worden, eindigde onverwacht in het ziekenhuis. Hevige pijn, onderzoeken en uiteindelijk een spoedoperatie.</p>
+            <p>Ik was alleen, in een ander land, en ik wist niet wat mijn verzekering zou dekken. Welke documenten ik moest opsturen. Wie ik moest bellen. Of ik zelf duizenden euro's zou moeten betalen.</p>
+            <p>Jullie hebben mijn dossier voor je.</p>
+            <p>Voor jullie is het een toekomstscenario. Voor mij is het op dit moment heel echt.</p>
+            <p>De komende jaren gaan Vanbreda en AE keuzes maken over processen, data, technologie en AI. Maar wanneer het erop aankomt, gaat die samenwerking niet over systemen. Ze gaat over mensen zoals ik.</p>
+            <p>Ik vraag jullie daarom om goed voor mij te zorgen.</p>
+            <p>Zorg dat ik mijn verhaal maar één keer hoef te vertellen. Dat mijn documenten en gegevens op de juiste plek terechtkomen. Dat eenvoudige stappen snel en automatisch verlopen. En dat er een mens voor mij klaarstaat wanneer oordeel, uitleg of empathie nodig is.</p>
+            <p>De beslissingen die jullie in 2026 nemen, bepalen welke ervaring ik in 2030 heb.</p>
+            <p class="letter__closing">Ik vertrouw op jullie.</p>
+            <div class="letter__signature">Sophie</div>
+          </div>
         </div>
       </div>
-      <button class="letter__continue" id="letter-continue">Open het dossier →</button>
+      <button class="letter__continue" id="letter-continue">Start mijn reis →</button>
     </div>
     <div class="letter__right">
       <div class="letter__side-photo letter__side-photo--hidden" id="letter-photo-1" style="transform:rotate(-4deg) translateX(-15px);">
@@ -852,70 +1151,57 @@ function renderDesk(): string {
   </audio>
 </div>
 
-<div class="celebrate" id="celebrate">
-  <canvas id="confetti-canvas"></canvas>
-  <div class="celebrate__content">
-    <div class="celebrate__emoji">🎉</div>
-    <div class="celebrate__title">Alles staat klaar.</div>
-    <div class="celebrate__text">Het is 1 dag voordat Sophie ziek wordt.</div>
-    <div class="celebrate__sub">Alle systemen, processen en mensen zijn voorbereid.<br>De vraag is: zijn we werkelijk klaar voor haar?</div>
-    <button class="celebrate__btn" id="celebrate-btn">Ontdek het moment van de waarheid →</button>
+<div class="cutscene-player" id="cutscene-player">
+  <div class="cutscene-title-card" id="cutscene-title-card" style="display:none;">
+    <div class="cutscene-date-label" id="cutscene-date"></div>
+    <div class="cutscene-title-line"></div>
+    <div class="cutscene-title-text" id="cutscene-title"></div>
   </div>
-</div>
-
-<div class="print-only">
-  ${dossierPages.map(p => p.render()).join('\n')}
+  <video id="cutscene-video" playsinline></video>
+  <div class="cutscene-subtitles" id="cutscene-subtitles" style="display:none;"></div>
+  <button class="cutscene-skip-btn" id="cutscene-skip-btn">Sla video over ➔</button>
 </div>
 `
 }
 
 
-// ─── Events ───
+
+// ─── Event Bindings ───
 function bindEvents() {
-  const letterAudio = document.getElementById('letter-audio') as HTMLAudioElement
+  const letterAudio = document.getElementById('letter-audio') as HTMLAudioElement | null
   let letterAudioPlaying = false
   let photoTimers: ReturnType<typeof setTimeout>[] = []
   let trustLocked = false
 
-  // --- Open letter from desk ---
   document.getElementById('desk-brief')?.addEventListener('click', () => openLetter())
-
-  // --- Draggable assets ---
-  document.querySelectorAll('.desk-asset[draggable]').forEach(el => {
-    el.addEventListener('dragstart', (e) => {
-      (e as DragEvent).dataTransfer?.setData('text/plain', el.id)
-    })
-  })
-
-  // --- Bind page drop/close events ---
-  bindPageEvents()
 
   function openLetter() {
     const overlay = document.getElementById('letter-overlay')
     overlay?.classList.add('letter-overlay--visible')
-    // Reset photos to hidden
+    
+    // Reset photos
     for (let i = 1; i <= 4; i++) {
       document.getElementById(`letter-photo-${i}`)?.classList.add('letter__side-photo--hidden')
     }
-    // Schedule timed reveals
+    
     photoTimers.push(setTimeout(() => {
       document.getElementById('letter-photo-1')?.classList.remove('letter__side-photo--hidden')
-    }, 2000))
+    }, 1000))
     photoTimers.push(setTimeout(() => {
       document.getElementById('letter-photo-2')?.classList.remove('letter__side-photo--hidden')
-    }, 22000))
+    }, 8000))
     photoTimers.push(setTimeout(() => {
       document.getElementById('letter-photo-3')?.classList.remove('letter__side-photo--hidden')
-    }, 40000))
+    }, 16000))
     photoTimers.push(setTimeout(() => {
       document.getElementById('letter-photo-4')?.classList.remove('letter__side-photo--hidden')
-    }, 58000))
-    // "Ik vertrouw op jullie" — trust moment at ~85s
-    photoTimers.push(setTimeout(() => {
       trustLocked = true
       overlay?.classList.add('letter-overlay--trust')
-    }, 85000))
-    // Auto-play Sophie's voice
+    }, 24000))
+
+    const scroller = document.getElementById('letter-scroller')
+    if (scroller) scroller.scrollTop = 0
+
     if (letterAudio) {
       letterAudio.currentTime = 0
       letterAudio.volume = 0.8
@@ -924,7 +1210,6 @@ function bindEvents() {
       const icon = document.getElementById('letter-audio-icon')
       if (icon) icon.textContent = '⏸'
     }
-    // Lower background music
     if (audioEl) audioEl.volume = 0.15
   }
 
@@ -932,7 +1217,10 @@ function bindEvents() {
     const overlay = document.getElementById('letter-overlay')
     overlay?.classList.remove('letter-overlay--visible')
     overlay?.classList.remove('letter-overlay--trust')
-    // Stop letter audio
+    
+    const scroller = document.getElementById('letter-scroller')
+    if (scroller) scroller.scrollTop = 0
+
     if (letterAudio && letterAudioPlaying) {
       letterAudio.pause()
       letterAudio.currentTime = 0
@@ -940,36 +1228,30 @@ function bindEvents() {
       const icon = document.getElementById('letter-audio-icon')
       if (icon) icon.textContent = '▶'
     }
-    // Clear photo timers
+    
     photoTimers.forEach(t => clearTimeout(t))
     photoTimers = []
-    // Restore background music volume
-    if (audioEl) audioEl.volume = 0.4
+    if (audioEl) audioEl.volume = 0.25
   }
 
-  // Close letter
-  document.getElementById('letter-close')?.addEventListener('click', closeLetter)
-
-  // Hover on continue → trigger trust warmth
-  document.getElementById('letter-continue')?.addEventListener('mouseenter', () => {
-    document.getElementById('letter-overlay')?.classList.add('letter-overlay--trust')
-  })
-  document.getElementById('letter-continue')?.addEventListener('mouseleave', () => {
-    if (!trustLocked) {
-      document.getElementById('letter-overlay')?.classList.remove('letter-overlay--trust')
-    }
-  })
-
-  // Letter continue → close letter, open dossier inline
-  document.getElementById('letter-continue')?.addEventListener('click', () => {
+  document.getElementById('letter-close')?.addEventListener('click', () => {
     closeLetter()
     setTimeout(() => {
-      dossierOpen = true
-      switchChapter(0)
+      // Kruisje gaat naar "Start mijn reis" (title card)
+      currentPageIndex = 2
+      showPage(currentPageIndex)
     }, 400)
   })
 
-  // Letter audio play/pause
+  document.getElementById('letter-continue')?.addEventListener('click', () => {
+    closeLetter()
+    setTimeout(() => {
+      // Advance to the next page after the letter (title card)
+      currentPageIndex = 2 // title card page
+      showPage(currentPageIndex)
+    }, 400)
+  })
+
   document.getElementById('letter-audio-btn')?.addEventListener('click', () => {
     if (!letterAudio) return
     const icon = document.getElementById('letter-audio-icon')
@@ -985,499 +1267,49 @@ function bindEvents() {
     }
   })
 
-  // Auto-stop letter audio when it ends
   letterAudio?.addEventListener('ended', () => {
     letterAudioPlaying = false
     const icon = document.getElementById('letter-audio-icon')
     if (icon) icon.textContent = '▶'
   })
 
-  // Chapter navigation
-  document.querySelectorAll('.chapter-nav__dot').forEach(dot => {
-    dot.addEventListener('click', () => {
-      const ch = parseInt(dot.getAttribute('data-chapter') || '0')
-      switchChapter(ch)
-    })
+
+
+  // Bottom navigation buttons
+  document.getElementById('chapter-nav-prev')?.addEventListener('click', () => {
+    navigateBack()
   })
 
-  // Open dossier (first click on closed folder)
-  document.getElementById('desk-folder')?.addEventListener('click', () => {
-    dossierOpen = true
-    switchChapter(currentChapter)
+  document.getElementById('chapter-nav-next')?.addEventListener('click', () => {
+    navigateForward()
   })
 
-  // Close dossier
+  // Deep Dive Viewer nav
   document.getElementById('viewer-close')?.addEventListener('click', closeDossier)
   document.getElementById('viewer-backdrop')?.addEventListener('click', closeDossier)
+  document.getElementById('viewer-prev')?.addEventListener('click', () => navigateViewerPage(-1))
+  document.getElementById('viewer-next')?.addEventListener('click', () => navigateViewerPage(1))
 
-  // Dossier navigation
-  document.getElementById('viewer-prev')?.addEventListener('click', () => navigatePage(-1))
-  document.getElementById('viewer-next')?.addEventListener('click', () => navigatePage(1))
-
-  // Page dots
   document.querySelectorAll('.viewer__dot').forEach(dot => {
     dot.addEventListener('click', () => {
-      const page = parseInt(dot.getAttribute('data-page') || '0')
-      currentPage = page
+      const pg = parseInt(dot.getAttribute('data-page') || '0')
+      currentViewerPage = pg
       updateViewer()
     })
   })
 
-  // Asset clicks
-  document.querySelectorAll('.desk-asset').forEach(el => {
-    el.addEventListener('click', () => {
-      const id = el.getAttribute('data-asset')
-      if (id) openAssetZoom(id)
-    })
-  })
-
-  // Document asset clicks
-  document.querySelectorAll('.desk-doc').forEach(el => {
-    el.addEventListener('click', () => {
-      const id = el.getAttribute('data-doc')
-      if (!id) return
-      const doc = deskDocAssets.find(d => d.id === id)
-      if (!doc) return
-      openDocZoom(doc)
-    })
-  })
-
-  // Asset zoom close
-  document.getElementById('zoom-close')?.addEventListener('click', closeAssetZoom)
-  document.getElementById('zoom-backdrop')?.addEventListener('click', closeAssetZoom)
-
-  // Video
-  document.getElementById('desk-video')?.addEventListener('click', openVideo)
-  document.getElementById('video-modal-close')?.addEventListener('click', closeVideo)
-  document.getElementById('video-modal-backdrop')?.addEventListener('click', closeVideo)
-
-  // Audio (bg music)
   document.getElementById('btn-audio')?.addEventListener('click', toggleAudio)
 
-  // Dream page audio player
-  document.getElementById('dream-audio-btn')?.addEventListener('click', () => {
-    const audio = document.getElementById('dream-audio') as HTMLAudioElement | null
-    const btn = document.getElementById('dream-audio-btn')
-    if (!audio || !btn) return
-    if (audio.paused) {
-      audio.play()
-      btn.classList.add('playing')
-      btn.querySelector('.cp-dream__audio-label')
-      const label = btn.nextElementSibling as HTMLElement | null
-      if (label) label.textContent = 'Nu aan het luisteren...'
-    } else {
-      audio.pause()
-      btn.classList.remove('playing')
-      const label = btn.nextElementSibling as HTMLElement | null
-      if (label) label.textContent = 'Luister naar Sophie'
-    }
-    audio.addEventListener('ended', () => {
-      btn.classList.remove('playing')
-      const label = btn.nextElementSibling as HTMLElement | null
-      if (label) label.textContent = 'Luister naar Sophie'
-    }, { once: true })
-  })
-
-  // Celebration
-  document.getElementById('celebrate-btn')?.addEventListener('click', closeCelebration)
-
-  // Keyboard
+  // Keyboard navigation
   document.addEventListener('keydown', (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       if (document.getElementById('letter-overlay')?.classList.contains('letter-overlay--visible')) {
         closeLetter()
-      } else if (document.getElementById('video-modal')?.classList.contains('video-modal--open')) {
-        closeVideo()
-      } else if (zoomedAsset) {
-        closeAssetZoom()
-      } else if (dossierOpen) {
+      } else if (viewerOpen) {
         closeDossier()
       }
     }
-    if (dossierOpen) {
-      if (e.key === 'ArrowRight') navigatePage(1)
-      if (e.key === 'ArrowLeft') navigatePage(-1)
-    }
   })
-
-  // Touch swipe on viewer
-  let touchStartX = 0
-  const viewerContent = document.getElementById('viewer-content')
-  viewerContent?.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX
-  })
-  viewerContent?.addEventListener('touchend', (e) => {
-    const diff = touchStartX - e.changedTouches[0].clientX
-    if (Math.abs(diff) > 60) {
-      navigatePage(diff > 0 ? 1 : -1)
-    }
-  })
-}
-
-
-
-// ─── Dossier Viewer ───
-function navigatePage(dir: number) {
-  const next = currentPage + dir
-  if (next < 0 || next >= dossierPages.length) return
-  currentPage = next
-  updateViewer()
-}
-
-function updateViewer() {
-  const content = document.getElementById('viewer-content')
-  if (!content) return
-
-  // Animate out
-  content.classList.add('viewer__content--exit')
-  setTimeout(() => {
-    content.innerHTML = dossierPages[currentPage].render()
-    content.classList.remove('viewer__content--exit')
-    content.classList.add('viewer__content--enter')
-    content.scrollTop = 0
-    setTimeout(() => content.classList.remove('viewer__content--enter'), 300)
-  }, 150)
-
-  // Update dots
-  document.querySelectorAll('.viewer__dot').forEach((dot, i) => {
-    dot.classList.toggle('viewer__dot--active', i === currentPage)
-  })
-
-  // Update counter
-  const counter = document.querySelector('.viewer__counter')
-  if (counter) counter.textContent = `${dossierPages[currentPage].label} · ${currentPage + 1} / ${dossierPages.length}`
-
-  // Update nav buttons
-  document.getElementById('viewer-prev')?.classList.toggle('viewer__nav--disabled', currentPage === 0)
-  document.getElementById('viewer-next')?.classList.toggle('viewer__nav--disabled', currentPage === dossierPages.length - 1)
-}
-
-function closeDossier() {
-  dossierOpen = false
-  document.getElementById('viewer')?.classList.remove('viewer--open')
-  document.getElementById('desk-folder')?.classList.remove('desk-folder--hidden')
-}
-
-// ─── Asset Zoom ───
-function openAssetZoom(id: string) {
-  const asset = deskAssets.find(a => a.id === id)
-  if (!asset) return
-  zoomedAsset = id
-
-  const content = document.getElementById('zoom-content')
-  const label = document.getElementById('zoom-label')
-  const container = document.getElementById('zoom-container')
-
-  // Style the zoom container based on asset type
-  container?.classList.remove('zoom__container--polaroid', 'zoom__container--document', 'zoom__container--sketch')
-
-  if (asset.style === 'polaroid') {
-    container?.classList.add('zoom__container--polaroid')
-    if (content) content.innerHTML = `
-      <div class="zoom-polaroid">
-        <img src="${asset.image}" alt="${asset.label}">
-        <div class="zoom-polaroid__caption">${asset.label}</div>
-      </div>`
-    if (label) label.innerHTML = `<span class="zoom__sublabel">${asset.sublabel}</span>`
-  } else if (asset.style === 'photo') {
-    if (content) content.innerHTML = `
-      <div class="zoom-photo">
-        <img src="${asset.image}" alt="${asset.label}">
-      </div>`
-    if (label) label.innerHTML = `<strong>${asset.label}</strong><br><span class="zoom__sublabel">${asset.sublabel}</span>`
-  } else {
-    if (content) content.innerHTML = `<img src="${asset.image}" alt="${asset.label}">`
-    if (label) label.innerHTML = `<strong>${asset.label}</strong><br><span class="zoom__sublabel">${asset.sublabel}</span>`
-  }
-
-  document.getElementById('zoom')?.classList.add('zoom--open')
-}
-
-function openDocZoom(doc: DeskDocAsset) {
-  zoomedAsset = doc.id
-  const content = document.getElementById('zoom-content')
-  const label = document.getElementById('zoom-label')
-  if (content) content.innerHTML = `<div class="zoom-doc">${doc.render()}</div>`
-  if (label) label.innerHTML = `<strong>${doc.label}</strong><br><span class="zoom__sublabel">${doc.sublabel}</span>`
-  document.getElementById('zoom')?.classList.add('zoom--open')
-}
-
-// ─── Page Events (drag, close, minimize) ───
-function bindPageEvents() {
-  const paper = document.getElementById('desk-paper')
-  
-  // Close button → show folder again
-  document.getElementById('page-close')?.addEventListener('click', () => {
-    pageMinimized = true
-    restoreAssetPositions()
-    const center = document.getElementById('desk-center')
-    if (center) {
-      center.innerHTML = renderFolderHTML('Klik om te openen')
-      document.getElementById('desk-folder')?.addEventListener('click', () => {
-        pageMinimized = false
-        switchChapter(currentChapter)
-      })
-    }
-  })
-
-  // Drag over
-  paper?.addEventListener('dragover', (e) => {
-    e.preventDefault()
-    paper.classList.add('desk-page__paper--dragover')
-  })
-  paper?.addEventListener('dragleave', () => {
-    paper.classList.remove('desk-page__paper--dragover')
-  })
-
-  // Drop
-  paper?.addEventListener('drop', (e) => {
-    e.preventDefault()
-    paper.classList.remove('desk-page__paper--dragover')
-    const assetId = (e as DragEvent).dataTransfer?.getData('text/plain')
-    const needed = requiredDrops[currentChapter]
-    if (!assetId || needed === 0 || droppedPerChapter[currentChapter] >= needed) return
-    
-    const prevDrops = droppedPerChapter[currentChapter]
-    droppedPerChapter[currentChapter]++
-    const newDrops = droppedPerChapter[currentChapter]
-    
-    // Map drops to step classes (scale to 3 steps)
-    const prevStep = Math.min(Math.floor((prevDrops / needed) * 3), 3)
-    const newStep = Math.min(Math.floor((newDrops / needed) * 3), 3)
-    
-    // Animate the dragged asset shrinking
-    const dragged = document.getElementById(assetId)
-    if (dragged) {
-      dragged.style.transition = 'all .5s ease'
-      dragged.style.opacity = '0.2'
-      dragged.style.transform += ' scale(0.7)'
-    }
-
-    // Update step class for progressive reveal
-    paper.classList.remove(`desk-page__paper--step-${prevStep}`)
-    paper.classList.add(`desk-page__paper--step-${newStep}`)
-
-    // Update "added" label
-    const addedLabel = paper.closest('.desk-page')?.querySelector('.desk-page__added') as HTMLElement
-    if (addedLabel && newDrops >= needed) {
-      addedLabel.textContent = 'Toegevoegd aan het dossier'
-    }
-
-    // Update drop zone
-    const dropZone = document.getElementById('page-drop')
-    if (dropZone) {
-      if (newDrops >= needed) {
-        // Hide drop zone, show nav sidebar
-        dropZone.style.display = 'none'
-        paper.classList.add('desk-page__paper--complete')
-        
-        // Inject nav sidebar
-        const page = paper.closest('.desk-page')
-        if (page && !page.querySelector('.desk-page__nav-sidebar')) {
-          const prevDis = currentChapter === 0 ? ' desk-page__nav-btn--disabled' : ''
-          const nextDis = currentChapter === chapters.length - 1 ? ' desk-page__nav-btn--disabled' : ''
-          page.insertAdjacentHTML('beforeend', `
-            <div class="desk-page__nav-sidebar">
-              <button class="desk-page__nav-btn${prevDis}" id="page-prev" title="Vorig hoofdstuk">‹</button>
-              <div class="desk-page__nav-counter">${currentChapter + 1}<span>/</span>${chapters.length}</div>
-              <button class="desk-page__nav-btn${nextDis}" id="page-next-ch" title="Volgend hoofdstuk">›</button>
-            </div>`)
-          document.getElementById('page-prev')?.addEventListener('click', () => switchChapter(currentChapter - 1))
-          document.getElementById('page-next-ch')?.addEventListener('click', () => switchChapter(currentChapter + 1))
-        }
-      } else {
-        dropZone.innerHTML = `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${newDrops}/${needed}</div>`
-      }
-    }
-  })
-
-  // Nav sidebar buttons (when rendered from template)
-  document.getElementById('page-prev')?.addEventListener('click', () => switchChapter(currentChapter - 1))
-  document.getElementById('page-next-ch')?.addEventListener('click', () => switchChapter(currentChapter + 1))
-}
-
-// ─── Chapter Switching ───
-function switchChapter(n: number) {
-  if (n < 0 || n >= chapters.length) return
-  
-  // Intercept: show celebration before reveal (once)
-  if (n === 7 && !celebrationShown) {
-    celebrationShown = true
-    showCelebration()
-    return
-  }
-  
-  currentChapter = n
-
-  // Open dossier if still closed
-  if (!dossierOpen) {
-    dossierOpen = true
-  }
-
-  // Update central dossier page
-  pageMinimized = false
-  const center = document.getElementById('desk-center')
-  if (center) {
-    center.style.opacity = '0'
-    setTimeout(() => {
-      center.innerHTML = renderPageHTML(n)
-      center.style.opacity = '1'
-      bindPageEvents()
-
-      // Auto-play dream video on page 8 (chapter index 7)
-      if (n === 7) {
-        setTimeout(() => {
-          const dreamVideo = document.getElementById('dream-video') as HTMLVideoElement | null
-          const dreamBtn = document.getElementById('dream-video-btn')
-          const videoContainer = dreamBtn?.closest('.cp-dream__video')
-          if (dreamVideo && dreamBtn && videoContainer) {
-            // Duck background music low during video
-            if (audioEl) audioEl.volume = 0.15
-
-            dreamVideo.play().then(() => {
-              videoContainer.classList.add('playing')
-            }).catch(() => {}) // Autoplay might be blocked
-
-            dreamVideo.addEventListener('ended', () => {
-              videoContainer.classList.remove('playing')
-              if (audioEl) audioEl.volume = 1.0
-            }, { once: true })
-
-            // Click to toggle play/pause
-            videoContainer.addEventListener('click', () => {
-              if (dreamVideo.paused) {
-                dreamVideo.play()
-                videoContainer.classList.add('playing')
-              } else {
-                dreamVideo.pause()
-                videoContainer.classList.remove('playing')
-              }
-            })
-          }
-        }, 600)
-      }
-    }, 300)
-  }
-
-  // Update nav dots
-  document.querySelectorAll('.chapter-nav__dot').forEach((dot, i) => {
-    dot.classList.toggle('chapter-nav__dot--active', i === n)
-  })
-
-  // Fade assets in/out + smoothly push aside
-  document.querySelectorAll('.desk-asset[data-chapters]').forEach(el => {
-    const chs = (el.getAttribute('data-chapters') || '').split(',').map(Number)
-    const htmlEl = el as HTMLElement
-    if (chs.includes(n)) {
-      htmlEl.style.opacity = '1'
-      htmlEl.style.pointerEvents = 'auto'
-
-      // Smoothly push to sides (CSS transition handles the animation)
-      const origLeft = el.getAttribute('data-orig-left')
-      if (origLeft) {
-        const leftVal = parseFloat(origLeft)
-        if (leftVal < 35) {
-          htmlEl.style.left = `${Math.max(1, leftVal - 14)}%`
-        } else {
-          htmlEl.style.left = `${Math.min(90, leftVal + 10)}%`
-        }
-      }
-    } else {
-      htmlEl.style.opacity = '0'
-      htmlEl.style.pointerEvents = 'none'
-    }
-  })
-
-  // Also handle doc assets
-  document.querySelectorAll('.desk-doc[data-chapters]').forEach(el => {
-    const chs = (el.getAttribute('data-chapters') || '').split(',').map(Number)
-    const htmlEl = el as HTMLElement
-    htmlEl.style.opacity = chs.includes(n) ? '1' : '0'
-    htmlEl.style.pointerEvents = chs.includes(n) ? 'auto' : 'none'
-  })
-}
-
-// Restore asset positions when page is minimized
-function restoreAssetPositions() {
-  document.querySelectorAll('.desk-asset[data-orig-left]').forEach(el => {
-    const htmlEl = el as HTMLElement
-    const origLeft = el.getAttribute('data-orig-left')
-    if (origLeft) htmlEl.style.left = origLeft
-  })
-}
-
-// ─── Celebration / Confetti ───
-function showCelebration() {
-  const el = document.getElementById('celebrate')
-  el?.classList.add('celebrate--visible')
-  
-  const canvas = document.getElementById('confetti-canvas') as HTMLCanvasElement
-  if (!canvas) return
-  const ctx = canvas.getContext('2d')
-  if (!ctx) return
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
-
-  const particles: { x: number; y: number; vx: number; vy: number; color: string; size: number; rotation: number; rv: number }[] = []
-  const colors = ['#FFD700', '#FF6B35', '#2C8C99', '#FF4E6A', '#7B68EE', '#00D4AA', '#FFF']
-  
-  for (let i = 0; i < 200; i++) {
-    particles.push({
-      x: canvas.width / 2 + (Math.random() - .5) * 200,
-      y: canvas.height / 2,
-      vx: (Math.random() - .5) * 16,
-      vy: Math.random() * -18 - 4,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      size: Math.random() * 8 + 3,
-      rotation: Math.random() * 360,
-      rv: (Math.random() - .5) * 12,
-    })
-  }
-
-  let frame = 0
-  function animate() {
-    if (!ctx || frame > 180) return
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    particles.forEach(p => {
-      p.x += p.vx
-      p.y += p.vy
-      p.vy += 0.25
-      p.vx *= 0.99
-      p.rotation += p.rv
-      ctx.save()
-      ctx.translate(p.x, p.y)
-      ctx.rotate(p.rotation * Math.PI / 180)
-      ctx.fillStyle = p.color
-      ctx.globalAlpha = Math.max(0, 1 - frame / 180)
-      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6)
-      ctx.restore()
-    })
-    frame++
-    requestAnimationFrame(animate)
-  }
-  animate()
-}
-
-function closeCelebration() {
-  const el = document.getElementById('celebrate')
-  el?.classList.remove('celebrate--visible')
-  switchChapter(7)
-}
-
-function closeAssetZoom() {
-  zoomedAsset = null
-  document.getElementById('zoom')?.classList.remove('zoom--open')
-}
-
-// ─── Video ───
-function openVideo() {
-  document.getElementById('video-modal')?.classList.add('video-modal--open')
-}
-
-function closeVideo() {
-  document.getElementById('video-modal')?.classList.remove('video-modal--open')
-  const video = document.getElementById('sophie-video') as HTMLVideoElement
-  if (video) video.pause()
 }
 
 // ─── Audio ───
@@ -1487,29 +1319,24 @@ function initAudio() {
     audioEl.volume = 0.25
   }
 
-  // Splash screen → click starts music + fades splash
   const splash = document.getElementById('splash')
   const splashBtn = document.getElementById('splash-btn')
 
   const startExperience = () => {
-    // Go fullscreen
     document.documentElement.requestFullscreen?.().catch(() => {})
-    // Start background music
     if (audioEl) {
       audioEl.play().catch(() => {})
       audioPlaying = true
     }
-    // Fade out splash
     splash?.classList.add('splash--hidden')
     setTimeout(() => {
-      splash?.remove()
-      // Auto-open Sophie's letter
-      document.getElementById('desk-brief')?.click()
-    }, 1200)
+      // Navigate to letter page
+      currentPageIndex = 1
+      showPage(currentPageIndex)
+    }, 800)
   }
 
   splashBtn?.addEventListener('click', startExperience)
-  // Also allow clicking anywhere on splash
   splash?.addEventListener('click', (e) => {
     if (e.target === splash) startExperience()
   })
@@ -1529,3 +1356,14 @@ function toggleAudio() {
 
 // ─── Init ───
 render()
+
+// Set initial history state
+history.replaceState({ pageIndex: 0 }, '', '#splash')
+
+// Browser back/forward button support
+window.addEventListener('popstate', (e) => {
+  if (e.state && typeof e.state.pageIndex === 'number') {
+    currentPageIndex = e.state.pageIndex
+    showPage(currentPageIndex, true)
+  }
+})

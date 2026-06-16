@@ -239,6 +239,35 @@ const jobs: ImageJob[] = [
     prompt: `Same woman as in the reference photo. Gentle photograph of this European woman in her early 40s with light brown shoulder-length hair, in a garden with her children. She's kneeling beside a small vegetable patch, laughing with a child holding a tomato. Soft afternoon light, lush green garden in a Belgian suburb. She looks healthy, grounded, present. Natural family photography, warm tones, authentic moment.`,
     inputImages: ["public/img-sophie-family.png"],
   },
+  // ─── Scene Backgrounds (16:9, clean dark atmospheric) ───
+  {
+    name: "bg-signaleren",
+    prompt: `Create a wide 16:9 dark atmospheric background image (1920x1080). Clean dark surface with deep navy-teal gradient. Subtle blurred city lights (Lyon at night) visible in the far background, very out of focus. No text, no logos, no people. Premium, minimal, moody. Dark enough to overlay white text and UI elements on top.`,
+  },
+  {
+    name: "bg-begrijpen",
+    prompt: `Create a wide 16:9 dark atmospheric background image (1920x1080). Clean dark navy-black surface with very subtle teal-colored geometric network lines suggesting AI and data processing. Abstract, minimal. No text, no logos, no people. Premium dark UI background suitable for overlaying white interface elements.`,
+  },
+  {
+    name: "bg-begeleiden",
+    prompt: `Create a wide 16:9 dark atmospheric background image (1920x1080). Clean dark surface with a very subtle warm glow in the center suggesting hospital corridor lighting — abstract, not a literal photograph. Deep navy base with subtle warm amber accent. No text, no logos, no people. Premium, warm, caring.`,
+  },
+  {
+    name: "bg-verbinden",
+    prompt: `Create a wide 16:9 dark atmospheric background image (1920x1080). Clean dark surface with a subtle golden sunrise gradient on the right side, suggesting morning and hope. Deep navy base fading to warm amber at one edge. No text, no logos, no people. Premium, hopeful, human connection.`,
+  },
+  {
+    name: "bg-beslissen",
+    prompt: `Create a wide 16:9 dark atmospheric background image (1920x1080). Clean dark surface with subtle teal geometric lines suggesting organization and structure — like a faint grid or dashboard wireframe in the background. Deep navy base. No text, no logos, no people. Premium, organized, clear.`,
+  },
+  {
+    name: "bg-ondersteunen",
+    prompt: `Create a wide 16:9 dark atmospheric background image (1920x1080). Clean dark surface with a subtle warm gradient suggesting travel and departure — hint of sunset orange on the horizon line. Deep navy base. No text, no logos, no people. Premium, hopeful, journey home.`,
+  },
+  {
+    name: "bg-herstellen",
+    prompt: `Create a wide 16:9 dark atmospheric background image (1920x1080). Clean dark surface with subtle warm light spots suggesting a cozy home — abstract, not a literal photograph. Deep navy base with gentle warm amber glow spots. No text, no logos, no people. Premium, warm, homecoming, safe.`,
+  },
 ];
 
 

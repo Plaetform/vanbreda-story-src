@@ -1,0 +1,302 @@
+/* =========================================================
+   iPHONE 15 PRO — Realistic CSS Mockup
+   ========================================================= */
+
+.iphone {
+  --iphone-width: 320px;
+  --iphone-ratio: 2.17;
+  --iphone-radius: 48px;
+  --iphone-bezel: 8px;
+  --iphone-border-color: #2a2a2a;
+  --iphone-frame-color: #1a1a1a;
+
+  position: relative;
+  width: var(--iphone-width);
+  height: calc(var(--iphone-width) * var(--iphone-ratio));
+  background: var(--iphone-frame-color);
+  border-radius: var(--iphone-radius);
+  padding: var(--iphone-bezel);
+  box-shadow:
+    /* Outer glow */
+    0 30px 60px rgba(0, 0, 0, 0.55),
+    0 0 80px rgba(44, 140, 153, 0.06),
+    /* Metal edge highlight */
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    /* Depth shadow */
+    0 2px 4px rgba(0, 0, 0, 0.8);
+  flex-shrink: 0;
+}
+
+/* Titanium side buttons */
+.iphone::before {
+  content: '';
+  position: absolute;
+  /* Power button - right side */
+  right: -3px;
+  top: 25%;
+  width: 3px;
+  height: 48px;
+  background: linear-gradient(
+    to right,
+    var(--iphone-border-color),
+    #444,
+    var(--iphone-border-color)
+  );
+  border-radius: 0 2px 2px 0;
+}
+
+.iphone::after {
+  content: '';
+  position: absolute;
+  /* Volume buttons - left side */
+  left: -3px;
+  top: 22%;
+  width: 3px;
+  height: 32px;
+  background: linear-gradient(
+    to left,
+    var(--iphone-border-color),
+    #444,
+    var(--iphone-border-color)
+  );
+  border-radius: 2px 0 0 2px;
+  box-shadow: 0 24px 0 0 #333; /* Second volume button */
+}
+
+/* Screen area */
+.iphone__screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--iphone-radius) - var(--iphone-bezel));
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dynamic Island */
+.iphone__notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 28px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 20;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Subtle inner camera dot on Dynamic Island */
+.iphone__notch::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #1a2a3a 30%, #0a0a0a 70%);
+  box-shadow: inset 0 0 2px rgba(100, 140, 200, 0.3);
+}
+
+/* Screen reflection / glare */
+.iphone__reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: calc(var(--iphone-radius) - var(--iphone-bezel));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  pointer-events: none;
+  z-index: 15;
+}
+
+/* ─── Screen Content Areas ─── */
+
+/* Status bar */
+.iphone__status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px 0;
+  height: 48px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.iphone__status-time {
+  font-variant-numeric: tabular-nums;
+}
+
+.iphone__status-icons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 11px;
+}
+
+/* App header bar */
+.iphone__app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px 10px;
+  background: var(--c-navy, #1e3a5f);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid var(--c-teal, #2c8c99);
+  flex-shrink: 0;
+}
+
+/* Chat area inside phone */
+.iphone__chat {
+  flex: 1;
+  background: #f4f3ee;
+  padding: 12px 14px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Choice input area */
+.iphone__input {
+  padding: 10px 14px;
+  background: #e8e7e2;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+/* ─── Size Variants ─── */
+
+/* Large centered phone (main scene) */
+.iphone--large {
+  --iphone-width: 340px;
+}
+
+/* Small phone (side panel in split view) */
+.iphone--small {
+  --iphone-width: 220px;
+  --iphone-radius: 36px;
+}
+
+.iphone--small .iphone__notch {
+  width: 70px;
+  height: 20px;
+  top: 8px;
+}
+
+.iphone--small .iphone__notch::after {
+  width: 6px;
+  height: 6px;
+  right: 10px;
+}
+
+.iphone--small .iphone__status-bar {
+  padding: 10px 16px 0;
+  height: 36px;
+  font-size: 10px;
+}
+
+.iphone--small .iphone__app-header {
+  padding: 4px 12px 6px;
+  font-size: 12px;
+}
+
+.iphone--small .iphone__chat {
+  font-size: 11px;
+  padding: 8px 10px;
+  gap: 8px;
+}
+
+/* ─── Centered Layout (no white card) ─── */
+.scene-phone-centered {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-height: calc(100vh - 140px);
+}
+
+.scene-phone-next {
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+/* ─── Reuse existing bubble styles inside iPhone ─── */
+.iphone__chat .phone-bubble {
+  max-width: 82%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  position: relative;
+  animation: fadeIn 0.3s ease forwards;
+  font-size: 13px;
+}
+
+.iphone__chat .phone-bubble--assistant {
+  background: #fff;
+  color: var(--c-navy, #1e3a5f);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.iphone__chat .phone-bubble--user {
+  background: var(--c-teal, #2c8c99);
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.iphone__chat .phone-typing {
+  align-self: flex-start;
+  color: #999;
+  font-style: italic;
+  font-size: 12px;
+  padding: 6px 0;
+}
+
+/* Map inside chat */
+.iphone__chat .svg-map-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  margin: 4px 0;
+}
+
+/* Choice buttons inside phone */
+.iphone__input .step-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  margin: 4px 0;
+  border: none;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
