@@ -177,11 +177,7 @@ body {
 }
 
 .desk-page__added {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: .14em;
-  color: rgba(255,255,255,.5);
-  text-transform: uppercase;
+  display: none;
 }
 
 .desk-page__paper {
