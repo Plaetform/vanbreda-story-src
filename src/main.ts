@@ -415,7 +415,7 @@ const chapterPages = [
             <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M8 5v14l11-7z"/></svg>
           </button>
           <div class="cp-dream__audio-label">Luister naar Sophie</div>
-          <audio id="dream-audio" src="/sophie-audio.mp3" preload="auto"></audio>
+          <audio id="dream-audio" src="/audio/outtro-sophie.mp3" preload="auto"></audio>
         </div>
 
         <div class="cp-dream__cta">
@@ -1331,6 +1331,32 @@ function switchChapter(n: number) {
       center.innerHTML = renderPageHTML(n)
       center.style.opacity = '1'
       bindPageEvents()
+
+      // Auto-play dream audio on page 8 (chapter index 7)
+      if (n === 7) {
+        setTimeout(() => {
+          const dreamAudio = document.getElementById('dream-audio') as HTMLAudioElement | null
+          const dreamBtn = document.getElementById('dream-audio-btn')
+          if (dreamAudio && dreamBtn) {
+            // Duck background music to 75%
+            if (audioEl) audioEl.volume = 0.75
+
+            dreamAudio.play().then(() => {
+              dreamBtn.classList.add('playing')
+              const label = dreamBtn.nextElementSibling as HTMLElement | null
+              if (label) label.textContent = 'Nu aan het luisteren...'
+            }).catch(() => {}) // Autoplay might be blocked
+
+            dreamAudio.addEventListener('ended', () => {
+              dreamBtn.classList.remove('playing')
+              const label = dreamBtn.nextElementSibling as HTMLElement | null
+              if (label) label.textContent = 'Luister naar Sophie'
+              // Restore background music volume
+              if (audioEl) audioEl.volume = 1.0
+            }, { once: true })
+          }
+        }, 600)
+      }
     }, 300)
   }
 
