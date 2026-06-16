@@ -509,7 +509,6 @@ function renderPageHTML(n: number): string {
   return `
     <div class="desk-page" id="desk-page">
       ${ch.question ? `<div class="desk-page__question">${ch.question}</div>` : ''}
-      <div class="desk-page__added">${addedLabel}</div>
       <div class="desk-page__paper ${stepClass} ${completeClass} ${autoClass}" id="desk-paper">
         <button class="desk-page__close" id="page-close" title="Sluit pagina">✕</button>
         <div class="desk-page__pagenum">${cp.pageNum} / 8</div>
