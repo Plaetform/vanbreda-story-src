@@ -388,42 +388,34 @@ const chapterPages = [
     subtitle: 'Van afzonderlijke AI-successen naar één samenhangende Health Care-operatie',
     content: `
       <div class="cp-dream">
+        <div class="cp-dream__video">
+          <video id="dream-video" src="/video/outtro-sophie.mp4" preload="auto" playsinline></video>
+          <button class="cp-dream__play-btn" id="dream-video-btn" aria-label="Speel af">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+
         <div class="cp-dream__letter">
           <div class="cp-dream__letter-date">Brasschaat, september 2030</div>
 
           <div class="cp-dream__letter-body">
             <p>Lieve Vanbreda,</p>
-            <p>Drie maanden geleden schreef ik jullie vanuit een ziekenhuisbed in Lyon. Ik was bang en ver van huis.</p>
-            <p>Nu zit ik weer thuis bij mijn gezin.</p>
-          </div>
-
-          <div class="cp-dream__hero">
-            <img src="/img-sophie-family.png" alt="Sophie thuis bij haar gezin" class="cp-dream__hero-img" />
-          </div>
-
-          <div class="cp-dream__letter-body">
+            <p>Drie maanden geleden lag ik onverwacht in een ziekenhuis in Frankrijk.</p>
+            <p>Nu ben ik weer thuis bij mijn gezin.</p>
             <p>Ik hoefde mijn verhaal maar één keer te vertellen. Ik wist waar ik aan toe was. En toen het echt nodig was, was er iemand die me begreep.</p>
-            <p><strong>Zo wil je geholpen worden wanneer je kwetsbaar bent.</strong></p>
-            <p>Bedankt.</p>
+            <p><strong>Mijn ervaring in 2030 begon met jullie keuzes in 2026.</strong></p>
+            <p>Dank jullie wel!</p>
           </div>
 
           <div class="cp-dream__signature">Sophie De Winter</div>
         </div>
+      </div>
 
-        <div class="cp-dream__audio">
-          <button class="cp-dream__play-btn" id="dream-audio-btn" aria-label="Luister naar Sophie">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M8 5v14l11-7z"/></svg>
-          </button>
-          <div class="cp-dream__audio-label">Luister naar Sophie</div>
-          <audio id="dream-audio" src="/audio/outtro-sophie.mp3" preload="auto"></audio>
-        </div>
-
-        <div class="cp-dream__cta">
-          <a class="cp-cta cp-cta--primary" href="/vanbreda-healthcaroperatie.pdf" download>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="margin-right:8px;vertical-align:middle"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download onze visie — Health Care 2030
-          </a>
-        </div>
+      <div class="cp-dream__cta" style="text-align:center; margin-top:20px;">
+        <a class="cp-cta cp-cta--primary" href="/vanbreda-healthcaroperatie.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="margin-right:8px;vertical-align:middle"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download onze visie — Health Care 2030
+        </a>
       </div>`,
     footnote: 'Haar ervaring in 2030 begint met de keuzes die we vandaag maken.',
   },
@@ -1332,28 +1324,35 @@ function switchChapter(n: number) {
       center.style.opacity = '1'
       bindPageEvents()
 
-      // Auto-play dream audio on page 8 (chapter index 7)
+      // Auto-play dream video on page 8 (chapter index 7)
       if (n === 7) {
         setTimeout(() => {
-          const dreamAudio = document.getElementById('dream-audio') as HTMLAudioElement | null
-          const dreamBtn = document.getElementById('dream-audio-btn')
-          if (dreamAudio && dreamBtn) {
+          const dreamVideo = document.getElementById('dream-video') as HTMLVideoElement | null
+          const dreamBtn = document.getElementById('dream-video-btn')
+          const videoContainer = dreamBtn?.closest('.cp-dream__video')
+          if (dreamVideo && dreamBtn && videoContainer) {
             // Duck background music to 75%
             if (audioEl) audioEl.volume = 0.75
 
-            dreamAudio.play().then(() => {
-              dreamBtn.classList.add('playing')
-              const label = dreamBtn.nextElementSibling as HTMLElement | null
-              if (label) label.textContent = 'Nu aan het luisteren...'
+            dreamVideo.play().then(() => {
+              videoContainer.classList.add('playing')
             }).catch(() => {}) // Autoplay might be blocked
 
-            dreamAudio.addEventListener('ended', () => {
-              dreamBtn.classList.remove('playing')
-              const label = dreamBtn.nextElementSibling as HTMLElement | null
-              if (label) label.textContent = 'Luister naar Sophie'
-              // Restore background music volume
+            dreamVideo.addEventListener('ended', () => {
+              videoContainer.classList.remove('playing')
               if (audioEl) audioEl.volume = 1.0
             }, { once: true })
+
+            // Click to toggle play/pause
+            videoContainer.addEventListener('click', () => {
+              if (dreamVideo.paused) {
+                dreamVideo.play()
+                videoContainer.classList.add('playing')
+              } else {
+                dreamVideo.pause()
+                videoContainer.classList.remove('playing')
+              }
+            })
           }
         }, 600)
       }

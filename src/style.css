@@ -929,19 +929,48 @@ body {
 /* ── Dream page (page 8) — mirrors splash letter ── */
 .cp-dream {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
+  gap: 28px;
   padding: 0;
+  align-items: flex-start;
+}
+
+.cp-dream__video {
+  flex: 1;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 8px 32px rgba(0,0,0,.2);
+  cursor: pointer;
+}
+
+.cp-dream__video video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cp-dream__video .cp-dream__play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: opacity .3s, transform .3s;
+}
+
+.cp-dream__video.playing .cp-dream__play-btn {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .cp-dream__letter {
+  flex: 1;
   background: #f8f4eb;
   background-image: linear-gradient(180deg, #faf6ed, #f4efe3);
   padding: 32px 40px;
   border-radius: 3px;
   box-shadow: 0 12px 40px rgba(0,0,0,.15), 0 2px 6px rgba(0,0,0,.08);
-  width: 100%;
   position: relative;
 }
 
