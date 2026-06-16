@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "generated_at_unix": 1781595913,
+  "components": [
+    {
+      "id": "vite-spa-minimal",
+      "kind": "frontend",
+      "repo_url": "https://github.com/Plaetform/platform-templates",
+      "ref": "main",
+      "template_path": "vite-spa-minimal",
+      "mount_path": "",
+      "renderer_id": "passthrough",
+      "renderer_version": "1.0.0"
+    }
+  ],
+  "hooks_executed": []
+}
