@@ -468,6 +468,24 @@ let celebrationShown = false
 // Drops required per chapter: 3 = full onboarding, 1 = pattern, 0 = auto-reveal
 const requiredDrops = [3, 1, 0, 0, 0, 0, 0, 0]
 
+// ─── Folder HTML helper ───
+function renderFolderHTML(hint = 'Klik om het dossier te openen'): string {
+  return `
+    <div class="desk-folder" id="desk-folder">
+      <div class="desk-folder__front">
+        <div class="desk-folder__stamp">HEALTH CARE 2030</div>
+        <div class="desk-folder__title">AE × Vanbreda</div>
+        <div class="desk-folder__sub">Status: in reconstructie</div>
+        <div class="desk-folder__label">VERTROUWELIJK</div>
+        <div class="desk-folder__logos">
+          <img src="/ae-logo.png" alt="AE">
+          <img src="/vanbreda-logo.svg" alt="Vanbreda">
+        </div>
+      </div>
+      <div class="desk-folder__hint">${hint}</div>
+    </div>`
+}
+
 // ─── Page HTML helper ───
 function renderPageHTML(n: number): string {
   const ch = chapters[n]
@@ -544,6 +562,8 @@ function renderDesk(): string {
          id="asset-${a.id}"
          data-asset="${a.id}"
          data-chapters="${a.chapters.join(',')}"
+         data-orig-top="${a.top}"
+         data-orig-left="${a.left}"
          draggable="true"
          style="top:${a.top}; left:${a.left}; transform:rotate(${a.rotation}deg); width:${a.width}; ${a.chapters.includes(currentChapter) ? '' : 'opacity:0; pointer-events:none;'}"
          title="${a.label}">
@@ -609,27 +629,7 @@ function renderDesk(): string {
 
   <!-- Central dossier: closed folder OR open page -->
   <div class="desk-center" id="desk-center">
-    ${dossierOpen ? (pageMinimized ? `
-    <div class="desk-folder" id="desk-folder">
-      <div class="desk-folder__front">
-        <div class="desk-folder__stamp">HEALTH CARE 2030</div>
-        <div class="desk-folder__title">AE × Vanbreda</div>
-        <div class="desk-folder__sub">Status: in reconstructie</div>
-        <div class="desk-folder__label">VERTROUWELIJK</div>
-      </div>
-      <div class="desk-folder__hint">Klik om te openen</div>
-    </div>
-    ` : renderPageHTML(currentChapter)) : `
-    <div class="desk-folder" id="desk-folder">
-      <div class="desk-folder__front">
-        <div class="desk-folder__stamp">HEALTH CARE 2030</div>
-        <div class="desk-folder__title">AE × Vanbreda</div>
-        <div class="desk-folder__sub">Status: in reconstructie</div>
-        <div class="desk-folder__label">VERTROUWELIJK</div>
-      </div>
-      <div class="desk-folder__hint">Klik om het dossier te openen</div>
-    </div>
-    `}
+    ${dossierOpen ? (pageMinimized ? renderFolderHTML('Klik om te openen') : renderPageHTML(currentChapter)) : renderFolderHTML()}
   </div>
 
   <div class="desk-brief" id="desk-brief">
@@ -1075,18 +1075,10 @@ function bindPageEvents() {
   // Close button → show folder again
   document.getElementById('page-close')?.addEventListener('click', () => {
     pageMinimized = true
+    restoreAssetPositions()
     const center = document.getElementById('desk-center')
     if (center) {
-      center.innerHTML = `
-        <div class="desk-folder" id="desk-folder">
-          <div class="desk-folder__front">
-            <div class="desk-folder__stamp">HEALTH CARE 2030</div>
-            <div class="desk-folder__title">AE × Vanbreda</div>
-            <div class="desk-folder__sub">Status: in reconstructie</div>
-            <div class="desk-folder__label">VERTROUWELIJK</div>
-          </div>
-          <div class="desk-folder__hint">Klik om te openen</div>
-        </div>`
+      center.innerHTML = renderFolderHTML('Klik om te openen')
       document.getElementById('desk-folder')?.addEventListener('click', () => {
         pageMinimized = false
         switchChapter(currentChapter)
@@ -1205,16 +1197,43 @@ function switchChapter(n: number) {
     dot.classList.toggle('chapter-nav__dot--active', i === n)
   })
 
-  // Fade assets in/out
+  // Fade assets in/out and push aside
   document.querySelectorAll('[data-chapters]').forEach(el => {
     const chs = (el.getAttribute('data-chapters') || '').split(',').map(Number)
     const htmlEl = el as HTMLElement
     if (chs.includes(n)) {
       htmlEl.style.opacity = '1'
       htmlEl.style.pointerEvents = 'auto'
+      
+      // Push assets to sides when page is open
+      const origLeft = el.getAttribute('data-orig-left')
+      if (origLeft && !pageMinimized) {
+        const leftVal = parseFloat(origLeft)
+        if (leftVal < 40) {
+          // Left-side asset → push further left
+          htmlEl.style.left = `${Math.max(1, leftVal - 12)}%`
+        } else {
+          // Right-side asset → push further right
+          htmlEl.style.left = `${Math.min(88, leftVal + 8)}%`
+        }
+        // Scale down slightly
+        htmlEl.style.transform = htmlEl.style.transform.replace(/scale\([^)]+\)/, '') + ' scale(0.85)'
+      }
     } else {
       htmlEl.style.opacity = '0'
       htmlEl.style.pointerEvents = 'none'
+    }
+  })
+}
+
+// Restore asset positions when page is minimized
+function restoreAssetPositions() {
+  document.querySelectorAll('[data-orig-left]').forEach(el => {
+    const htmlEl = el as HTMLElement
+    const origLeft = el.getAttribute('data-orig-left')
+    if (origLeft) {
+      htmlEl.style.left = origLeft
+      htmlEl.style.transform = htmlEl.style.transform.replace(/ ?scale\([^)]+\)/, '')
     }
   })
 }
