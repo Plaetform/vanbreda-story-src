@@ -1075,7 +1075,6 @@ function bindPageEvents() {
   // Close button → show folder again
   document.getElementById('page-close')?.addEventListener('click', () => {
     pageMinimized = true
-    restoreAssetPositions()
     const center = document.getElementById('desk-center')
     if (center) {
       center.innerHTML = renderFolderHTML('Klik om te openen')
@@ -1204,36 +1203,9 @@ function switchChapter(n: number) {
     if (chs.includes(n)) {
       htmlEl.style.opacity = '1'
       htmlEl.style.pointerEvents = 'auto'
-      
-      // Push assets to sides when page is open
-      const origLeft = el.getAttribute('data-orig-left')
-      if (origLeft && !pageMinimized) {
-        const leftVal = parseFloat(origLeft)
-        if (leftVal < 40) {
-          // Left-side asset → push further left
-          htmlEl.style.left = `${Math.max(1, leftVal - 12)}%`
-        } else {
-          // Right-side asset → push further right
-          htmlEl.style.left = `${Math.min(88, leftVal + 8)}%`
-        }
-        // Scale down slightly
-        htmlEl.style.transform = htmlEl.style.transform.replace(/scale\([^)]+\)/, '') + ' scale(0.85)'
-      }
     } else {
       htmlEl.style.opacity = '0'
       htmlEl.style.pointerEvents = 'none'
-    }
-  })
-}
-
-// Restore asset positions when page is minimized
-function restoreAssetPositions() {
-  document.querySelectorAll('[data-orig-left]').forEach(el => {
-    const htmlEl = el as HTMLElement
-    const origLeft = el.getAttribute('data-orig-left')
-    if (origLeft) {
-      htmlEl.style.left = origLeft
-      htmlEl.style.transform = htmlEl.style.transform.replace(/ ?scale\([^)]+\)/, '')
     }
   })
 }
