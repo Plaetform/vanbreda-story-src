@@ -477,100 +477,109 @@ const dossierPages = [
 ]
 
 const deskAssets: DeskAsset[] = [
-  // ── Ch0: De Belofte ──
-  { id: 'napkin', label: 'De Napkin', sublabel: 'De eerste versie van de customer journey — geschetst op een servet.',
-    image: '/img-napkin.png', top: '8%', left: '8%', rotation: 5, width: '12vw', style: 'sketch', chapters: [0] },
-  { id: 'hand-sketch', label: 'Eerste Schets', sublabel: 'De allereerste schets van het proces — op een kladblok.',
-    image: '/img-hand-sketch.png', top: '55%', left: '6%', rotation: -3, width: '11vw', style: 'sketch', chapters: [0] },
-  { id: 'droomkaart', label: 'Droomkaart 2030', sublabel: 'De ideale klantbeleving in één customer journey map.',
-    image: '/img-droomkaart.png', top: '8%', left: '72%', rotation: -4, width: '13vw', style: 'document', chapters: [0] },
-  { id: 'klantbelofte', label: 'Klantbelofte', sublabel: 'Vijf principes die we onszelf opleggen — voor Sophie.',
-    image: '/img-klantbelofte.png', top: '55%', left: '74%', rotation: 5, width: '11vw', style: 'document', chapters: [0] },
+  // ── Ch0: De belofte aan Sophie ──
+  { id: 'klantbelofte', label: 'Sophie\'s Brief', sublabel: '"Ik wil mijn verhaal maar één keer hoeven vertellen."',
+    image: '/img-klantbelofte.png', top: '8%', left: '8%', rotation: -3, width: '13vw', style: 'document', chapters: [0] },
+  { id: 'sophie-persona', label: 'Persona Sophie', sublabel: '41 · Marketing Director · Pharma International',
+    image: '/img-sophie-persona.png', top: '55%', left: '74%', rotation: 4, width: '12vw', style: 'document', chapters: [0] },
+  { id: 'zakenreis', label: 'De Zakenreis', sublabel: 'Lyon, dag één — alles nog normaal.',
+    image: '/img-zakenreis.png', top: '8%', left: '72%', rotation: 5, width: '12vw', style: 'photo', chapters: [0] },
+  { id: 'klantvragen', label: 'Klantvragen', sublabel: 'De eerste vragen die Sophie zich stelt.',
+    image: '/img-klantvragen.png', top: '55%', left: '6%', rotation: -5, width: '10vw', style: 'sketch', chapters: [0] },
+  { id: 'napkin', label: 'Klantreisschets', sublabel: 'De eerste schets vanuit Sophie\'s ervaring.',
+    image: '/img-napkin.png', top: '30%', left: '4%', rotation: 3, width: '11vw', style: 'sketch', chapters: [0] },
 
-  // ── Ch1: De Werkelijkheid ──
-  { id: 'bierviltje', label: 'Het Bierviltje', sublabel: 'Na het eerste gesprek schreven we het kernidee op een bierviltje.',
-    image: '/img-bierviltje.png', top: '8%', left: '6%', rotation: -5, width: '12vw', style: 'sketch', chapters: [1] },
-  { id: 'pizza', label: 'Pizza & Pixels', sublabel: '14 juni · ±23:47 — de avond dat het idee vorm kreeg.',
-    image: '/img-pizza-bw.png', top: '55%', left: '74%', rotation: 4, width: '12vw', style: 'polaroid', chapters: [1] },
-  { id: 'postit', label: 'Brainstorm', sublabel: 'Alles op post-its tegen de muur. Hier werd de scope helder.',
-    image: '/img-postit-wall.png', top: '6%', left: '74%', rotation: 3, width: '12vw', style: 'photo', chapters: [1] },
-  { id: 'zo-nooit-meer', label: 'Zo Nooit Meer', sublabel: 'Het moment: "dit moeten we anders doen." De trigger.',
-    image: '/img-zo-nooit-meer.png', top: '55%', left: '6%', rotation: -6, width: '11vw', style: 'photo', chapters: [1] },
-  { id: 'servet', label: 'Het Servet', sublabel: 'Sophie\'s reis van Lyon tot terugbetaling — in één avond geschetst.',
-    image: '/img-servet.png', top: '30%', left: '4%', rotation: 3, width: '12vw', style: 'sketch', chapters: [1] },
-  { id: 'value-leakage', label: 'Value Leakage', sublabel: 'Waar lekt de waarde weg? Rode cirkels markeren de pijnpunten.',
-    image: '/img-value-leakage.png', top: '10%', left: '20%', rotation: -2, width: '13vw', style: 'document', chapters: [1] },
-  { id: 'interview-notes', label: 'Interview Notities', sublabel: 'Medewerker Claims vertelt waar het systeem faalt.',
-    image: '/img-interview-notes.png', top: '60%', left: '22%', rotation: 4, width: '11vw', style: 'document', chapters: [1] },
+  // ── Ch1: Vanbreda begint niet bij nul ──
+  { id: 'voice-ai-stats', label: 'Voice AI Stats', sublabel: '~80% calls via Voice AI · 95% routering',
+    image: '/img-voice-ai-stats.png', top: '8%', left: '8%', rotation: -4, width: '12vw', style: 'document', chapters: [1] },
+  { id: 'claims-stp', label: 'Claims STP', sublabel: '55% volumegewogen STP · 200K claims/maand',
+    image: '/img-claims-stp.png', top: '8%', left: '72%', rotation: 3, width: '12vw', style: 'document', chapters: [1] },
+  { id: 'b2b-stp', label: 'B2B/B2I Stats', sublabel: '~87% STP bij aansluitingen',
+    image: '/img-b2b-stp.png', top: '55%', left: '74%', rotation: -3, width: '11vw', style: 'document', chapters: [1] },
+  { id: 'intent-classifier', label: 'Intentclassificatie', sublabel: 'Inkomende vraag → herkende intent → routing',
+    image: '/img-intent-classifier.png', top: '55%', left: '6%', rotation: 5, width: '12vw', style: 'document', chapters: [1] },
+  { id: 'rpa-schets', label: 'Integratieschets', sublabel: 'Voice AI → Classifier → RPA → Kernapplicatie',
+    image: '/img-rpa-schets.png', top: '30%', left: '4%', rotation: -2, width: '11vw', style: 'sketch', chapters: [1] },
 
-  // ── Ch2: Het Eerste Bewijs ──
-  { id: 'whiteboard', label: 'Het Whiteboard', sublabel: 'Drie uur brainstormen, twintig post-its, één conclusie.',
-    image: '/img-whiteboard.png', top: '8%', left: '8%', rotation: -4, width: '12vw', style: 'photo', chapters: [2] },
-  { id: 'experimentkaart', label: 'Experiment #1', sublabel: 'Hypothese, use-case, resultaat — bewezen met een rode stempel.',
-    image: '/img-experimentkaart.png', top: '8%', left: '72%', rotation: 3, width: '13vw', style: 'document', chapters: [2] },
-  { id: 'klantfeedback', label: 'Klantfeedback', sublabel: 'De eerste reacties uit de pilot — "dit voelt anders."',
-    image: '/img-klantfeedback.png', top: '55%', left: '72%', rotation: -4, width: '12vw', style: 'document', chapters: [2] },
-  { id: 'sketch', label: 'Prototype', sublabel: 'De eerste werkende schets — nog ruw, maar het bewees het idee.',
-    image: '/img-sketch.png', top: '55%', left: '6%', rotation: 5, width: '11vw', style: 'sketch', chapters: [2] },
+  // ── Ch2: De waarde zit in de verbinding ──
+  { id: 'value-leakage', label: 'Value Leakage', sublabel: 'Waar lekt de waarde weg? Hypothese — te valideren.',
+    image: '/img-value-leakage.png', top: '8%', left: '8%', rotation: -3, width: '13vw', style: 'document', chapters: [2] },
+  { id: 'pizza', label: 'Werksessie', sublabel: 'Samen de keten onderzoeken — co-creatie.',
+    image: '/img-pizza-bw.png', top: '55%', left: '74%', rotation: 4, width: '12vw', style: 'polaroid', chapters: [2] },
+  { id: 'postit', label: 'Knelpunten', sublabel: '"klant vertelt verhaal opnieuw" · "wie is eigenaar?"',
+    image: '/img-postit-wall.png', top: '8%', left: '72%', rotation: 3, width: '12vw', style: 'photo', chapters: [2] },
+  { id: 'papieren-dossier', label: 'Versnipperd', sublabel: 'De fysieke manifestatie van data-silo\'s.',
+    image: '/img-papieren-dossier.png', top: '55%', left: '6%', rotation: -5, width: '11vw', style: 'photo', chapters: [2] },
+  { id: 'observatie', label: 'Observatie', sublabel: '"Automatisch verwerkt ≠ automatisch zonder handwerk."',
+    image: '/img-observatie-notitie.png', top: '30%', left: '4%', rotation: 2, width: '10vw', style: 'sketch', chapters: [2] },
 
-  // ── Ch3: Het Fundament ──
-  { id: 'architecture', label: 'Systeemontwerp', sublabel: 'De architectuur — hoe data, AI en mens samenwerken.',
-    image: '/img-architecture.png', top: '8%', left: '74%', rotation: -4, width: '12vw', style: 'document', chapters: [3] },
-  { id: 'blueprint', label: 'De Blauwdruk', sublabel: 'De architectuur die alles verbindt.',
-    image: '/img-blueprint-flow.png', top: '8%', left: '8%', rotation: -6, width: '12vw', style: 'document', chapters: [3] },
-  { id: 'golden-record', label: 'Golden Record', sublabel: 'Sophie De Winter als single source of truth — alles verbonden.',
-    image: '/img-golden-record.png', top: '55%', left: '72%', rotation: 4, width: '13vw', style: 'document', chapters: [3] },
-  { id: 'routekaart', label: 'Routekaart', sublabel: '9 stappen — met stempels voor autonomie.',
-    image: '/img-routekaart.png', top: '55%', left: '6%', rotation: 3, width: '12vw', style: 'document', chapters: [3] },
-  { id: 'fundamenten', label: 'Fundamenten', sublabel: 'Wat moest hiervoor waar zijn?',
-    image: '/img-fundamenten.png', top: '30%', left: '4%', rotation: -4, width: '11vw', style: 'document', chapters: [3] },
+  // ── Ch3: De verbonden basis ──
+  { id: 'architecture', label: 'Architectuurschets', sublabel: 'Lagen: ervaring, processen, orkestratie, data.',
+    image: '/img-architecture.png', top: '8%', left: '8%', rotation: -4, width: '12vw', style: 'sketch', chapters: [3] },
+  { id: 'golden-record', label: 'Golden Record', sublabel: 'Sophie als single source of truth — alles verbonden.',
+    image: '/img-golden-record.png', top: '8%', left: '72%', rotation: 3, width: '13vw', style: 'document', chapters: [3] },
+  { id: 'beslisregel', label: 'Beslisregel', sublabel: 'Buitenlandse spoedopname → automatisch voorstel.',
+    image: '/img-beslisregel.png', top: '55%', left: '6%', rotation: 5, width: '12vw', style: 'document', chapters: [3] },
+  { id: 'blueprint', label: 'Integratiekaart', sublabel: 'Werkgever · Zorgverlener · Vanbreda · Verzekeraar.',
+    image: '/img-blueprint-flow.png', top: '55%', left: '74%', rotation: -3, width: '12vw', style: 'document', chapters: [3] },
+  { id: 'audit-trail', label: 'Audit Trail', sublabel: 'Document ontvangen → beoordeeld → gecommuniceerd.',
+    image: '/img-audit-trail.png', top: '30%', left: '76%', rotation: 2, width: '11vw', style: 'document', chapters: [3] },
 
-  // ── Ch4: Mens & AI ──
-  { id: 'polaroid-wb', label: 'Eerste Sessie', sublabel: 'De sessie waar AE en Vanbreda elkaars taal leerden.',
-    image: '/img-polaroid.png', top: '8%', left: '8%', rotation: 3, width: '12vw', style: 'polaroid', chapters: [4] },
-  { id: 'koffie', label: 'Doorgewerkte Nacht', sublabel: 'De nacht dat we doorwerkten — koffieringen als bewijs.',
-    image: '/img-koffie.png', top: '55%', left: '6%', rotation: -2, width: '11vw', style: 'photo', chapters: [4] },
-  { id: 'memo-medewerker', label: 'Memo Thomas V.', sublabel: 'Zorgen over veranderende rollen — maar ook voorzichtig optimisme.',
-    image: '/img-memo-medewerker.png', top: '8%', left: '72%', rotation: -3, width: '12vw', style: 'document', chapters: [4] },
+  // ── Ch4: Menselijke regie ──
   { id: 'trainingskaart', label: 'Besliskaart', sublabel: 'Wanneer grijp ik in? Een beslisboom voor mens en AI.',
-    image: '/img-trainingskaart.png', top: '55%', left: '74%', rotation: 5, width: '11vw', style: 'document', chapters: [4] },
+    image: '/img-trainingskaart.png', top: '8%', left: '8%', rotation: -3, width: '12vw', style: 'document', chapters: [4] },
+  { id: 'rolkaart-exception', label: 'Exception Specialist', sublabel: 'Beoordeelt uitzonderingen · valideert onzekerheid.',
+    image: '/img-rolkaart-exception.png', top: '8%', left: '72%', rotation: 4, width: '12vw', style: 'document', chapters: [4] },
+  { id: 'rolkaart-steward', label: 'Data & Model Steward', sublabel: 'Bewaakt datakwaliteit · monitort modelprestaties.',
+    image: '/img-rolkaart-steward.png', top: '55%', left: '74%', rotation: -4, width: '11vw', style: 'document', chapters: [4] },
+  { id: 'memo-medewerker', label: 'Quote Thomas V.', sublabel: '"Ik kan me richten op de beslissing die echt mijn oordeel vraagt."',
+    image: '/img-memo-medewerker.png', top: '55%', left: '6%', rotation: 5, width: '12vw', style: 'document', chapters: [4] },
+  { id: 'leiderschap-memo', label: 'Leiderschapsmemo', sublabel: '"Eigenaarschap en kwaliteit blijven menselijk belegd."',
+    image: '/img-leiderschap-memo.png', top: '30%', left: '4%', rotation: -2, width: '11vw', style: 'document', chapters: [4] },
 
-  // ── Ch5: Schaal ──
+  // ── Ch5: De samenhangende operatie ──
+  { id: 'cross-pillar', label: 'Cross-pillar Case', sublabel: 'Eén case doorloopt Claims · Communicatie · B2B/B2I.',
+    image: '/img-cross-pillar.png', top: '8%', left: '8%', rotation: -4, width: '13vw', style: 'sketch', chapters: [5] },
   { id: 'control-room', label: 'Control Room', sublabel: '847 claims verwerkt, STP 82%, doorlooptijd 1u42m.',
-    image: '/img-control-room.png', top: '8%', left: '8%', rotation: -3, width: '13vw', style: 'document', chapters: [5] },
-  { id: 'incident-report', label: 'Incident Rapport', sublabel: 'De eerste fout — en hoe die werd gecorrigeerd. Opgelost.',
-    image: '/img-incident-report.png', top: '8%', left: '72%', rotation: 4, width: '12vw', style: 'document', chapters: [5] },
-  { id: 'go-nogo', label: 'Go/No-Go Besluit', sublabel: 'Alle criteria gehaald. Eén voorwaardelijk. GO gestempeld.',
-    image: '/img-go-nogo.png', top: '55%', left: '6%', rotation: -4, width: '12vw', style: 'document', chapters: [5] },
-  { id: 'annotations', label: 'Feedback', sublabel: 'Handgeschreven opmerkingen — "dit moet beter, dit kan slimmer."',
-    image: '/img-annotations.png', top: '55%', left: '74%', rotation: 6, width: '11vw', style: 'document', chapters: [5] },
+    image: '/img-control-room.png', top: '8%', left: '72%', rotation: 3, width: '12vw', style: 'document', chapters: [5] },
+  { id: 'case-timeline', label: 'Case Timeline', sublabel: 'Document binnen → identiteit → polis → expert → klant.',
+    image: '/img-case-timeline.png', top: '55%', left: '6%', rotation: 5, width: '12vw', style: 'document', chapters: [5] },
+  { id: 'orchestratie', label: 'Orkestratie', sublabel: 'Case coordinator verbindt systemen, AI, mens en partners.',
+    image: '/img-orchestratie.png', top: '55%', left: '74%', rotation: -3, width: '11vw', style: 'sketch', chapters: [5] },
+  { id: 'feedbackloop', label: 'Feedbackloop', sublabel: 'Uitkomst → correctie → analyse → verbeteren → meten.',
+    image: '/img-feedbackloop.png', top: '30%', left: '76%', rotation: 2, width: '11vw', style: 'document', chapters: [5] },
 
-  // ── Ch6: Sophie ──
-  { id: 'sophie', label: 'Sophie De Winter', sublabel: '41 · Brasschaat — voor haar bouwen we dit.',
-    image: '/img-cover-sophie.png', top: '55%', left: '55%', rotation: -2, width: '12vw', style: 'polaroid', chapters: [6] },
-  { id: 'faxbericht', label: 'Faxbericht', sublabel: 'AI-beslissing & escalatie — menselijke review vereist.',
-    image: '/img-faxbericht.png', top: '8%', left: '74%', rotation: -4, width: '12vw', style: 'document', chapters: [6] },
-  { id: 'claimbrief', label: 'Claimbrief', sublabel: 'Aan Sophie — goedgekeurd, met één uitzondering.',
-    image: '/img-claimbrief.png', top: '25%', left: '76%', rotation: 4, width: '11vw', style: 'document', chapters: [6] },
-  { id: 'interne-nota', label: 'Interne Nota', sublabel: 'Open vragen — wat we samen moeten begrijpen.',
-    image: '/img-interne-nota.png', top: '55%', left: '6%', rotation: 5, width: '12vw', style: 'document', chapters: [6] },
-  { id: 'indexkaart', label: 'Indexkaart', sublabel: 'De casus op één fiche — wie, wat, waar, en waarom.',
-    image: '/img-indexkaart.png', top: '8%', left: '6%', rotation: -3, width: '11vw', style: 'document', chapters: [6] },
-  { id: 'sophie-hospital', label: 'Sophie in Lyon', sublabel: 'De spoedopname die alles in gang zette.',
-    image: '/img-sophie-hospital.png', top: '30%', left: '4%', rotation: 3, width: '11vw', style: 'polaroid', chapters: [6] },
+  // ── Ch6: Het moment van de waarheid ──
+  { id: 'ziekenhuis-factuur', label: 'Ziekenhuisfactuur', sublabel: 'Hôpital Édouard Herriot · Lyon · €4.847,50',
+    image: '/img-ziekenhuis-factuur.png', top: '6%', left: '6%', rotation: -3, width: '12vw', style: 'document', chapters: [6] },
+  { id: 'ontslagverslag', label: 'Ontslagverslag', sublabel: 'Compte rendu de sortie — Franstalig met markering.',
+    image: '/img-ontslagverslag.png', top: '6%', left: '72%', rotation: 4, width: '11vw', style: 'document', chapters: [6] },
+  { id: 'telefoon-transcript', label: 'Transcript', sublabel: 'Sophie belt · Voice AI herkent intent · overdracht.',
+    image: '/img-telefoon-transcript.png', top: '25%', left: '76%', rotation: -2, width: '11vw', style: 'document', chapters: [6] },
+  { id: 'faxbericht', label: 'AI Decision Record', sublabel: 'Voorstel · confidence 87% · escalatie vereist.',
+    image: '/img-faxbericht.png', top: '50%', left: '74%', rotation: 5, width: '11vw', style: 'document', chapters: [6] },
+  { id: 'interne-nota', label: 'Notitie Specialist', sublabel: 'Spoedopname gedekt. Comfortkost uitgesloten.',
+    image: '/img-interne-nota.png', top: '55%', left: '6%', rotation: -4, width: '12vw', style: 'document', chapters: [6] },
+  { id: 'duplicaat-alert', label: 'Duplicaatwaarschuwing', sublabel: '99,3% overeenkomst — actie vereist.',
+    image: '/img-duplicaat-alert.png', top: '30%', left: '4%', rotation: 3, width: '10vw', style: 'document', chapters: [6] },
+  { id: 'klantbericht', label: 'Klantbericht', sublabel: '"U hoeft voorlopig niets te doen."',
+    image: '/img-klantbericht.png', top: '70%', left: '22%', rotation: -2, width: '10vw', style: 'document', chapters: [6] },
+  { id: 'betalingsoverzicht', label: 'Betalingsoverzicht', sublabel: 'Goedgekeurd · afgewezen · gereserveerd.',
+    image: '/img-betalingsoverzicht.png', top: '70%', left: '55%', rotation: 4, width: '11vw', style: 'document', chapters: [6] },
+
+  // ── Ch7: Onze droom voor Vanbreda ──
+  { id: 'indexkaart', label: 'Afgerond Dossier', sublabel: 'Sophie De Winter — HC-2030-004781 — AFGEROND.',
+    image: '/img-indexkaart.png', top: '8%', left: '8%', rotation: -3, width: '12vw', style: 'document', chapters: [7] },
+  { id: 'sophie-happy', label: 'Bedankkaart Sophie', sublabel: '"Voor mij voelde het alsof één organisatie voor mij zorgde."',
+    image: '/img-sophie-happy.png', top: '8%', left: '72%', rotation: 4, width: '12vw', style: 'polaroid', chapters: [7] },
+  { id: 'droom-uitvoering', label: 'Van Droom naar Uitvoering', sublabel: 'Architectuur, roadmap, businesscase en aanpak.',
+    image: '/img-droom-uitvoering.png', top: '55%', left: '6%', rotation: 5, width: '12vw', style: 'document', chapters: [7] },
+  { id: 'ae-vanbreda-card', label: 'AE × Vanbreda', sublabel: '"Samen ontwerpen, bewijzen, leren en opschalen."',
+    image: '/img-ae-vanbreda-card.png', top: '55%', left: '74%', rotation: -4, width: '12vw', style: 'document', chapters: [7] },
 ]
 
-const deskDocAssets: DeskDocAsset[] = [
-  // Ch4: Mens & AI
-  { id: 'doc-postit', label: 'Post-its', sublabel: 'Radiologiefactuur: patiënt-ID ontbreekt. Handmatig nakijken.',
-    icon: '📝', top: '75%', left: '45%', rotation: -3, width: '6.5vw', docStyle: 'postit', render: asset04, chapters: [4] },
 
-  // Ch5: Schaal
-  { id: 'doc-factuur', label: 'AI Factuur', sublabel: 'Eén dossier, €0,86 aan AI-kosten.',
-    icon: '💶', top: '75%', left: '45%', rotation: -5, width: '7vw', docStyle: 'document', render: asset11, chapters: [5] },
-
-  // Ch6: Sophie
-]
+const deskDocAssets: DeskDocAsset[] = []
 
 // ─── State ───
 let dossierOpen = false
@@ -585,6 +594,7 @@ let celebrationShown = false
 
 // Drops required per chapter: 3 = full onboarding, 1 = pattern, 0 = auto-reveal
 const requiredDrops = [3, 1, 0, 0, 0, 0, 0, 0]
+
 
 // ─── Folder HTML helper ───
 function renderFolderHTML(hint = 'Klik om het dossier te openen'): string {
