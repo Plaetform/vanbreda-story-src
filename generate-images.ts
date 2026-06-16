@@ -218,6 +218,27 @@ const jobs: ImageJob[] = [
     prompt: `Create a premium collaboration card on a clean white background. Use the provided logo (this is the AE logo) in the bottom-left of the card. Add "Vanbreda" text next to it in matching dark navy typography. At the top: "AE × Vanbreda" in elegant bold serif typography. Below in handwritten-style italic text: "Samen ontwerpen, bewijzen, leren en opschalen." A thin orange (#FF4B28) accent line separates the title from the tagline. Premium cream-colored thick paper texture with subtle rounded corners. Clean, minimal, partnership-focused design. Flat scan on white background.`,
     inputImages: ["public/ae-logo.png"],
   },
+  // ─── Pagina 8: Sophie lifestyle photos (consistent character) ───
+  {
+    name: "img-sophie-business",
+    prompt: `Same woman as in the reference photo. Professional photograph of this European woman in her early 40s with light brown shoulder-length hair, standing in a modern office. She wears a smart casual blazer over a navy blouse, smiling confidently. Glass walls, green plants, natural light. She is presenting to colleagues in a meeting room. Corporate lifestyle photography, warm natural tones, shallow depth of field. She looks healthy, energetic, successful.`,
+    inputImages: ["public/img-sophie-family.png"],
+  },
+  {
+    name: "img-sophie-travel",
+    prompt: `Same woman as in the reference photo. Candid travel photograph of this European woman in her early 40s with light brown shoulder-length hair, walking through an airport terminal with a carry-on suitcase. She wears casual chic travel clothes and is checking her phone with a relaxed smile. Morning light through large terminal windows. She looks confident and happy, a frequent traveler. Editorial travel photography, warm tones.`,
+    inputImages: ["public/img-sophie-family.png"],
+  },
+  {
+    name: "img-sophie-cafe",
+    prompt: `Same woman as in the reference photo. Warm photograph of this European woman in her early 40s with light brown shoulder-length hair, sitting at a sunny terrace café with a coffee and a book. She's looking up from the book, smiling at someone approaching. Autumn light, European city setting, trees with golden leaves. She looks relaxed, healthy, content. Lifestyle photography, warm golden tones, natural bokeh.`,
+    inputImages: ["public/img-sophie-family.png"],
+  },
+  {
+    name: "img-sophie-garden",
+    prompt: `Same woman as in the reference photo. Gentle photograph of this European woman in her early 40s with light brown shoulder-length hair, in a garden with her children. She's kneeling beside a small vegetable patch, laughing with a child holding a tomato. Soft afternoon light, lush green garden in a Belgian suburb. She looks healthy, grounded, present. Natural family photography, warm tones, authentic moment.`,
+    inputImages: ["public/img-sophie-family.png"],
+  },
 ];
 
 

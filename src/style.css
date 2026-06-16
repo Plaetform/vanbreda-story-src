@@ -926,6 +926,134 @@ body {
 .cp-cta--secondary { background: var(--ae-dark); color: #fff; }
 .cp-cta--secondary:hover { background: #333; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(29,29,29,.25); }
 
+/* ── Dream page (page 8) — mirrors splash letter ── */
+.cp-dream {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 0;
+}
+
+.cp-dream__letter {
+  background: #f8f4eb;
+  background-image: linear-gradient(180deg, #faf6ed, #f4efe3);
+  padding: 32px 40px;
+  border-radius: 3px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.15), 0 2px 6px rgba(0,0,0,.08);
+  max-width: 540px;
+  width: 100%;
+  position: relative;
+}
+
+.cp-dream__letter-date {
+  font-family: var(--font-hw-accent);
+  font-size: 15px;
+  color: #888;
+  text-align: right;
+  margin-bottom: 16px;
+}
+
+.cp-dream__letter-body {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.72;
+  color: #2d2a22;
+}
+
+.cp-dream__letter-body p {
+  margin-bottom: 12px;
+}
+
+.cp-dream__letter-body p:first-child {
+  font-size: 18px;
+}
+
+.cp-dream__letter-body strong {
+  color: #1A3D8F;
+}
+
+.cp-dream__hero {
+  margin: 16px -8px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,.1);
+  background: #fff;
+  padding: 6px 6px 28px;
+}
+
+.cp-dream__hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cp-dream__signature {
+  font-family: var(--font-hw-signature);
+  font-size: 32px;
+  color: #1A3D8F;
+  margin-top: 8px;
+}
+
+.cp-dream__audio {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cp-dream__play-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(26,61,143,.2);
+  background: rgba(26,61,143,.08);
+  color: #1A3D8F;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s ease;
+  animation: dream-pulse 2.5s ease-in-out infinite;
+}
+
+.cp-dream__play-btn:hover {
+  background: rgba(26,61,143,.15);
+  transform: scale(1.1);
+}
+
+.cp-dream__play-btn.playing {
+  background: #1A3D8F;
+  color: #fff;
+  border-color: #1A3D8F;
+  animation: none;
+}
+
+.cp-dream__play-btn.playing svg {
+  display: none;
+}
+
+.cp-dream__play-btn.playing::after {
+  content: '❚❚';
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+@keyframes dream-pulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(26,61,143,.1); }
+  50% { box-shadow: 0 2px 16px rgba(26,61,143,.2), 0 0 0 6px rgba(26,61,143,.05); }
+}
+
+.cp-dream__audio-label {
+  font-family: var(--font-hw-accent);
+  font-size: 15px;
+  color: #888;
+  font-style: italic;
+}
+
+.cp-dream__cta {
+  margin-top: 4px;
+  text-align: center;
+}
 
 /* =========================================================
    CHAPTER NAV — Bottom navigation bar

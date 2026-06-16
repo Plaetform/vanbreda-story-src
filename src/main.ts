@@ -384,57 +384,45 @@ const chapterPages = [
   },
   {
     pageNum: 8,
-    title: 'Onze droom voor Vanbreda',
-    subtitle: 'Health Care 2030',
+    title: 'De droom',
+    subtitle: 'Van afzonderlijke AI-successen naar één samenhangende Health Care-operatie',
     content: `
-      <div class="cp-reveal">
-        <div class="cp-reveal__stamp">DOSSIER HC-2030-004781 — AFGEROND</div>
-        <div class="cp-reveal__verdict">Sophie werd geholpen zoals we haar hadden beloofd.</div>
-        <div class="cp-reveal__intro">
-          Niet omdat één tool alles oploste.<br>
-          Maar omdat processen, data, AI, mensen en partners als één samenhangende Health Care-operatie samenwerkten.
+      <div class="cp-dream">
+        <div class="cp-dream__letter">
+          <div class="cp-dream__letter-date">Brasschaat, september 2030</div>
+
+          <div class="cp-dream__letter-body">
+            <p>Lieve Vanbreda,</p>
+            <p>Drie maanden geleden schreef ik jullie vanuit een ziekenhuisbed in Lyon. Ik was bang en ver van huis.</p>
+            <p>Nu zit ik weer thuis bij mijn gezin.</p>
+          </div>
+
+          <div class="cp-dream__hero">
+            <img src="/img-sophie-family.png" alt="Sophie thuis bij haar gezin" class="cp-dream__hero-img" />
+          </div>
+
+          <div class="cp-dream__letter-body">
+            <p>Ik hoefde mijn verhaal maar één keer te vertellen. Ik wist waar ik aan toe was. En toen het echt nodig was, was er iemand die me begreep.</p>
+            <p><strong>Zo wil je geholpen worden wanneer je kwetsbaar bent.</strong></p>
+            <p>Bedankt.</p>
+          </div>
+
+          <div class="cp-dream__signature">Sophie De Winter</div>
         </div>
 
-        <div class="cp-reveal__heading">Eén samenhangend Health Care operating model</div>
-        <ul class="cp-reveal__list">
-          <li>AI het routinewerk draagt</li>
-          <li>processen en informatie als één keten samenwerken</li>
-          <li>onzekerheid tijdig wordt herkend</li>
-          <li>menselijk oordeel beschikbaar is waar het verschil maakt</li>
-          <li>iedere interactie bijdraagt aan verbetering</li>
-        </ul>
-
-        <div class="cp-reveal__fanout">
-          <div class="cp-reveal__petal cp-reveal__petal--1">Klantbelofte</div>
-          <div class="cp-reveal__petal cp-reveal__petal--2">Bestaande kracht</div>
-          <div class="cp-reveal__petal cp-reveal__petal--3">Verbinding</div>
-          <div class="cp-reveal__center">
-            <div class="cp-reveal__center-name">Sophie</div>
-          </div>
-          <div class="cp-reveal__petal cp-reveal__petal--4">Fundament</div>
-          <div class="cp-reveal__petal cp-reveal__petal--5">Menselijke regie</div>
-          <div class="cp-reveal__petal cp-reveal__petal--6">Besturing</div>
-          <div class="cp-reveal__fanout-label">Health Care 2030</div>
+        <div class="cp-dream__audio">
+          <button class="cp-dream__play-btn" id="dream-audio-btn" aria-label="Luister naar Sophie">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="cp-dream__audio-label">Luister naar Sophie</div>
+          <audio id="dream-audio" src="/sophie-audio.mp3" preload="auto"></audio>
         </div>
 
-        <div class="cp-reveal__principles">
-          <div class="cp-reveal__principle">
-            <span class="cp-reveal__icon">◈</span>
-            <span><strong>Eén ervaring</strong> — voor verzekerde, medewerker en partner</span>
-          </div>
-          <div class="cp-reveal__principle">
-            <span class="cp-reveal__icon">◈</span>
-            <span><strong>Eén verbonden operatie</strong> — over Claims, Communicatie en B2B/B2I heen</span>
-          </div>
-          <div class="cp-reveal__principle">
-            <span class="cp-reveal__icon">◈</span>
-            <span><strong>Menselijk waar het telt</strong> — bij uitzonderingen, interpretatie en empathie</span>
-          </div>
-        </div>
-
-        <div class="cp-cta-group">
-          <a class="cp-cta cp-cta--primary" href="/vanbreda-healthcaroperatie.pdf" target="_blank">Bekijk de droom in één overzicht</a>
-          <a class="cp-cta cp-cta--secondary" href="/vanbreda-healthcaroperatie.pdf" download>Download als PDF</a>
+        <div class="cp-dream__cta">
+          <a class="cp-cta cp-cta--primary" href="/vanbreda-healthcaroperatie.pdf" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="margin-right:8px;vertical-align:middle"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download onze visie — Health Care 2030
+          </a>
         </div>
       </div>`,
     footnote: 'Haar ervaring in 2030 begint met de keuzes die we vandaag maken.',
@@ -567,15 +555,17 @@ const deskAssets: DeskAsset[] = [
   { id: 'betalingsoverzicht', label: 'Betalingsoverzicht', sublabel: 'Goedgekeurd · afgewezen · gereserveerd.',
     image: '/img-betalingsoverzicht.png', top: '70%', left: '55%', rotation: 4, width: '11vw', style: 'document', chapters: [6] },
 
-  // ── Ch7: Onze droom voor Vanbreda ──
-  { id: 'indexkaart', label: 'Afgerond Dossier', sublabel: 'Sophie De Winter — HC-2030-004781 — AFGEROND.',
-    image: '/img-indexkaart.png', top: '8%', left: '8%', rotation: -3, width: '12vw', style: 'document', chapters: [7] },
-  { id: 'sophie-happy', label: 'Bedankkaart Sophie', sublabel: '"Voor mij voelde het alsof één organisatie voor mij zorgde."',
-    image: '/img-sophie-happy.png', top: '8%', left: '72%', rotation: 4, width: '12vw', style: 'polaroid', chapters: [7] },
-  { id: 'droom-uitvoering', label: 'Van Droom naar Uitvoering', sublabel: 'Architectuur, roadmap, businesscase en aanpak.',
-    image: '/img-droom-uitvoering.png', top: '55%', left: '6%', rotation: 5, width: '12vw', style: 'document', chapters: [7] },
-  { id: 'ae-vanbreda-card', label: 'AE × Vanbreda', sublabel: '"Samen ontwerpen, bewijzen, leren en opschalen."',
-    image: '/img-ae-vanbreda-card.png', top: '55%', left: '74%', rotation: -4, width: '12vw', style: 'document', chapters: [7] },
+  // ── Ch7: De droom ──
+  { id: 'sophie-family', label: 'Thuis', sublabel: 'Sophie met haar gezin, drie maanden later.',
+    image: '/img-sophie-family.png', top: '6%', left: '6%', rotation: -4, width: '13vw', style: 'polaroid', chapters: [7] },
+  { id: 'sophie-business', label: 'Op kantoor', sublabel: 'Terug in haar element als Marketing Director.',
+    image: '/img-sophie-business.png', top: '6%', left: '74%', rotation: 5, width: '12vw', style: 'polaroid', chapters: [7] },
+  { id: 'sophie-travel', label: 'Onderweg', sublabel: 'Weer op zakenreis — zonder zorgen.',
+    image: '/img-sophie-travel.png', top: '55%', left: '4%', rotation: 3, width: '11vw', style: 'polaroid', chapters: [7] },
+  { id: 'sophie-cafe', label: 'Even pauze', sublabel: 'Een moment voor zichzelf.',
+    image: '/img-sophie-cafe.png', top: '40%', left: '78%', rotation: -3, width: '11vw', style: 'polaroid', chapters: [7] },
+  { id: 'sophie-garden', label: 'In de tuin', sublabel: 'Gewoon thuis, gewoon gelukkig.',
+    image: '/img-sophie-garden.png', top: '65%', left: '72%', rotation: 6, width: '11vw', style: 'polaroid', chapters: [7] },
 ]
 
 
@@ -1071,6 +1061,30 @@ function bindEvents() {
 
   // Audio (bg music)
   document.getElementById('btn-audio')?.addEventListener('click', toggleAudio)
+
+  // Dream page audio player
+  document.getElementById('dream-audio-btn')?.addEventListener('click', () => {
+    const audio = document.getElementById('dream-audio') as HTMLAudioElement | null
+    const btn = document.getElementById('dream-audio-btn')
+    if (!audio || !btn) return
+    if (audio.paused) {
+      audio.play()
+      btn.classList.add('playing')
+      btn.querySelector('.cp-dream__audio-label')
+      const label = btn.nextElementSibling as HTMLElement | null
+      if (label) label.textContent = 'Nu aan het luisteren...'
+    } else {
+      audio.pause()
+      btn.classList.remove('playing')
+      const label = btn.nextElementSibling as HTMLElement | null
+      if (label) label.textContent = 'Luister naar Sophie'
+    }
+    audio.addEventListener('ended', () => {
+      btn.classList.remove('playing')
+      const label = btn.nextElementSibling as HTMLElement | null
+      if (label) label.textContent = 'Luister naar Sophie'
+    }, { once: true })
+  })
 
   // Celebration
   document.getElementById('celebrate-btn')?.addEventListener('click', closeCelebration)
