@@ -39,49 +39,42 @@ interface DeskDocAsset {
   chapters: number[]
 }
 
-// ─── Chapters (7 bewijsstukken) ───
+// ─── Chapters ───
 const chapters = [
   {
     id: 'belofte',
     title: 'De belofte',
-    question: 'Welke ervaring willen we voor Sophie mogelijk maken?',
-    quote: 'We begonnen niet met technologie, maar met een belofte: dat Sophie nooit haar verhaal twee keer hoeft te vertellen.',
+    question: 'Wat moet Sophie ervaren als het erop aankomt?',
   },
   {
-    id: 'werkelijkheid',
-    title: 'De werkelijkheid',
-    question: 'Waar ontstaan vandaag frictie, uitzonderingen en verborgen werk?',
-    quote: 'Voordat we konden automatiseren, moesten we begrijpen waar het werk werkelijk zat.',
+    id: 'kracht',
+    title: 'De kracht',
+    question: 'Waarom is deze droom geloofwaardig?',
   },
   {
-    id: 'bewijs',
-    title: 'Het eerste bewijs',
-    question: 'Welke concrete verbetering kunnen we snel aantoonbaar maken?',
-    quote: 'Niet alles hoeft af te zijn om waarde te leveren. We begonnen met één use-case en bewezen dat het werkt.',
+    id: 'grenzen',
+    title: 'De grenzen',
+    question: 'Waarom is meer van hetzelfde niet genoeg?',
   },
   {
-    id: 'fundament',
-    title: 'Het fundament',
-    question: 'Wat moet betrouwbaar en herbruikbaar worden?',
-    quote: 'Fundamenten worden gericht versterkt rondom use-cases die direct waarde leveren.',
+    id: 'realiteit',
+    title: 'De realiteit',
+    question: 'Hoe gedraagt de organisatie zich in 2030?',
   },
   {
-    id: 'organisatie',
-    title: 'Mens & AI',
-    question: 'Hoe veranderen rollen, verantwoordelijkheid en samenwerking?',
-    quote: 'De moeilijkste verandering was niet dat AI meer ging doen. Het was dat mensen anders moesten leren kijken.',
-  },
-  {
-    id: 'schaal',
-    title: 'Schaal',
-    question: 'Hoe worden succesvolle onderdelen één bestuurbare operatie?',
-    quote: 'Niet de happy flow bewees dat het werkte, maar de manier waarop het systeem omging met twijfel.',
+    id: 'mens',
+    title: 'De mens',
+    question: 'Wat betekent dit voor de mensen die het werk doen?',
   },
   {
     id: 'sophie',
     title: 'Sophie',
-    question: 'Hebben alle eerdere keuzes samen geleid tot de ervaring die we haar beloofden?',
-    quote: 'Alles wat is ontworpen, getest en veranderd, komt nu samen in één kwetsbaar moment.',
+    question: 'Hoe voelt 80% autonomie als het écht gebeurt?',
+  },
+  {
+    id: 'droom',
+    title: 'De droom',
+    question: '',
   },
 ]
 
@@ -89,163 +82,120 @@ const chapters = [
 const chapterPages = [
   {
     pageNum: 1,
-    title: 'De klantbelofte',
-    subtitle: 'Eén vloeiende dienstverlening op een kwetsbaar moment',
+    title: 'De ervaring die we willen beloven',
+    subtitle: 'Sophie\'s belofte',
     content: `
       <ul class="cp-list">
-        <li>Sophie vertelt haar verhaal <strong>één keer</strong></li>
-        <li>Ze weet steeds waar zij aan toe is</li>
+        <li>Ze vertelt haar verhaal <strong>één keer</strong></li>
         <li>Ze krijgt snel duidelijkheid over eenvoudige onderdelen</li>
-        <li>Ze krijgt menselijke uitleg wanneer oordeel nodig is</li>
         <li>Ze hoeft niet zelf tussen organisaties te coördineren</li>
+        <li>Ze krijgt menselijke aandacht wanneer het nodig is</li>
+        <li>Ze weet steeds waar ze aan toe is</li>
       </ul>`,
-    footnote: 'Dit is het criterium waaraan iedere ontwerpkeuze wordt getoetst.',
+    footnote: 'Dit is het criterium waaraan iedere keuze wordt getoetst.',
   },
   {
     pageNum: 2,
-    title: 'De huidige werkelijkheid',
-    subtitle: 'Waar de keten vandaag waarde kan verliezen',
+    title: 'Vanbreda begint niet bij nul',
+    subtitle: 'Voortbouwen op wat al werkt',
     content: `
-      <ul class="cp-list cp-list--numbered">
-        <li><strong>Onvolledige of versnipperde context</strong> — informatie zit in verschillende systemen, niet bij de beslisser</li>
-        <li><strong>Verborgen handmatig werk</strong> — medewerkers compenseren stilzwijgend voor systeemgaten</li>
-        <li><strong>Overdrachten tussen teams en systemen</strong> — elke overdracht is een kans op vertraging en fout</li>
-        <li><strong>Impliciete besliskennis</strong> — ervaren medewerkers weten hoe het moet, maar het staat nergens</li>
-        <li><strong>Uitzonderingen zonder end-to-end eigenaarschap</strong> — niemand voelt zich verantwoordelijk voor het geheel</li>
-      </ul>`,
-    footnote: 'De grootste frictie zit vaak niet in één taak, maar tussen de onderdelen van de keten.',
+      <div class="cp-grid">
+        <div class="cp-grid__item">Voice AI</div>
+        <div class="cp-grid__item">Triage</div>
+        <div class="cp-grid__item">Contextverrijking</div>
+        <div class="cp-grid__item">Conceptantwoorden</div>
+        <div class="cp-grid__item">Claims-STP</div>
+        <div class="cp-grid__item">Digitale aansluitingen</div>
+      </div>`,
+    footnote: 'Dit zijn geen losse tools. Het zijn de bouwstenen waarmee de belofte haalbaar wordt.',
   },
   {
     pageNum: 3,
-    title: 'De bestaande bouwstenen',
-    subtitle: 'Waarop Vanbreda voortbouwt',
+    title: 'De waarde zit in de verbinding',
+    subtitle: 'De grenzen van losse successen',
     content: `
-      <div class="cp-columns">
-        <div class="cp-col">
-          <div class="cp-col__title">Claims</div>
-          <ul class="cp-col__list">
-            <li>55% volumegewogen STP</li>
-            <li>Digitale intake</li>
-            <li>OCR-capability</li>
-          </ul>
-        </div>
-        <div class="cp-col">
-          <div class="cp-col__title">Communicatie</div>
-          <ul class="cp-col__list">
-            <li>Voice AI</li>
-            <li>Intentclassificatie</li>
-            <li>Contextverrijking</li>
-            <li>Conceptantwoorden</li>
-          </ul>
-        </div>
-        <div class="cp-col">
-          <div class="cp-col__title">B2B / B2I</div>
-          <ul class="cp-col__list">
-            <li>87% STP aansluitingen</li>
-            <li>Digitale interfaces</li>
-            <li>Partner- en beheerprocessen</li>
-          </ul>
-        </div>
-      </div>`,
-    footnote: 'De volgende stap is niet opnieuw beginnen, maar bewezen capabilities verbinden.',
+      <ul class="cp-list">
+        <li>Context reist niet altijd mee tussen stappen</li>
+        <li>Processen lopen over teams en partijen</li>
+        <li>Uitzonderingen vragen coördinatie die er niet altijd is</li>
+        <li>Kennis en beslisregels zijn niet altijd expliciet</li>
+        <li>Lokale automatisering is nog geen <strong>autonome operatie</strong></li>
+      </ul>`,
+    footnote: 'Méér van hetzelfde maakt het niet beter. De keten moet als geheel werken.',
   },
   {
     pageNum: 4,
-    title: 'De ruggengraat',
-    subtitle: 'Van gecontroleerde autonomie',
+    title: 'Eén samenhangende Health Care-operatie',
+    subtitle: 'De nieuwe realiteit',
     content: `
-      <div class="cp-grid">
-        <div class="cp-grid__item">Gedeelde data</div>
-        <div class="cp-grid__item">Consistente identiteit</div>
-        <div class="cp-grid__item">Expliciete beslisregels</div>
-        <div class="cp-grid__item">Modulaire integratie</div>
-        <div class="cp-grid__item">Workflow &amp; case management</div>
-        <div class="cp-grid__item">Herleidbaarheid</div>
-        <div class="cp-grid__item">Toegangsbeheer</div>
-        <div class="cp-grid__item">Auditability</div>
-      </div>`,
-    footnote: 'Autonomie begint niet bij een agent, maar bij een betrouwbare ruggengraat.',
+      <ul class="cp-list">
+        <li>Eén case over de hele keten</li>
+        <li>Alle relevante context beschikbaar op het juiste moment</li>
+        <li>Routinewerk loopt automatisch</li>
+        <li>Onzekerheid wordt <strong>herkend</strong>, niet genegeerd</li>
+        <li>De juiste mens wordt op het juiste moment betrokken</li>
+        <li>Klant, medewerker en partner zien een consistente status</li>
+        <li>Correcties worden gebruikt om te verbeteren</li>
+      </ul>`,
+    footnote: 'Niet een technische architectuur, maar hoe de organisatie zich gedraagt.',
   },
   {
     pageNum: 5,
-    title: 'De nieuwe manier van werken',
-    subtitle: 'Mens en AI in balans',
+    title: 'AI draagt routine. Mensen maken het verschil.',
+    subtitle: 'De mens in het nieuwe model',
     content: `
-      <div class="cp-levels">
-        <div class="cp-level cp-level--1">
-          <div class="cp-level__label">AI ondersteunt</div>
-          <div class="cp-level__desc">De mens beslist.</div>
-        </div>
-        <div class="cp-level cp-level--2">
-          <div class="cp-level__label">AI handelt binnen grenzen</div>
-          <div class="cp-level__desc">De mens monitort en behandelt uitzonderingen.</div>
-        </div>
-        <div class="cp-level cp-level--3">
-          <div class="cp-level__label">AI handelt autonoom</div>
-          <div class="cp-level__desc">De mens bewaakt beleid, kwaliteit en prestaties.</div>
-        </div>
-      </div>
-      <div class="cp-roles">
-        <span>Process Owner</span><span>Exception Specialist</span><span>Data Steward</span>
-        <span>Model Steward</span><span>Customer Advisor</span><span>Knowledge Owner</span>
-      </div>`,
-    footnote: 'Autonomie betekent niet minder verantwoordelijkheid, maar explicietere verantwoordelijkheid.',
+      <ul class="cp-list">
+        <li>Medewerkers worden niet vervangen, maar <strong>ontlast</strong></li>
+        <li>Aandacht verschuift naar uitzonderingen, interpretatie en empathie</li>
+        <li>Rollen en verantwoordelijkheden zijn duidelijk</li>
+        <li>AI legt uit waarom iets wordt voorgesteld</li>
+        <li>De medewerker kan altijd corrigeren en ingrijpen</li>
+      </ul>`,
+    footnote: 'Autonomie betekent niet minder verantwoordelijkheid, maar meer ruimte voor wat er werkelijk toe doet.',
   },
   {
     pageNum: 6,
-    title: 'Besturing en schaal',
-    subtitle: 'Van use-case naar bestuurbare operatie',
+    title: 'Zo voelt 80% autonomie voor Sophie',
+    subtitle: 'Sophie\'s dossier in 2030',
     content: `
-      <div class="cp-cycle">
-        <span>Begrijpen</span><span class="cp-cycle__arrow">→</span>
-        <span>Ontwerpen</span><span class="cp-cycle__arrow">→</span>
-        <span>Leveren</span><span class="cp-cycle__arrow">→</span>
-        <span>Meten</span><span class="cp-cycle__arrow">→</span>
-        <span>Leren</span><span class="cp-cycle__arrow">→</span>
-        <span>Opschalen</span>
-      </div>
-      <div class="cp-grid cp-grid--compact">
-        <div class="cp-grid__item">End-to-end orkestratie</div>
-        <div class="cp-grid__item">SLA-monitoring</div>
-        <div class="cp-grid__item">Exception management</div>
-        <div class="cp-grid__item">Modelmonitoring</div>
-        <div class="cp-grid__item">TCO &amp; value tracking</div>
-        <div class="cp-grid__item">Feedbackloops</div>
-        <div class="cp-grid__item">Herbruikbare capabilities</div>
-        <div class="cp-grid__item">Continue verbetering</div>
-      </div>`,
-    footnote: 'Waarde vroeg bewijzen. Fundamenten gericht versterken. Beheerst opschalen.',
+      <ul class="cp-list">
+        <li>Haar documenten worden herkend</li>
+        <li>Polis en context worden automatisch gekoppeld</li>
+        <li>Eenvoudige onderdelen lopen zonder tussenkomst</li>
+        <li>Een duplicaat wordt gevonden vóór het een probleem wordt</li>
+        <li>Complexe kosten worden geëscaleerd naar een specialist</li>
+        <li>Sophie krijgt <strong>één begrijpelijk antwoord</strong></li>
+        <li>Ze hoeft niets opnieuw te vertellen</li>
+      </ul>`,
+    footnote: 'Niet een demo. Niet een pilot. Dit is hoe het werkt als alles samenkomt.',
   },
   {
     pageNum: 7,
-    title: 'Ons antwoord op de RFI',
-    subtitle: 'Eén samenhangend Health Care operating model',
+    title: 'Onze droom voor Vanbreda',
+    subtitle: 'Health Care 2030',
     content: `
       <div class="cp-reveal">
-        <div class="cp-reveal__section">
-          <div class="cp-reveal__heading">De belofte</div>
-          <div class="cp-reveal__text">Eén vloeiende ervaring voor Sophie.</div>
+        <div class="cp-reveal__vision">
+          Eén samenhangend Health Care operating model —<br>
+          waar AI het routinewerk draagt, processen en informatie als één keten samenwerken,
+          en mensen ruimte krijgen voor oordeel, empathie en uitzonderingen.
         </div>
-        <div class="cp-reveal__section">
-          <div class="cp-reveal__heading">Drie pijlers</div>
-          <div class="cp-reveal__pillars">
-            <span>Claims</span><span>Communicatie</span><span>B2B/B2I</span>
+        <div class="cp-reveal__principles">
+          <div class="cp-reveal__principle">
+            <span class="cp-reveal__icon">◈</span>
+            <span>Eén ervaring voor klant en partner</span>
           </div>
-        </div>
-        <div class="cp-reveal__section">
-          <div class="cp-reveal__heading">De verbindende laag</div>
-          <div class="cp-reveal__tags">
-            <span>Orkestratie</span><span>Data &amp; kennis</span><span>Beslisregels</span><span>Case management</span>
+          <div class="cp-reveal__principle">
+            <span class="cp-reveal__icon">◈</span>
+            <span>Eén verbonden operatie achter de schermen</span>
           </div>
-        </div>
-        <div class="cp-reveal__section">
-          <div class="cp-reveal__heading">De besturing</div>
-          <div class="cp-reveal__tags">
-            <span>Menselijk oordeel</span><span>Governance</span><span>Monitoring</span><span>Continue verbetering</span>
+          <div class="cp-reveal__principle">
+            <span class="cp-reveal__icon">◈</span>
+            <span>Menselijk oordeel waar het verschil maakt</span>
           </div>
         </div>
       </div>`,
-    footnote: 'Alles wat is ontworpen, getest en veranderd, komt samen in dit antwoord.',
+    footnote: 'De roadmap, architectuur, businesscase en aanpak die deze droom uitvoerbaar maken, zijn opgenomen in onze formele RFI-beantwoording.',
   },
 ]
 
