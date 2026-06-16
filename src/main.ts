@@ -316,6 +316,26 @@ let currentChapter = 0
 let zoomedAsset: string | null = null
 let audioPlaying = false
 let audioEl: HTMLAudioElement | null = null
+let droppedPerChapter = [0, 0, 0, 0, 0, 0, 0]
+let pageMinimized = false
+
+// ─── SVG icons per chapter ───
+const chapterIcons = [
+  // 1: Shield/heart (belofte)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><path d="M32 8L10 18v16c0 12 10 20 22 24 12-4 22-12 22-24V18L32 8z"/><path d="M32 26c-3 0-6 3-6 6s3 6 6 6 6-3 6-6-3-6-6-6z" fill="#2C8C99" opacity=".15"/></svg>`,
+  // 2: Building blocks (kracht)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><rect x="8" y="36" width="20" height="20" rx="2" fill="#2C8C99" opacity=".08"/><rect x="36" y="36" width="20" height="20" rx="2" fill="#2C8C99" opacity=".08"/><rect x="22" y="16" width="20" height="20" rx="2" fill="#2C8C99" opacity=".12"/></svg>`,
+  // 3: Chain gap (grenzen)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><ellipse cx="20" cy="32" rx="12" ry="8"/><ellipse cx="44" cy="32" rx="12" ry="8"/><line x1="28" y1="28" x2="36" y2="28" stroke-dasharray="2 3"/><line x1="28" y1="36" x2="36" y2="36" stroke-dasharray="2 3"/></svg>`,
+  // 4: Network nodes (realiteit)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><circle cx="32" cy="16" r="6" fill="#2C8C99" opacity=".1"/><circle cx="14" cy="44" r="6" fill="#2C8C99" opacity=".1"/><circle cx="50" cy="44" r="6" fill="#2C8C99" opacity=".1"/><line x1="32" y1="22" x2="14" y2="38"/><line x1="32" y1="22" x2="50" y2="38"/><line x1="20" y1="44" x2="44" y2="44"/></svg>`,
+  // 5: People (mens)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><circle cx="22" cy="20" r="7"/><circle cx="42" cy="20" r="7"/><path d="M8 48c0-8 6-14 14-14s14 6 14 14" fill="#2C8C99" opacity=".08"/><path d="M28 48c0-8 6-14 14-14s14 6 14 14" fill="#2C8C99" opacity=".08"/></svg>`,
+  // 6: Checkmark person (sophie)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><circle cx="32" cy="18" r="10"/><path d="M14 54c0-10 8-18 18-18s18 8 18 18" fill="#2C8C99" opacity=".08"/><path d="M24 34l6 6 12-12" stroke-width="3" stroke-linecap="round"/></svg>`,
+  // 7: Diamond (droom)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><path d="M32 6L58 32 32 58 6 32z" fill="#2C8C99" opacity=".06"/><path d="M32 16L48 32 32 48 16 32z" fill="#2C8C99" opacity=".1"/><circle cx="32" cy="32" r="4" fill="#2C8C99" opacity=".2"/></svg>`,
+]
 
 // ─── Render ───
 function render() {
@@ -331,6 +351,7 @@ function renderDesk(): string {
          id="asset-${a.id}"
          data-asset="${a.id}"
          data-chapters="${a.chapters.join(',')}"
+         draggable="true"
          style="top:${a.top}; left:${a.left}; transform:rotate(${a.rotation}deg); width:${a.width}; ${a.chapters.includes(currentChapter) ? '' : 'opacity:0; pointer-events:none;'}"
          title="${a.label}">
       <img src="${a.image}" alt="${a.label}" draggable="false">
@@ -395,21 +416,33 @@ function renderDesk(): string {
 
   <!-- Central dossier: closed folder OR open page -->
   <div class="desk-center" id="desk-center">
-    ${dossierOpen ? `
+    ${dossierOpen ? (pageMinimized ? `
+    <div class="desk-page-mini" id="desk-page-mini">
+      <div class="desk-page-mini__label">Pagina ${cp.pageNum} van 7 · ${cp.title}</div>
+      <div class="desk-page-mini__hint">Klik om te openen</div>
+    </div>
+    ` : `
     <div class="desk-page" id="desk-page">
       <div class="desk-page__added">Toegevoegd aan het dossier</div>
-      <div class="desk-page__paper">
+      <div class="desk-page__paper ${droppedPerChapter[currentChapter] >= 3 ? 'desk-page__paper--complete' : ''}" id="desk-paper">
+        <button class="desk-page__close" id="page-close" title="Sluit pagina">✕</button>
+        <div class="desk-page__graphic">${chapterIcons[currentChapter]}</div>
         <div class="desk-page__header">
           <div class="desk-page__number">Pagina ${cp.pageNum} van 7</div>
           <div class="desk-page__title">${cp.title}</div>
           <div class="desk-page__subtitle">${cp.subtitle}</div>
         </div>
         <div class="desk-page__body">${cp.content}</div>
+        <div class="desk-page__drop" id="page-drop">
+          ${droppedPerChapter[currentChapter] >= 3 
+            ? '<div class="desk-page__drop-done">✓ Pagina compleet</div>' 
+            : `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${droppedPerChapter[currentChapter]}/3</div>`}
+        </div>
         <div class="desk-page__footnote">${cp.footnote}</div>
       </div>
       <div class="desk-page__question">${ch.question}</div>
     </div>
-    ` : `
+    `) : `
     <div class="desk-folder" id="desk-folder">
       <div class="desk-folder__front">
         <div class="desk-folder__stamp">HEALTH CARE 2030</div>
@@ -559,6 +592,16 @@ function bindEvents() {
 
   // --- Open letter from desk ---
   document.getElementById('desk-brief')?.addEventListener('click', () => openLetter())
+
+  // --- Draggable assets ---
+  document.querySelectorAll('.desk-asset[draggable]').forEach(el => {
+    el.addEventListener('dragstart', (e) => {
+      (e as DragEvent).dataTransfer?.setData('text/plain', el.id)
+    })
+  })
+
+  // --- Bind page drop/close events ---
+  bindPageEvents()
 
   function openLetter() {
     const overlay = document.getElementById('letter-overlay')
@@ -848,6 +891,68 @@ function openDocZoom(doc: DeskDocAsset) {
   document.getElementById('zoom')?.classList.add('zoom--open')
 }
 
+// ─── Page Events (drag, close, minimize) ───
+function bindPageEvents() {
+  const paper = document.getElementById('desk-paper')
+  
+  // Close button → minimize page
+  document.getElementById('page-close')?.addEventListener('click', () => {
+    pageMinimized = true
+    const center = document.getElementById('desk-center')
+    const cp = chapterPages[currentChapter]
+    if (center) {
+      center.innerHTML = `
+        <div class="desk-page-mini" id="desk-page-mini">
+          <div class="desk-page-mini__label">Pagina ${cp.pageNum} van 7 · ${cp.title}</div>
+          <div class="desk-page-mini__hint">Klik om te openen</div>
+        </div>`
+      // Re-open on click
+      document.getElementById('desk-page-mini')?.addEventListener('click', () => {
+        pageMinimized = false
+        switchChapter(currentChapter)
+      })
+    }
+  })
+
+  // Drag over
+  paper?.addEventListener('dragover', (e) => {
+    e.preventDefault()
+    paper.classList.add('desk-page__paper--dragover')
+  })
+  paper?.addEventListener('dragleave', () => {
+    paper.classList.remove('desk-page__paper--dragover')
+  })
+
+  // Drop
+  paper?.addEventListener('drop', (e) => {
+    e.preventDefault()
+    paper.classList.remove('desk-page__paper--dragover')
+    const assetId = (e as DragEvent).dataTransfer?.getData('text/plain')
+    if (!assetId || droppedPerChapter[currentChapter] >= 3) return
+    
+    droppedPerChapter[currentChapter]++
+    
+    // Animate the dragged asset shrinking
+    const dragged = document.getElementById(assetId)
+    if (dragged) {
+      dragged.style.transition = 'all .5s ease'
+      dragged.style.opacity = '0.2'
+      dragged.style.transform += ' scale(0.7)'
+    }
+
+    // Update drop zone
+    const dropZone = document.getElementById('page-drop')
+    if (dropZone) {
+      if (droppedPerChapter[currentChapter] >= 3) {
+        dropZone.innerHTML = '<div class="desk-page__drop-done">✓ Pagina compleet</div>'
+        paper.classList.add('desk-page__paper--complete')
+      } else {
+        dropZone.innerHTML = `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${droppedPerChapter[currentChapter]}/3</div>`
+      }
+    }
+  })
+}
+
 // ─── Chapter Switching ───
 function switchChapter(n: number) {
   if (n < 0 || n >= chapters.length) return
@@ -868,6 +973,7 @@ function switchChapter(n: number) {
   // Update central dossier page
   const ch = chapters[n]
   const cp = chapterPages[n]
+  pageMinimized = false
   const center = document.getElementById('desk-center')
   if (center) {
     center.style.opacity = '0'
@@ -875,18 +981,26 @@ function switchChapter(n: number) {
       center.innerHTML = `
         <div class="desk-page" id="desk-page">
           <div class="desk-page__added">Toegevoegd aan het dossier</div>
-          <div class="desk-page__paper">
+          <div class="desk-page__paper ${droppedPerChapter[n] >= 3 ? 'desk-page__paper--complete' : ''}" id="desk-paper">
+            <button class="desk-page__close" id="page-close" title="Sluit pagina">✕</button>
+            <div class="desk-page__graphic">${chapterIcons[n]}</div>
             <div class="desk-page__header">
               <div class="desk-page__number">Pagina ${cp.pageNum} van 7</div>
               <div class="desk-page__title">${cp.title}</div>
               <div class="desk-page__subtitle">${cp.subtitle}</div>
             </div>
             <div class="desk-page__body">${cp.content}</div>
+            <div class="desk-page__drop" id="page-drop">
+              ${droppedPerChapter[n] >= 3
+                ? '<div class="desk-page__drop-done">✓ Pagina compleet</div>'
+                : `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${droppedPerChapter[n]}/3</div>`}
+            </div>
             <div class="desk-page__footnote">${cp.footnote}</div>
           </div>
           <div class="desk-page__question">${ch.question}</div>
         </div>`
       center.style.opacity = '1'
+      bindPageEvents()
     }, 300)
   }
 
