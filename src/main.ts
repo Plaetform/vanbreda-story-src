@@ -895,19 +895,22 @@ function openDocZoom(doc: DeskDocAsset) {
 function bindPageEvents() {
   const paper = document.getElementById('desk-paper')
   
-  // Close button → minimize page
+  // Close button → show folder again
   document.getElementById('page-close')?.addEventListener('click', () => {
     pageMinimized = true
     const center = document.getElementById('desk-center')
-    const cp = chapterPages[currentChapter]
     if (center) {
       center.innerHTML = `
-        <div class="desk-page-mini" id="desk-page-mini">
-          <div class="desk-page-mini__label">Pagina ${cp.pageNum} van 7 · ${cp.title}</div>
-          <div class="desk-page-mini__hint">Klik om te openen</div>
+        <div class="desk-folder" id="desk-folder">
+          <div class="desk-folder__front">
+            <div class="desk-folder__stamp">HEALTH CARE 2030</div>
+            <div class="desk-folder__title">AE × Vanbreda</div>
+            <div class="desk-folder__sub">Status: in reconstructie</div>
+            <div class="desk-folder__label">VERTROUWELIJK</div>
+          </div>
+          <div class="desk-folder__hint">Klik om te openen</div>
         </div>`
-      // Re-open on click
-      document.getElementById('desk-page-mini')?.addEventListener('click', () => {
+      document.getElementById('desk-folder')?.addEventListener('click', () => {
         pageMinimized = false
         switchChapter(currentChapter)
       })
