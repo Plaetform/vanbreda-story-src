@@ -935,13 +935,14 @@ body {
 }
 
 .cp-dream__video {
-  flex: 1;
+  flex: 0 0 38%;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
   background: #000;
   box-shadow: 0 8px 32px rgba(0,0,0,.2);
   cursor: pointer;
+  align-self: center;
 }
 
 .cp-dream__video video {
