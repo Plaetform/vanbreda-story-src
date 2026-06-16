@@ -18,6 +18,123 @@ body {
   line-height: 1.5;
 }
 
+/* =========================================================
+   SPLASH SCREEN
+   ========================================================= */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0a0806;
+  background-image: radial-gradient(ellipse at 50% 45%, rgba(30,25,15,.8) 0%, #0a0806 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.splash--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  animation: splash-fadein 1.5s ease both;
+}
+
+@keyframes splash-fadein {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.splash__logos {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.splash__logo--ae {
+  height: 64px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: .8;
+}
+
+.splash__logo--vb {
+  height: 48px;
+  width: auto;
+  opacity: .8;
+}
+
+.splash__x {
+  font-size: 24px;
+  color: rgba(255,255,255,.25);
+  font-weight: 300;
+}
+
+.splash__divider {
+  width: 80px;
+  height: 1px;
+  background: rgba(255,255,255,.2);
+  margin: 36px 0;
+}
+
+.splash__label {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: .3em;
+  color: rgba(255,255,255,.4);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.splash__title {
+  font-family: var(--font-serif);
+  font-size: 64px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  letter-spacing: .06em;
+}
+
+.splash__subtitle {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: rgba(255,255,255,.45);
+  text-align: center;
+  margin-top: 16px;
+  font-style: italic;
+  max-width: 520px;
+  line-height: 1.5;
+}
+
+.splash__btn {
+  margin-top: 48px;
+  padding: 18px 48px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.25);
+  color: rgba(255,255,255,.75);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: .14em;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all .35s ease;
+}
+
+.splash__btn:hover {
+  border-color: rgba(255,255,255,.6);
+  color: #fff;
+  background: rgba(255,255,255,.06);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+
 /* --- Typography Tokens --- */
 :root {
   --font-body: Arial, Helvetica, sans-serif;
@@ -714,8 +831,8 @@ body {
 .desk-brief {
   position: absolute;
   z-index: 15;
-  bottom: 14%;
-  left: 3%;
+  top: 38%;
+  left: 27%;
   cursor: pointer;
   transition: transform .3s ease, box-shadow .3s;
 }

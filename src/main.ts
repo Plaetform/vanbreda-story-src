@@ -179,7 +179,6 @@ let currentPage = 0
 let zoomedAsset: string | null = null
 let audioPlaying = false
 let audioEl: HTMLAudioElement | null = null
-let letterShown = true
 
 // ─── Render ───
 function render() {
@@ -206,6 +205,21 @@ function renderDesk(): string {
   ).join('')
 
   return `
+<div class="splash" id="splash">
+  <div class="splash__content">
+    <div class="splash__logos">
+      <img src="/ae-logo.png" alt="AE" class="splash__logo splash__logo--ae">
+      <span class="splash__x">×</span>
+      <img src="/vanbreda-logo-white.svg" alt="Vanbreda" class="splash__logo splash__logo--vb">
+    </div>
+    <div class="splash__divider"></div>
+    <div class="splash__label">VERTROUWELIJK DOSSIER</div>
+    <div class="splash__title">AFKOMSTIG UIT 2030</div>
+    <div class="splash__subtitle">Open alleen als je bereid bent de toekomst te veranderen.</div>
+    <button class="splash__btn" id="splash-btn">Maak kennis met Sophie →</button>
+  </div>
+</div>
+
 <div class="desk" id="desk">
   <div class="desk__bg"></div>
   <div class="desk__vignette"></div>
@@ -344,12 +358,6 @@ function bindEvents() {
 
   // --- Open letter from desk ---
   document.getElementById('desk-brief')?.addEventListener('click', () => openLetter())
-
-  // Auto-open on first load
-  if (letterShown) {
-    setTimeout(() => openLetter(), 300)
-    letterShown = false
-  }
 
   function openLetter() {
     const overlay = document.getElementById('letter-overlay')
@@ -631,19 +639,32 @@ function initAudio() {
   audioEl = document.getElementById('bg-audio') as HTMLAudioElement
   if (audioEl) {
     audioEl.volume = 0.25
-    audioPlaying = true
-    // Start on first user interaction
-    const startBgMusic = () => {
-      if (audioEl && audioPlaying) {
-        audioEl.play().catch(() => {})
-      }
-      document.removeEventListener('click', startBgMusic)
-      document.removeEventListener('keydown', startBgMusic)
-    }
-    document.addEventListener('click', startBgMusic)
-    document.addEventListener('keydown', startBgMusic)
-    audioEl.play().catch(() => {})
   }
+
+  // Splash screen → click starts music + fades splash
+  const splash = document.getElementById('splash')
+  const splashBtn = document.getElementById('splash-btn')
+
+  const startExperience = () => {
+    // Start background music
+    if (audioEl) {
+      audioEl.play().catch(() => {})
+      audioPlaying = true
+    }
+    // Fade out splash
+    splash?.classList.add('splash--hidden')
+    setTimeout(() => {
+      splash?.remove()
+      // Auto-open Sophie's letter
+      document.getElementById('desk-brief')?.click()
+    }, 1200)
+  }
+
+  splashBtn?.addEventListener('click', startExperience)
+  // Also allow clicking anywhere on splash
+  splash?.addEventListener('click', (e) => {
+    if (e.target === splash) startExperience()
+  })
 }
 
 function toggleAudio() {
