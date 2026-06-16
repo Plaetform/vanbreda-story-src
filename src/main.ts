@@ -435,7 +435,7 @@ function renderDesk(): string {
         <div class="desk-page__body">${cp.content}</div>
         <div class="desk-page__drop" id="page-drop">
           ${droppedPerChapter[currentChapter] >= 3 
-            ? '<div class="desk-page__drop-done">✓ Pagina compleet</div>' 
+            ? '<div class="desk-page__drop-done">✓ Pagina compleet</div><button class="desk-page__next" id="page-next">Volgende fase →</button>' 
             : `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${droppedPerChapter[currentChapter]}/3</div>`}
         </div>
         <div class="desk-page__footnote">${cp.footnote}</div>
@@ -947,13 +947,17 @@ function bindPageEvents() {
     const dropZone = document.getElementById('page-drop')
     if (dropZone) {
       if (droppedPerChapter[currentChapter] >= 3) {
-        dropZone.innerHTML = '<div class="desk-page__drop-done">✓ Pagina compleet</div>'
+        dropZone.innerHTML = '<div class="desk-page__drop-done">✓ Pagina compleet</div><button class="desk-page__next" id="page-next">Volgende fase →</button>'
         paper.classList.add('desk-page__paper--complete')
+        document.getElementById('page-next')?.addEventListener('click', () => switchChapter(currentChapter + 1))
       } else {
         dropZone.innerHTML = `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${droppedPerChapter[currentChapter]}/3</div>`
       }
     }
   })
+
+  // Next button (if page already complete on load)
+  document.getElementById('page-next')?.addEventListener('click', () => switchChapter(currentChapter + 1))
 }
 
 // ─── Chapter Switching ───
@@ -995,7 +999,7 @@ function switchChapter(n: number) {
             <div class="desk-page__body">${cp.content}</div>
             <div class="desk-page__drop" id="page-drop">
               ${droppedPerChapter[n] >= 3
-                ? '<div class="desk-page__drop-done">✓ Pagina compleet</div>'
+                ? '<div class="desk-page__drop-done">✓ Pagina compleet</div><button class="desk-page__next" id="page-next">Volgende fase →</button>'
                 : `<div class="desk-page__drop-hint">↓ Sleep bewijsstukken hierheen · ${droppedPerChapter[n]}/3</div>`}
             </div>
             <div class="desk-page__footnote">${cp.footnote}</div>

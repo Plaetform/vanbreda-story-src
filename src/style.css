@@ -290,6 +290,27 @@ body {
   letter-spacing: .05em;
 }
 
+.desk-page__next {
+  margin-top: 10px;
+  padding: 12px 28px;
+  background: #2C8C99;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.desk-page__next:hover {
+  background: #1a6b75;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(44,140,153,.3);
+}
+
 .desk-page__paper--complete .desk-page__drop {
   border-color: rgba(76,175,80,.25);
   background: rgba(76,175,80,.04);
