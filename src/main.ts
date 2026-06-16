@@ -280,12 +280,33 @@ const chapterPages = [
       <div class="cp-reveal">
         <div class="cp-reveal__stamp">DOSSIER HC-2030-004781 — AFGEROND</div>
         <div class="cp-reveal__verdict">Sophie werd geholpen zoals we haar hadden beloofd.</div>
-        <div class="cp-reveal__vision">
-          Eén samenhangend Health Care operating model —<br>
-          waar AI het routinewerk draagt, processen en informatie als één keten samenwerken,
-          onzekerheid wordt herkend, menselijk oordeel beschikbaar is waar het verschil maakt,
-          en iedere interactie bijdraagt aan verbetering.
+        <div class="cp-reveal__intro">
+          Niet omdat één tool alles oploste.<br>
+          Maar omdat processen, data, AI, mensen en partners als één samenhangende Health Care-operatie samenwerkten.
         </div>
+
+        <div class="cp-reveal__heading">Eén samenhangend Health Care operating model</div>
+        <ul class="cp-reveal__list">
+          <li>AI het routinewerk draagt</li>
+          <li>processen en informatie als één keten samenwerken</li>
+          <li>onzekerheid wordt herkend</li>
+          <li>menselijk oordeel beschikbaar is waar het verschil maakt</li>
+          <li>iedere interactie bijdraagt aan verbetering</li>
+        </ul>
+
+        <div class="cp-reveal__fanout">
+          <div class="cp-reveal__petal cp-reveal__petal--1">Klantbelofte</div>
+          <div class="cp-reveal__petal cp-reveal__petal--2">Bestaande kracht</div>
+          <div class="cp-reveal__petal cp-reveal__petal--3">Verbinding</div>
+          <div class="cp-reveal__center">
+            <div class="cp-reveal__center-name">Sophie</div>
+          </div>
+          <div class="cp-reveal__petal cp-reveal__petal--4">Fundament</div>
+          <div class="cp-reveal__petal cp-reveal__petal--5">Menselijke regie</div>
+          <div class="cp-reveal__petal cp-reveal__petal--6">Besturing</div>
+          <div class="cp-reveal__fanout-label">Health Care 2030</div>
+        </div>
+
         <div class="cp-reveal__principles">
           <div class="cp-reveal__principle">
             <span class="cp-reveal__icon">◈</span>
@@ -483,6 +504,7 @@ function renderPageHTML(n: number): string {
 
   return `
     <div class="desk-page" id="desk-page">
+      ${ch.question ? `<div class="desk-page__question">${ch.question}</div>` : ''}
       <div class="desk-page__added">${addedLabel}</div>
       <div class="desk-page__paper ${stepClass} ${completeClass} ${autoClass}" id="desk-paper">
         <button class="desk-page__close" id="page-close" title="Sluit pagina">✕</button>
@@ -505,7 +527,6 @@ function renderPageHTML(n: number): string {
           ${dropContent}
         </div>
       </div>
-      <div class="desk-page__question">${ch.question}</div>
     </div>`
 }
 
