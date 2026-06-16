@@ -465,6 +465,7 @@ let audioPlaying = false
 let audioEl: HTMLAudioElement | null = null
 let droppedPerChapter = [0, 0, 0, 0, 0, 0, 0, 0]
 let pageMinimized = false
+let celebrationShown = false
 
 // Drops required per chapter: 3 = full onboarding, 1 = pattern, 0 = auto-reveal
 const requiredDrops = [3, 1, 0, 0, 0, 0, 0, 0]
@@ -1158,8 +1159,9 @@ function bindPageEvents() {
 function switchChapter(n: number) {
   if (n < 0 || n >= chapters.length) return
   
-  // Intercept: show celebration before Sophie
-  if (n === 7 && currentChapter !== 7) {
+  // Intercept: show celebration before reveal (once)
+  if (n === 7 && !celebrationShown) {
+    celebrationShown = true
     showCelebration()
     return
   }
@@ -1257,7 +1259,7 @@ function showCelebration() {
 function closeCelebration() {
   const el = document.getElementById('celebrate')
   el?.classList.remove('celebrate--visible')
-  switchChapter(6)
+  switchChapter(7)
 }
 
 function closeAssetZoom() {
