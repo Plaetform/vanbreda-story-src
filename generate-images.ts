@@ -76,6 +76,14 @@ const jobs: ImageJob[] = [
     name: "img-go-nogo",
     prompt: `Top-down photograph of a formal A4 decision document on a dark wooden desk. The document is titled "GO / NO-GO BESLUIT" in large bold type with a date "2029-Q3". Below is a checklist of criteria with green checkmarks and one orange "VOORWAARDELIJK" mark. Categories include: Technisch, Operationeel, Juridisch, Change, Business Case. At the bottom, a signature line with an actual signature in black ink, and a large green "GO" stamp. The document has a professional, corporate feel with a subtle watermark. Clean lighting, photorealistic. Shot from directly above.`,
   },
+  {
+    name: "img-routekaart",
+    prompt: `Top-down photograph of an A4 roadmap document on a dark wooden desk. The document is titled "ROUTEKAART" in elegant serif type. It shows a winding path with 9 numbered milestone circles connected by a dotted line, each milestone having a small icon and Dutch label. Some milestones have small red "GEREED" stamps. The path goes from "Start" at top-left to "Autonomie" at bottom-right. The document has a cream background with teal accent colors. Small handwritten margin notes. Professional but human, warm lighting, photorealistic. Shot from directly above.`,
+  },
+  {
+    name: "img-fundamenten",
+    prompt: `Top-down photograph of an A5 checklist card on a dark wooden desk. The card is titled "FUNDAMENTEN — Prerequisites" in clean sans-serif type. Below is a structured checklist of 6 foundational requirements, each with a checkbox. Four are checked in green ink, two are circled in orange with "IN PROGRESS" written beside them. Dutch labels: "Master data", "Identiteit", "Integratie", "Security", "Beslisregels", "Audit trail". The card has a small green checkmark logo in the corner. Clean professional design with handwritten progress marks. Warm lighting, photorealistic. Shot from directly above.`,
+  },
 ];
 
 

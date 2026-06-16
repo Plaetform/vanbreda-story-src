@@ -404,6 +404,10 @@ const deskAssets: DeskAsset[] = [
     image: '/img-blueprint-flow.png', top: '8%', left: '8%', rotation: -6, width: '12vw', style: 'document', chapters: [3] },
   { id: 'golden-record', label: 'Golden Record', sublabel: 'Sophie De Winter als single source of truth — alles verbonden.',
     image: '/img-golden-record.png', top: '55%', left: '72%', rotation: 4, width: '13vw', style: 'document', chapters: [3] },
+  { id: 'routekaart', label: 'Routekaart', sublabel: '9 stappen — met stempels voor autonomie.',
+    image: '/img-routekaart.png', top: '55%', left: '6%', rotation: 3, width: '12vw', style: 'document', chapters: [3] },
+  { id: 'fundamenten', label: 'Fundamenten', sublabel: 'Wat moest hiervoor waar zijn?',
+    image: '/img-fundamenten.png', top: '30%', left: '4%', rotation: -4, width: '11vw', style: 'document', chapters: [3] },
 
   // ── Ch4: Mens & AI ──
   { id: 'polaroid-wb', label: 'Eerste Sessie', sublabel: 'De sessie waar AE en Vanbreda elkaars taal leerden.',
@@ -431,12 +435,6 @@ const deskAssets: DeskAsset[] = [
 ]
 
 const deskDocAssets: DeskDocAsset[] = [
-  // Ch3: Fundament
-  { id: 'doc-routekaart', label: 'Routekaart', sublabel: '9 stappen — met stempels voor autonomie.',
-    icon: '🗺️', top: '55%', left: '8%', rotation: 3, width: '7vw', docStyle: 'document', render: asset06, chapters: [3] },
-  { id: 'doc-fundamenten', label: 'Fundamenten', sublabel: 'Wat moest hiervoor waar zijn?',
-    icon: '✅', top: '75%', left: '74%', rotation: 4, width: '7vw', docStyle: 'card', render: asset08, chapters: [3] },
-
   // Ch4: Mens & AI
   { id: 'doc-postit', label: 'Post-its', sublabel: 'Radiologiefactuur: patiënt-ID ontbreekt. Handmatig nakijken.',
     icon: '📝', top: '75%', left: '45%', rotation: -3, width: '6.5vw', docStyle: 'postit', render: asset04, chapters: [4] },
