@@ -140,7 +140,7 @@ body {
    ========================================================= */
 .chapter-overlay {
   position: fixed;
-  top: 2vh;
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 500;
@@ -156,7 +156,7 @@ body {
 
 .chapter-overlay__question {
   font-family: var(--font-serif);
-  font-size: 1.4vw;
+  font-size: 18px;
   font-weight: 600;
   color: rgba(255,255,255,.85);
   text-shadow: 0 2px 12px rgba(0,0,0,.5);
@@ -166,7 +166,7 @@ body {
 
 .chapter-overlay__quote {
   font-family: var(--font-serif);
-  font-size: 0.85vw;
+  font-size: 13px;
   font-style: italic;
   color: rgba(255,255,255,.4);
   text-shadow: 0 1px 6px rgba(0,0,0,.4);
@@ -178,25 +178,25 @@ body {
    ========================================================= */
 .chapter-nav {
   position: fixed;
-  bottom: 48px;
+  bottom: 42px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 550;
   display: flex;
-  gap: 4px;
-  padding: 6px 14px;
-  background: rgba(10,8,6,.6);
-  backdrop-filter: blur(12px);
+  gap: 6px;
+  padding: 10px 20px;
+  background: rgba(10,8,6,.7);
+  backdrop-filter: blur(14px);
   border-radius: 30px;
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: 0 4px 20px rgba(0,0,0,.4);
+  border: 1px solid rgba(255,255,255,.1);
+  box-shadow: 0 6px 28px rgba(0,0,0,.5);
 }
 
 .chapter-nav__dot {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 12px;
+  gap: 8px;
+  padding: 10px 16px;
   background: transparent;
   border: none;
   border-radius: 20px;
@@ -211,32 +211,32 @@ body {
 }
 
 .chapter-nav__dot--active {
-  color: rgba(255,255,255,.9);
-  background: rgba(255,255,255,.1);
+  color: rgba(255,255,255,.95);
+  background: rgba(255,255,255,.12);
 }
 
 .chapter-nav__num {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 1px solid currentColor;
+  border: 1.5px solid currentColor;
   flex-shrink: 0;
 }
 
 .chapter-nav__dot--active .chapter-nav__num {
-  background: rgba(255,255,255,.15);
+  background: rgba(255,255,255,.2);
 }
 
 .chapter-nav__label {
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .06em;
+  font-size: 11px;
+  letter-spacing: .05em;
   white-space: nowrap;
 }
 
@@ -273,6 +273,96 @@ body {
 .desk-asset, .desk-doc {
   transition: opacity .5s ease, transform .35s cubic-bezier(.25,.8,.25,1),
               box-shadow .35s ease, filter .35s ease !important;
+}
+
+/* =========================================================
+   CELEBRATION OVERLAY
+   ========================================================= */
+.celebrate {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  background: rgba(5,3,0,.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .6s ease, visibility .6s ease;
+}
+
+.celebrate--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+#confetti-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.celebrate__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: splash-fadein 1s ease .3s both;
+}
+
+.celebrate__emoji {
+  font-size: 64px;
+  margin-bottom: 8px;
+}
+
+.celebrate__title {
+  font-family: var(--font-serif);
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .04em;
+}
+
+.celebrate__text {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: rgba(255,255,255,.7);
+}
+
+.celebrate__sub {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: rgba(255,255,255,.4);
+  font-style: italic;
+  line-height: 1.6;
+  max-width: 480px;
+  margin-top: 8px;
+}
+
+.celebrate__btn {
+  margin-top: 32px;
+  padding: 16px 42px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.3);
+  color: rgba(255,255,255,.8);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: .12em;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all .35s ease;
+}
+
+.celebrate__btn:hover {
+  border-color: #FFD700;
+  color: #FFD700;
+  background: rgba(255,215,0,.06);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
 }
 
 /* --- Typography Tokens --- */

@@ -233,7 +233,6 @@ function renderDesk(): string {
   `).join('')
 
   const ch = chapters[currentChapter]
-  const isLocked = currentChapter < 6
 
   const pageDots = dossierPages.map((_, i) =>
     `<div class="viewer__dot ${i === currentPage ? 'viewer__dot--active' : ''}" data-page="${i}"></div>`
@@ -268,17 +267,16 @@ function renderDesk(): string {
   <div class="desk-peek desk-peek--1" style="top:42%;left:47%;transform:rotate(-12deg);"></div>
   <div class="desk-peek desk-peek--2" style="top:44%;left:54%;transform:rotate(8deg);"></div>
   <div class="desk-peek desk-peek--3" style="top:58%;left:46%;transform:rotate(14deg);"></div>
-  <div class="desk-folder ${dossierOpen ? 'desk-folder--hidden' : ''} ${isLocked ? 'desk-folder--locked' : ''}" id="desk-folder">
+  <div class="desk-folder ${dossierOpen ? 'desk-folder--hidden' : ''}" id="desk-folder">
     <div class="desk-folder__front">
       <div class="desk-folder__stamp">2030</div>
       <div class="desk-folder__title">DOSSIER<br>2030</div>
       <div class="desk-folder__sub">TERUGGESTUURD NAAR 2026</div>
       <div class="desk-folder__label">VERTROUWELIJK</div>
     </div>
-    <div class="desk-folder__hint">${isLocked ? '🔒 Pas te openen bij Sophie' : 'Klik om te openen'}</div>
-    ${isLocked ? '<div class="desk-folder__lock">🔒</div>' : ''}
+    <div class="desk-folder__hint">Klik om te openen</div>
   </div>
-  <div class="desk-brief ${currentChapter === 6 ? '' : 'desk-brief--hidden'}" id="desk-brief">
+  <div class="desk-brief" id="desk-brief">
     <div class="desk-brief__envelope">
       <div class="desk-brief__to">Sophie De Winter</div>
       <div class="desk-brief__subtitle">Brief · 17 april 2030</div>
@@ -386,6 +384,17 @@ function renderDesk(): string {
   <audio id="letter-audio" preload="auto">
     <source src="/audio/brief-sophie.mp3" type="audio/mpeg">
   </audio>
+</div>
+
+<div class="celebrate" id="celebrate">
+  <canvas id="confetti-canvas"></canvas>
+  <div class="celebrate__content">
+    <div class="celebrate__emoji">🎉</div>
+    <div class="celebrate__title">Alles staat klaar.</div>
+    <div class="celebrate__text">Het is 1 dag voordat Sophie ziek wordt.</div>
+    <div class="celebrate__sub">Alle systemen, processen en mensen zijn voorbereid.<br>De vraag is: zijn we werkelijk klaar voor haar?</div>
+    <button class="celebrate__btn" id="celebrate-btn">Ontdek het moment van de waarheid →</button>
+  </div>
 </div>
 
 <div class="print-only">
@@ -514,9 +523,8 @@ function bindEvents() {
     })
   })
 
-  // Open dossier (only if unlocked = chapter 6)
+  // Open dossier
   document.getElementById('desk-folder')?.addEventListener('click', () => {
-    if (currentChapter < 6) return // locked
     dossierOpen = true
     currentPage = 0
     updateViewer()
@@ -571,6 +579,9 @@ function bindEvents() {
 
   // Audio (bg music)
   document.getElementById('btn-audio')?.addEventListener('click', toggleAudio)
+
+  // Celebration
+  document.getElementById('celebrate-btn')?.addEventListener('click', closeCelebration)
 
   // Keyboard
   document.addEventListener('keydown', (e: KeyboardEvent) => {
@@ -696,6 +707,13 @@ function openDocZoom(doc: DeskDocAsset) {
 // ─── Chapter Switching ───
 function switchChapter(n: number) {
   if (n < 0 || n >= chapters.length) return
+  
+  // Intercept: show celebration before Sophie
+  if (n === 6 && currentChapter !== 6) {
+    showCelebration()
+    return
+  }
+  
   currentChapter = n
 
   // Update question/quote overlay
@@ -729,22 +747,64 @@ function switchChapter(n: number) {
       htmlEl.style.pointerEvents = 'none'
     }
   })
+}
 
-  // Dossier lock/unlock
-  const folder = document.getElementById('desk-folder')
-  if (folder) {
-    folder.classList.toggle('desk-folder--locked', n < 6)
-    const hint = folder.querySelector('.desk-folder__hint')
-    if (hint) hint.textContent = n < 6 ? '🔒 Pas te openen bij Sophie' : 'Klik om te openen'
-    const lock = folder.querySelector('.desk-folder__lock')
-    if (n >= 6 && lock) lock.remove()
+// ─── Celebration / Confetti ───
+function showCelebration() {
+  const el = document.getElementById('celebrate')
+  el?.classList.add('celebrate--visible')
+  
+  const canvas = document.getElementById('confetti-canvas') as HTMLCanvasElement
+  if (!canvas) return
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
+
+  const particles: { x: number; y: number; vx: number; vy: number; color: string; size: number; rotation: number; rv: number }[] = []
+  const colors = ['#FFD700', '#FF6B35', '#2C8C99', '#FF4E6A', '#7B68EE', '#00D4AA', '#FFF']
+  
+  for (let i = 0; i < 200; i++) {
+    particles.push({
+      x: canvas.width / 2 + (Math.random() - .5) * 200,
+      y: canvas.height / 2,
+      vx: (Math.random() - .5) * 16,
+      vy: Math.random() * -18 - 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      size: Math.random() * 8 + 3,
+      rotation: Math.random() * 360,
+      rv: (Math.random() - .5) * 12,
+    })
   }
 
-  // Brief visibility
-  const brief = document.getElementById('desk-brief')
-  if (brief) {
-    brief.classList.toggle('desk-brief--hidden', n !== 6)
+  let frame = 0
+  function animate() {
+    if (!ctx || frame > 180) return
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    particles.forEach(p => {
+      p.x += p.vx
+      p.y += p.vy
+      p.vy += 0.25
+      p.vx *= 0.99
+      p.rotation += p.rv
+      ctx.save()
+      ctx.translate(p.x, p.y)
+      ctx.rotate(p.rotation * Math.PI / 180)
+      ctx.fillStyle = p.color
+      ctx.globalAlpha = Math.max(0, 1 - frame / 180)
+      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6)
+      ctx.restore()
+    })
+    frame++
+    requestAnimationFrame(animate)
   }
+  animate()
+}
+
+function closeCelebration() {
+  const el = document.getElementById('celebrate')
+  el?.classList.remove('celebrate--visible')
+  switchChapter(6)
 }
 
 function closeAssetZoom() {
