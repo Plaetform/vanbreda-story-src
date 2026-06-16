@@ -39,164 +39,290 @@ interface DeskDocAsset {
   chapters: number[]
 }
 
-// ─── Chapters ───
+// ─── Chapters (8 dossierpagina's) ───
 const chapters = [
-  {
-    id: 'belofte',
-    title: 'De belofte',
-    question: 'Wat moet Sophie ervaren als het erop aankomt?',
-  },
-  {
-    id: 'kracht',
-    title: 'De kracht',
-    question: 'Waarom is deze droom geloofwaardig?',
-  },
-  {
-    id: 'grenzen',
-    title: 'De grenzen',
-    question: 'Waarom is meer van hetzelfde niet genoeg?',
-  },
-  {
-    id: 'realiteit',
-    title: 'De realiteit',
-    question: 'Hoe gedraagt de organisatie zich in 2030?',
-  },
-  {
-    id: 'mens',
-    title: 'De mens',
-    question: 'Wat betekent dit voor de mensen die het werk doen?',
-  },
-  {
-    id: 'sophie',
-    title: 'Sophie',
-    question: 'Hoe voelt 80% autonomie als het écht gebeurt?',
-  },
-  {
-    id: 'droom',
-    title: 'De droom',
-    question: '',
-  },
+  { id: 'belofte', title: 'De belofte', question: 'Welke ervaring willen we Sophie bieden?' },
+  { id: 'kracht', title: 'De kracht', question: 'Welke bewezen capabilities vormen het vertrekpunt?' },
+  { id: 'verbinding', title: 'De verbinding', question: 'Waarom leveren losse successen nog geen autonome organisatie op?' },
+  { id: 'fundament', title: 'Het fundament', question: 'Wat moet verbonden en betrouwbaar worden?' },
+  { id: 'mens', title: 'Mens & AI', question: 'Hoe werken mens en AI verantwoord samen?' },
+  { id: 'operatie', title: 'De operatie', question: 'Hoe gaan de onderdelen als één geheel samenwerken?' },
+  { id: 'waarheid', title: 'De waarheid', question: 'Werkt het ook wanneer het erop aankomt?' },
+  { id: 'droom', title: 'De droom', question: '' },
 ]
 
-// ─── Chapter Dossier Pages (center of desk) ───
+// ─── Chapter Dossier Pages ───
 const chapterPages = [
   {
     pageNum: 1,
-    title: 'De ervaring die we willen beloven',
-    subtitle: 'Sophie\'s belofte',
+    title: 'De klantbelofte',
+    subtitle: 'Eén vloeiende dienstverlening op een kwetsbaar moment',
     content: `
       <ul class="cp-list">
-        <li>Ze vertelt haar verhaal <strong>één keer</strong></li>
+        <li>Sophie vertelt haar verhaal <strong>één keer</strong></li>
+        <li>Ze weet steeds waar zij aan toe is</li>
         <li>Ze krijgt snel duidelijkheid over eenvoudige onderdelen</li>
-        <li>Ze hoeft niet zelf tussen organisaties te coördineren</li>
-        <li>Ze krijgt menselijke aandacht wanneer het nodig is</li>
-        <li>Ze weet steeds waar ze aan toe is</li>
-      </ul>`,
-    footnote: 'Dit is het criterium waaraan iedere keuze wordt getoetst.',
+        <li>Ze krijgt menselijke uitleg wanneer oordeel nodig is</li>
+        <li>Ze hoeft niet zelf tussen Vanbreda, werkgever, verzekeraar en zorgverlener te coördineren</li>
+      </ul>
+      <div class="cp-flow">
+        <div class="cp-flow__step">
+          <div class="cp-flow__label">Ziekte</div>
+          <div class="cp-flow__need">Geruststelling</div>
+        </div>
+        <div class="cp-flow__arrow">→</div>
+        <div class="cp-flow__step">
+          <div class="cp-flow__label">Contact</div>
+          <div class="cp-flow__need">Eenvoud</div>
+        </div>
+        <div class="cp-flow__arrow">→</div>
+        <div class="cp-flow__step">
+          <div class="cp-flow__label">Claim</div>
+          <div class="cp-flow__need">Transparantie</div>
+        </div>
+        <div class="cp-flow__arrow">→</div>
+        <div class="cp-flow__step">
+          <div class="cp-flow__label">Beoordeling</div>
+          <div class="cp-flow__need">Vertrouwen</div>
+        </div>
+        <div class="cp-flow__arrow">→</div>
+        <div class="cp-flow__step">
+          <div class="cp-flow__label">Duidelijkheid</div>
+          <div class="cp-flow__need">Afronding</div>
+        </div>
+      </div>`,
+    footnote: 'Iedere ontwerpkeuze moet aantoonbaar bijdragen aan de ervaring van Sophie.',
   },
   {
     pageNum: 2,
     title: 'Vanbreda begint niet bij nul',
-    subtitle: 'Voortbouwen op wat al werkt',
+    subtitle: 'De bestaande kracht',
     content: `
-      <div class="cp-grid">
-        <div class="cp-grid__item">Voice AI</div>
-        <div class="cp-grid__item">Triage</div>
-        <div class="cp-grid__item">Contextverrijking</div>
-        <div class="cp-grid__item">Conceptantwoorden</div>
-        <div class="cp-grid__item">Claims-STP</div>
-        <div class="cp-grid__item">Digitale aansluitingen</div>
+      <div class="cp-columns">
+        <div class="cp-col">
+          <div class="cp-col__title">Claims</div>
+          <ul class="cp-col__list">
+            <li>55% volumegewogen STP</li>
+            <li>Digitale intake</li>
+            <li>OCR-capability</li>
+            <li>±200.000 claims/maand</li>
+          </ul>
+        </div>
+        <div class="cp-col">
+          <div class="cp-col__title">Communicatie</div>
+          <ul class="cp-col__list">
+            <li>±80% calls via Voice AI</li>
+            <li>±95% routeringsnauwkeurigheid</li>
+            <li>Intentclassificatie</li>
+            <li>Contextverrijking</li>
+            <li>Conceptantwoorden</li>
+          </ul>
+        </div>
+        <div class="cp-col">
+          <div class="cp-col__title">B2B / B2I</div>
+          <ul class="cp-col__list">
+            <li>±87% STP aansluitingen</li>
+            <li>Digitale interfaces</li>
+            <li>Partner- en beheerprocessen</li>
+          </ul>
+        </div>
       </div>`,
-    footnote: 'Dit zijn geen losse tools. Het zijn de bouwstenen waarmee de belofte haalbaar wordt.',
+    footnote: 'De volgende stap is niet opnieuw beginnen, maar verbinden wat al waarde levert.',
   },
   {
     pageNum: 3,
     title: 'De waarde zit in de verbinding',
-    subtitle: 'De grenzen van losse successen',
+    subtitle: 'Mogelijke frictie tussen de onderdelen',
     content: `
+      <div class="cp-note">Te valideren met Vanbreda</div>
       <ul class="cp-list">
-        <li>Context reist niet altijd mee tussen stappen</li>
-        <li>Processen lopen over teams en partijen</li>
-        <li>Uitzonderingen vragen coördinatie die er niet altijd is</li>
-        <li>Kennis en beslisregels zijn niet altijd expliciet</li>
-        <li>Lokale automatisering is nog geen <strong>autonome operatie</strong></li>
-      </ul>`,
-    footnote: 'Méér van hetzelfde maakt het niet beter. De keten moet als geheel werken.',
+        <li>Context reist niet altijd mee</li>
+        <li>Informatie staat verspreid over systemen</li>
+        <li>Uitzonderingen vragen handmatige coördinatie</li>
+        <li>Besliskennis zit bij ervaren medewerkers</li>
+        <li>Automatische stappen kunnen verborgen handwerk veroorzaken</li>
+        <li>Lokale optimalisatie leidt niet automatisch tot <strong>end-to-end waarde</strong></li>
+      </ul>
+      <div class="cp-flow">
+        <div class="cp-flow__step">
+          <div class="cp-flow__label">Intake</div>
+        </div>
+        <div class="cp-flow__break">⚡</div>
+        <div class="cp-flow__step">
+          <div class="cp-flow__label">Classificatie</div>
+        </div>
+        <div class="cp-flow__break">⚡</div>
+        <div class="cp-flow__step">
+          <div class="cp-flow__label">Context</div>
+        </div>
+        <div class="cp-flow__break">⚡</div>
+        <div class="cp-flow__step">
+          <div class="cp-flow__label">Beslissing</div>
+        </div>
+        <div class="cp-flow__break">⚡</div>
+        <div class="cp-flow__step">
+          <div class="cp-flow__label">Uitvoering</div>
+        </div>
+        <div class="cp-flow__break">⚡</div>
+        <div class="cp-flow__step">
+          <div class="cp-flow__label">Communicatie</div>
+        </div>
+      </div>`,
+    footnote: 'De grootste frictie zit vaak niet in één taak, maar tussen teams, systemen en beslissingen.',
   },
   {
     pageNum: 4,
-    title: 'Eén samenhangende Health Care-operatie',
-    subtitle: 'De nieuwe realiteit',
+    title: 'De verbonden basis',
+    subtitle: 'De ruggengraat van gecontroleerde autonomie',
     content: `
-      <ul class="cp-list">
-        <li>Eén case over de hele keten</li>
-        <li>Alle relevante context beschikbaar op het juiste moment</li>
-        <li>Routinewerk loopt automatisch</li>
-        <li>Onzekerheid wordt <strong>herkend</strong>, niet genegeerd</li>
-        <li>De juiste mens wordt op het juiste moment betrokken</li>
-        <li>Klant, medewerker en partner zien een consistente status</li>
-        <li>Correcties worden gebruikt om te verbeteren</li>
-      </ul>`,
-    footnote: 'Niet een technische architectuur, maar hoe de organisatie zich gedraagt.',
+      <div class="cp-note">Nodig over de drie pijlers heen</div>
+      <div class="cp-grid">
+        <div class="cp-grid__item">Gedeelde data</div>
+        <div class="cp-grid__item">Consistente identiteit</div>
+        <div class="cp-grid__item">Expliciete beslisregels</div>
+        <div class="cp-grid__item">Modulaire integraties</div>
+        <div class="cp-grid__item">Workflow & case mgmt</div>
+        <div class="cp-grid__item">End-to-end status</div>
+        <div class="cp-grid__item">Bronverwijzingen</div>
+        <div class="cp-grid__item">Toegangsbeheer</div>
+        <div class="cp-grid__item">Exception handling</div>
+      </div>
+      <div class="cp-layers">
+        <div class="cp-layer cp-layer--top">
+          <div class="cp-layer__title">Ervaring</div>
+          <div class="cp-layer__items">Verzekerde · Medewerker · Werkgever · Partner</div>
+        </div>
+        <div class="cp-layer">
+          <div class="cp-layer__title">Proces</div>
+          <div class="cp-layer__items">Claims · Communicatie · B2B/B2I</div>
+        </div>
+        <div class="cp-layer">
+          <div class="cp-layer__title">Verbinding</div>
+          <div class="cp-layer__items">Orkestratie · Case management · Beslisregels</div>
+        </div>
+        <div class="cp-layer cp-layer--bottom">
+          <div class="cp-layer__title">Fundament</div>
+          <div class="cp-layer__items">Data · Masterdata · Identiteit · Integratie · Security</div>
+        </div>
+      </div>`,
+    footnote: 'Autonomie begint niet bij een agent, maar bij een betrouwbare ruggengraat.',
   },
   {
     pageNum: 5,
-    title: 'AI draagt routine. Mensen maken het verschil.',
-    subtitle: 'De mens in het nieuwe model',
+    title: 'Menselijke regie',
+    subtitle: 'AI draagt routine. Mensen maken het verschil.',
     content: `
+      <div class="cp-levels">
+        <div class="cp-level cp-level--1">
+          <div class="cp-level__label">AI ondersteunt</div>
+          <div class="cp-level__desc">Het systeem verzamelt context en stelt voor. De medewerker beslist.</div>
+        </div>
+        <div class="cp-level cp-level--2">
+          <div class="cp-level__label">AI handelt binnen grenzen</div>
+          <div class="cp-level__desc">Het systeem handelt zelfstandig. De medewerker monitort uitzonderingen.</div>
+        </div>
+        <div class="cp-level cp-level--3">
+          <div class="cp-level__label">AI handelt autonoom</div>
+          <div class="cp-level__desc">Het systeem voert uit. De mens bewaakt kwaliteit en beleid.</div>
+        </div>
+      </div>
+      <div class="cp-note">Veranderende rollen</div>
       <ul class="cp-list">
-        <li>Medewerkers worden niet vervangen, maar <strong>ontlast</strong></li>
-        <li>Aandacht verschuift naar uitzonderingen, interpretatie en empathie</li>
-        <li>Rollen en verantwoordelijkheden zijn duidelijk</li>
-        <li>AI legt uit waarom iets wordt voorgesteld</li>
-        <li>De medewerker kan altijd corrigeren en ingrijpen</li>
+        <li>Van verwerker naar <strong>exception specialist</strong></li>
+        <li>Van data-invoerder naar <strong>data steward</strong></li>
+        <li>Van teammanager naar <strong>end-to-end proceseigenaar</strong></li>
+        <li>Van modelgebruiker naar <strong>actieve feedbackgever</strong></li>
+        <li>Van standaardcontact naar <strong>empathisch klantadviseur</strong></li>
       </ul>`,
-    footnote: 'Autonomie betekent niet minder verantwoordelijkheid, maar meer ruimte voor wat er werkelijk toe doet.',
+    footnote: 'Autonomie betekent niet minder verantwoordelijkheid, maar explicietere verantwoordelijkheid.',
   },
   {
     pageNum: 6,
-    title: 'Zo voelt 80% autonomie voor Sophie',
-    subtitle: 'Sophie\'s dossier in 2030',
+    title: 'De samenhangende operatie',
+    subtitle: 'Eén Health Care operating model',
     content: `
+      <div class="cp-note">Wat de organisatie in 2030 kan</div>
       <ul class="cp-list">
-        <li>Haar documenten worden herkend</li>
-        <li>Polis en context worden automatisch gekoppeld</li>
-        <li>Eenvoudige onderdelen lopen zonder tussenkomst</li>
-        <li>Een duplicaat wordt gevonden vóór het een probleem wordt</li>
-        <li>Complexe kosten worden geëscaleerd naar een specialist</li>
-        <li>Sophie krijgt <strong>één begrijpelijk antwoord</strong></li>
-        <li>Ze hoeft niets opnieuw te vertellen</li>
+        <li>Eén case over de volledige keten volgen</li>
+        <li>Context automatisch beschikbaar maken</li>
+        <li>Routinewerk gecontroleerd automatiseren</li>
+        <li>Onzekerheid <strong>herkennen</strong></li>
+        <li>De juiste expert inschakelen</li>
+        <li>Klant en medewerker dezelfde status tonen</li>
+        <li>Elke beslissing herleiden</li>
+        <li>Correcties als leersignaal gebruiken</li>
+        <li>Prestaties, risico's en uitzonderingen bewaken</li>
+      </ul>`,
+    footnote: 'De klant ervaart één dienstverlening, ook wanneer achter de schermen meerdere systemen en partijen samenwerken.',
+  },
+  {
+    pageNum: 7,
+    title: 'Het moment van de waarheid',
+    subtitle: 'Sophie\'s claim in 2030',
+    content: `
+      <ul class="cp-list cp-list--numbered">
+        <li><strong>Sophie wordt opgenomen</strong> — buitenlandse spoedopname, onzekerheid over dekking</li>
+        <li><strong>Intake</strong> — documenten worden herkend, vertaald en gekoppeld</li>
+        <li><strong>Context</strong> — polis, werkgever, claimhistorie en communicatie komen samen</li>
+        <li><strong>Automatische verwerking</strong> — eenvoudige onderdelen worden goedgekeurd</li>
+        <li><strong>Uitzondering</strong> — buitenlandse code en mogelijke dubbele factuur herkend</li>
+        <li><strong>Menselijk oordeel</strong> — een claimspecialist beoordeelt de uitzondering</li>
+        <li><strong>Communicatie</strong> — Sophie ontvangt één duidelijk, persoonlijk antwoord</li>
+        <li><strong>Afronding</strong> — juiste betaling voorbereid, dubbele betaling voorkomen, feedback opgeslagen</li>
       </ul>`,
     footnote: 'Niet een demo. Niet een pilot. Dit is hoe het werkt als alles samenkomt.',
   },
   {
-    pageNum: 7,
+    pageNum: 8,
     title: 'Onze droom voor Vanbreda',
     subtitle: 'Health Care 2030',
     content: `
       <div class="cp-reveal">
+        <div class="cp-reveal__stamp">DOSSIER HC-2030-004781 — AFGEROND</div>
+        <div class="cp-reveal__verdict">Sophie werd geholpen zoals we haar hadden beloofd.</div>
         <div class="cp-reveal__vision">
           Eén samenhangend Health Care operating model —<br>
           waar AI het routinewerk draagt, processen en informatie als één keten samenwerken,
-          en mensen ruimte krijgen voor oordeel, empathie en uitzonderingen.
+          onzekerheid wordt herkend, menselijk oordeel beschikbaar is waar het verschil maakt,
+          en iedere interactie bijdraagt aan verbetering.
         </div>
         <div class="cp-reveal__principles">
           <div class="cp-reveal__principle">
             <span class="cp-reveal__icon">◈</span>
-            <span>Eén ervaring voor klant en partner</span>
+            <span><strong>Eén ervaring</strong> — voor verzekerde, medewerker en partner</span>
           </div>
           <div class="cp-reveal__principle">
             <span class="cp-reveal__icon">◈</span>
-            <span>Eén verbonden operatie achter de schermen</span>
+            <span><strong>Eén verbonden operatie</strong> — over Claims, Communicatie en B2B/B2I heen</span>
           </div>
           <div class="cp-reveal__principle">
             <span class="cp-reveal__icon">◈</span>
-            <span>Menselijk oordeel waar het verschil maakt</span>
+            <span><strong>Menselijk waar het telt</strong> — bij uitzonderingen, interpretatie en empathie</span>
           </div>
         </div>
       </div>`,
     footnote: 'De roadmap, architectuur, businesscase en aanpak die deze droom uitvoerbaar maken, zijn opgenomen in onze formele RFI-beantwoording.',
   },
+]
+
+// ─── SVG icons per chapter ───
+const chapterIcons = [
+  // 1: Shield (belofte)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><path d="M32 8L10 18v16c0 12 10 20 22 24 12-4 22-12 22-24V18L32 8z"/><path d="M32 26c-3 0-6 3-6 6s3 6 6 6 6-3 6-6-3-6-6-6z" fill="#2C8C99" opacity=".15"/></svg>`,
+  // 2: Building blocks (kracht)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><rect x="8" y="36" width="20" height="20" rx="2" fill="#2C8C99" opacity=".08"/><rect x="36" y="36" width="20" height="20" rx="2" fill="#2C8C99" opacity=".08"/><rect x="22" y="16" width="20" height="20" rx="2" fill="#2C8C99" opacity=".12"/></svg>`,
+  // 3: Chain gap (verbinding)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><ellipse cx="20" cy="32" rx="12" ry="8"/><ellipse cx="44" cy="32" rx="12" ry="8"/><line x1="28" y1="28" x2="36" y2="28" stroke-dasharray="2 3"/><line x1="28" y1="36" x2="36" y2="36" stroke-dasharray="2 3"/></svg>`,
+  // 4: Layers (fundament)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><path d="M8 40l24 12 24-12" fill="#2C8C99" opacity=".06"/><path d="M8 32l24 12 24-12" fill="#2C8C99" opacity=".08"/><path d="M8 24l24 12 24-12" fill="#2C8C99" opacity=".1"/><path d="M8 16l24 12 24-12"/></svg>`,
+  // 5: People (mens)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><circle cx="22" cy="20" r="7"/><circle cx="42" cy="20" r="7"/><path d="M8 48c0-8 6-14 14-14s14 6 14 14" fill="#2C8C99" opacity=".08"/><path d="M28 48c0-8 6-14 14-14s14 6 14 14" fill="#2C8C99" opacity=".08"/></svg>`,
+  // 6: Network (operatie)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><circle cx="32" cy="16" r="6" fill="#2C8C99" opacity=".1"/><circle cx="14" cy="44" r="6" fill="#2C8C99" opacity=".1"/><circle cx="50" cy="44" r="6" fill="#2C8C99" opacity=".1"/><line x1="32" y1="22" x2="14" y2="38"/><line x1="32" y1="22" x2="50" y2="38"/><line x1="20" y1="44" x2="44" y2="44"/></svg>`,
+  // 8: Checkmark (waarheid)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><circle cx="32" cy="32" r="24"/><path d="M20 32l8 8 16-16" stroke-width="3" stroke-linecap="round"/></svg>`,
+  // 8: Diamond (droom)
+  `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><path d="M32 6L58 32 32 58 6 32z" fill="#2C8C99" opacity=".06"/><path d="M32 16L48 32 32 48 16 32z" fill="#2C8C99" opacity=".1"/><circle cx="32" cy="32" r="4" fill="#2C8C99" opacity=".2"/></svg>`,
 ]
 
 // ─── Data ───
@@ -316,7 +442,7 @@ let currentChapter = 0
 let zoomedAsset: string | null = null
 let audioPlaying = false
 let audioEl: HTMLAudioElement | null = null
-let droppedPerChapter = [0, 0, 0, 0, 0, 0, 0]
+let droppedPerChapter = [0, 0, 0, 0, 0, 0, 0, 0]
 let pageMinimized = false
 
 // ─── SVG icons per chapter ───
@@ -333,7 +459,7 @@ const chapterIcons = [
   `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><circle cx="22" cy="20" r="7"/><circle cx="42" cy="20" r="7"/><path d="M8 48c0-8 6-14 14-14s14 6 14 14" fill="#2C8C99" opacity=".08"/><path d="M28 48c0-8 6-14 14-14s14 6 14 14" fill="#2C8C99" opacity=".08"/></svg>`,
   // 6: Checkmark person (sophie)
   `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><circle cx="32" cy="18" r="10"/><path d="M14 54c0-10 8-18 18-18s18 8 18 18" fill="#2C8C99" opacity=".08"/><path d="M24 34l6 6 12-12" stroke-width="3" stroke-linecap="round"/></svg>`,
-  // 7: Diamond (droom)
+  // 8: Diamond (droom)
   `<svg viewBox="0 0 64 64" fill="none" stroke="#2C8C99" stroke-width="2"><path d="M32 6L58 32 32 58 6 32z" fill="#2C8C99" opacity=".06"/><path d="M32 16L48 32 32 48 16 32z" fill="#2C8C99" opacity=".1"/><circle cx="32" cy="32" r="4" fill="#2C8C99" opacity=".2"/></svg>`,
 ]
 
@@ -350,11 +476,11 @@ function renderPageHTML(n: number): string {
       <div class="desk-page__added">${drops >= 3 ? 'Toegevoegd aan het dossier' : 'Bouw deze pagina op'}</div>
       <div class="desk-page__paper ${stepClass} ${completeClass}" id="desk-paper">
         <button class="desk-page__close" id="page-close" title="Sluit pagina">✕</button>
-        <div class="desk-page__pagenum">${cp.pageNum} / 7</div>
+        <div class="desk-page__pagenum">${cp.pageNum} / 8</div>
         <div class="desk-page__reveal desk-page__reveal--1">
           <div class="desk-page__graphic">${chapterIcons[n]}</div>
           <div class="desk-page__header">
-            <div class="desk-page__number">Pagina ${cp.pageNum} van 7</div>
+            <div class="desk-page__number">Pagina ${cp.pageNum} van 8</div>
             <div class="desk-page__title">${cp.title}</div>
             <div class="desk-page__subtitle">${cp.subtitle}</div>
           </div>
@@ -999,7 +1125,7 @@ function switchChapter(n: number) {
   if (n < 0 || n >= chapters.length) return
   
   // Intercept: show celebration before Sophie
-  if (n === 6 && currentChapter !== 6) {
+  if (n === 7 && currentChapter !== 7) {
     showCelebration()
     return
   }
