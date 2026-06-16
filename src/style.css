@@ -2488,9 +2488,20 @@ body {
 
 .desk-asset img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   pointer-events: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Document assets get a fixed aspect ratio so scan images crop well */
+.desk-asset--document {
+  aspect-ratio: 4 / 5;
+}
+
+.desk-asset--sketch {
+  aspect-ratio: 4 / 3;
 }
 
 .desk-asset:hover {

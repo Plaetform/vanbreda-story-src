@@ -29,7 +29,7 @@ const jobs: ImageJob[] = [
   },
   {
     name: "img-klantbelofte",
-    prompt: `Top-down photograph of an elegant cream-colored A5 card lying on a dark wooden desk surface. The card has "KLANTBELOFTE" printed in gold foil serif lettering at the top. Below are 5 numbered principles in clean Dutch text, each with a small teal diamond bullet point. The card has a thin gold border and a faint watermark of a shield logo. A vintage brass paperweight sits on one corner. The paper has a luxurious heavy cotton texture. Warm side lighting from the left. Photorealistic, high-end editorial style. Shot from directly above.`,
+    prompt: `Scan of a handwritten personal letter on light cream stationery, white background. The letter is written in neat but personal Dutch handwriting with a blue pen. At the top: "Lyon, 15 juni 2030". The text reads: "Lieve Vanbreda, Ik schrijf dit vanuit het ziekenhuis in Lyon. Ik werd onverwacht opgenomen tijdens een zakenreis. Ik ben bang en ver van huis. Dit is wat ik nodig heb: Ik wil mijn verhaal maar één keer hoeven vertellen. Ik wil weten waar ik aan toe ben. Ik wil niet zelf hoeven coördineren. Ik wil duidelijkheid, ook als het complex is. Zorg alsjeblieft goed voor mij. Sophie De Winter". The letter is signed with a natural signature. The stationery has a subtle watermark. Clean scan, white background, no desk. Emotional, personal, authentic feel.`,
   },
   // ─── Ch1: De Werkelijkheid ───
   {
@@ -215,7 +215,8 @@ const jobs: ImageJob[] = [
   },
   {
     name: "img-ae-vanbreda-card",
-    prompt: `Clean scan of a premium collaboration card on a white background. The card shows "AE × Vanbreda" in elegant typography. Below in handwritten-style text: "Samen ontwerpen, bewijzen, leren en opschalen." The card has a warm partnership feel — not corporate but a genuine commitment. Orange (#FF4B28) and dark navy (#1D1D1D) accent colors. Premium thick paper with subtle texture. Flat scan, white background.`,
+    prompt: `Create a premium collaboration card on a clean white background. Use the provided logo (this is the AE logo) in the bottom-left of the card. Add "Vanbreda" text next to it in matching dark navy typography. At the top: "AE × Vanbreda" in elegant bold serif typography. Below in handwritten-style italic text: "Samen ontwerpen, bewijzen, leren en opschalen." A thin orange (#FF4B28) accent line separates the title from the tagline. Premium cream-colored thick paper texture with subtle rounded corners. Clean, minimal, partnership-focused design. Flat scan on white background.`,
+    inputImages: ["public/ae-logo.png"],
   },
 ];
 
