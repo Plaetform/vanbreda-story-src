@@ -23,9 +23,9 @@ jobs:
         include:
           - service_name: "web"
             path: "."
-            container_app_name: "ca-app-vanbreda-822508-web"
-            dns_name: "vanbreda"
-            image_name: "prd-vanbreda-web"
+            container_app_name: "ca-app-vanbreda-story-bd92a6-web"
+            dns_name: "vanbreda-story"
+            image_name: "prd-vanbreda-story-web"
             cache_ref_suffix: "vite-spa-minimal-frontend"
 
     steps:
