@@ -1,6 +1,8 @@
 // Scene 2: Begeleiden — Aankomst & Vertaling bij het ziekenhuis
 import type { SceneModule } from './types'
 
+let sceneAudio: HTMLAudioElement | null = null
+
 export const begeleiden: SceneModule = {
   render() {
     return `
@@ -14,15 +16,27 @@ export const begeleiden: SceneModule = {
           </blockquote>
         </div>
         <div class="scene-display">
-          <div class="translation-widget" style="width: 100%; height: 260px;">
-            <div class="tw-header">Real-time Vertaling (NL ↔ FR)</div>
-            <div class="tw-chat" id="scene-3-tw-chat">
-              <!-- Dialogue lines will animate -->
+          <div class="iphone iphone--small">
+            <div class="iphone__screen">
+              <div class="iphone__notch"></div>
+              <div class="iphone__reflection"></div>
+              <div class="iphone__status-bar">
+                <span class="iphone__status-time">20:47</span>
+                <span class="iphone__status-icons">● ● ●●</span>
+              </div>
+              <div class="iphone__app-header">Vanbreda Care — Vertaling</div>
+              <div class="iphone__chat" id="scene-3-tw-chat">
+                <!-- Translation bubbles will animate here -->
+              </div>
+              <div class="iphone__input" id="scene-3-tw-status" style="display:none;">
+                <div style="text-align: center; font-size: 10px; color: var(--c-teal); padding: 4px 0;">
+                  🎙️ Actieve realtime vertaalverbinding
+                </div>
+              </div>
             </div>
-            <div class="tw-status" id="scene-3-tw-status" style="display:none;">🎙️ Actieve realtime vertaalverbinding</div>
           </div>
-          <div style="margin-top: 12px; text-align: right; width: 100%; display: none;" id="scene-3-next-container">
-            <button class="scene-btn scene-btn--primary" id="btn-to-scene-3" style="width: 100%; justify-content: center;">Volgende ochtend →</button>
+          <div style="margin-top: 12px; text-align: center;" id="scene-3-next-container" style="display: none;">
+            <button class="scene-btn scene-btn--primary" id="btn-to-scene-3">Volgende ochtend →</button>
           </div>
         </div>
       </div>`
@@ -32,39 +46,49 @@ export const begeleiden: SceneModule = {
     const twChat = document.getElementById('scene-3-tw-chat')
     const twStatus = document.getElementById('scene-3-tw-status')
     const nextContainer = document.getElementById('scene-3-next-container')
+    if (nextContainer) nextContainer.style.display = 'none'
+
+    // Start audio
+    sceneAudio = new Audio('/audio/realtime.mp3')
+    sceneAudio.volume = 0.5
+    sceneAudio.play().catch(() => {})
 
     const addTranslateBubble = (speaker: string, text: string, isFr = false) => {
       if (!twChat) return
       const bubble = document.createElement('div')
-      bubble.className = `tw-bubble tw-bubble--${isFr ? 'fr' : 'nl'}`
-      bubble.innerHTML = `<div class="tw-lang">${speaker}</div><div class="tw-text">${text}</div>`
+      bubble.className = `phone-bubble phone-bubble--${isFr ? 'user' : 'assistant'}`
+      bubble.innerHTML = `<div style="font-size: 9px; font-weight: 700; opacity: 0.7; margin-bottom: 3px;">${speaker}</div>${text}`
       twChat.appendChild(bubble)
       twChat.scrollTop = twChat.scrollHeight
     }
 
-    if (twStatus) twStatus.style.display = 'block'
+    if (twStatus) {
+      activeTimers.push(setTimeout(() => {
+        twStatus.style.display = 'block'
+      }, 500))
+    }
 
     activeTimers.push(setTimeout(() => {
-      addTranslateBubble("FR 🇫🇷 Medewerker", "Nous allons vous examiner. Vos coordonnées d'assurance ont été reçues. Vous n'avez rien à avancer.", true)
+      addTranslateBubble("FR 🇫🇷 Medewerker", "Nous allons vous examiner. Vos coordonnées d'assurance ont été reçues.", true)
     }, 1000))
 
     activeTimers.push(setTimeout(() => {
-      addTranslateBubble("NL 🇳🇱 (App Vertaling)", "We gaan u nu onderzoeken. Uw verzekeringsgegevens zijn ontvangen. U hoeft op dit moment niets voor te schieten.")
+      addTranslateBubble("NL 🇳🇱 App Vertaling", "We gaan u nu onderzoeken. Uw verzekeringsgegevens zijn ontvangen. U hoeft niets voor te schieten.")
     }, 3000))
 
     activeTimers.push(setTimeout(() => {
-      addTranslateBubble("NL 🇳🇱 Sophie", "Dank u. Kunt u ook aangeven wat er nu gaat gebeuren?")
+      addTranslateBubble("NL 🇳🇱 Sophie", "Dank u. Kunt u ook aangeven wat er nu gaat gebeuren?", true)
     }, 5000))
 
     activeTimers.push(setTimeout(() => {
-      addTranslateBubble("FR 🇫🇷 (App Vertaling)", "Merci. Pouvez-vous également indiquer ce qui va se passer maintenant ?", true)
+      addTranslateBubble("FR 🇫🇷 App Vertaling", "Merci. Pouvez-vous indiquer ce qui va se passer maintenant ?")
     }, 7000))
 
     activeTimers.push(setTimeout(() => {
       if (twChat) {
         const banner = document.createElement('div')
-        banner.style.cssText = 'background: rgba(44,140,153,0.1); padding: 8px; border-radius: 6px; font-size: 9px; text-align: center; color: var(--c-navy);'
-        banner.textContent = 'Keten-update: Dossier gekoppeld. Behandeling gestart.'
+        banner.style.cssText = 'background: rgba(44,140,153,0.1); padding: 6px; border-radius: 6px; font-size: 9px; text-align: center; color: var(--c-navy);'
+        banner.textContent = '✓ Dossier gekoppeld · Behandeling gestart'
         twChat.appendChild(banner)
         twChat.scrollTop = twChat.scrollHeight
       }
@@ -74,5 +98,13 @@ export const begeleiden: SceneModule = {
     document.getElementById('btn-to-scene-3')?.addEventListener('click', () => {
       navigateForward()
     })
+  },
+
+  cleanup() {
+    if (sceneAudio) {
+      sceneAudio.pause()
+      sceneAudio.currentTime = 0
+      sceneAudio = null
+    }
   }
 }

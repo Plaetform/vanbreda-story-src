@@ -557,6 +557,7 @@ const pages: Page[] = [
   { type: 'title', id: 'title-3', label: 'Naar huis', date: '12 april 2030 · Hôpital Saint-Claire', quote: 'Eigen haard is goud waard.' },
   { type: 'video', id: 'video-discharge', label: 'Naar huis', videoSrc: '/video/Sophie_discharged_202606162242.mp4', subtitles: [] },
   { type: 'content', id: 'ondersteunen', label: 'Veilig naar huis', sceneIndex: 5 },
+  { type: 'title', id: 'title-vision', label: 'De onzichtbare keten', date: '', quote: 'Ik hoefde mijn verhaal maar één keer te vertellen.' },
   { type: 'video', id: 'video-outtro', label: 'Drie maanden later', videoSrc: '/video/outtro-sophie.mp4', subtitles: [
     { t: 0, s: 'Drie maanden geleden lag ik onverwacht in een ziekenhuis in Frankrijk.' },
     { t: 5, s: 'Nu ben ik weer thuis bij mijn gezin.' },
@@ -564,7 +565,6 @@ const pages: Page[] = [
     { t: 17, s: 'Wat voor mij in 2030 vanzelfsprekend voelde, begon bij wat jullie in 2026 besloten te bouwen.' },
     { t: 23, s: 'Dank jullie wel, Vanbreda en AE.' }
   ] },
-  { type: 'title', id: 'title-vision', label: 'De onzichtbare keten', date: '', quote: 'Ik hoefde mijn verhaal maar één keer te vertellen.' },
   { type: 'content', id: 'herstellen', label: 'De onzichtbare keten van zorg', sceneIndex: 6 },
 ]
 
