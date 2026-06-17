@@ -14,6 +14,9 @@ export const begeleiden: SceneModule = {
           <blockquote class="scene-quote" style="font-family: var(--font-serif); font-style: italic; margin-top: 15px; border-left: 2px solid var(--c-teal); padding-left: 15px; font-size: 13px;">
             "Sophie hoeft de verbinding niet zelf te organiseren. De keten kent haar en beweegt met haar mee."
           </blockquote>
+          <div style="margin-top: 25px; display: none;" id="scene-3-next-container">
+            <button class="scene-btn scene-btn--primary" id="btn-to-scene-3" style="width: 100%;">Volgende ochtend →</button>
+          </div>
         </div>
         <div class="scene-display">
           <div class="iphone iphone--small">
@@ -35,9 +38,6 @@ export const begeleiden: SceneModule = {
               </div>
             </div>
           </div>
-          <div style="margin-top: 12px; text-align: center;" id="scene-3-next-container" style="display: none;">
-            <button class="scene-btn scene-btn--primary" id="btn-to-scene-3">Volgende ochtend →</button>
-          </div>
         </div>
       </div>`
   },
@@ -46,7 +46,6 @@ export const begeleiden: SceneModule = {
     const twChat = document.getElementById('scene-3-tw-chat')
     const twStatus = document.getElementById('scene-3-tw-status')
     const nextContainer = document.getElementById('scene-3-next-container')
-    if (nextContainer) nextContainer.style.display = 'none'
 
     // Start audio
     sceneAudio = new Audio('/audio/realtime.mp3')

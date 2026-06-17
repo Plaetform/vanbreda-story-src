@@ -554,7 +554,7 @@ const pages: Page[] = [
   { type: 'video', id: 'video-morning', label: 'De ochtend erna', videoSrc: '/video/Morning_after_surgery_202606162156.mp4', subtitles: [] },
   { type: 'content', id: 'verbinden', label: 'Wat gebeurt er nu?', sceneIndex: 3 },
   { type: 'content', id: 'beslissen', label: 'Sophie krijgt regie', sceneIndex: 4 },
-  { type: 'title', id: 'title-3', label: 'Naar huis', date: '12 april 2030 · Hôpital Saint-Claire', quote: 'Eigen haard is goud waard.' },
+  { type: 'title', id: 'title-3', label: 'Naar huis', date: '12 april 2030 · Hôpital Saint-Claire', quote: '4 dagen later.' },
   { type: 'video', id: 'video-discharge', label: 'Naar huis', videoSrc: '/video/Sophie_discharged_202606162242.mp4', subtitles: [] },
   { type: 'content', id: 'ondersteunen', label: 'Veilig naar huis', sceneIndex: 5 },
   { type: 'title', id: 'title-vision', label: 'De onzichtbare keten', date: '', quote: 'Ik hoefde mijn verhaal maar één keer te vertellen.' },

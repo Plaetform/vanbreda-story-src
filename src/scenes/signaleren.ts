@@ -115,8 +115,9 @@ export const signaleren: SceneModule = {
 
     activeTimers.push(setTimeout(() => {
       addBubble("Wil je dat ik een ambulance stuur en het ziekenhuis alvast laat weten dat je onderweg bent?")
+      if (chat) chat.scrollTop = chat.scrollHeight
       if (input && choices) {
-        input.style.display = 'block'
+        setTimeout(() => { input.style.display = 'block' }, 300)
         choices.innerHTML = `
           <button class="step-btn" id="btn-choice-yes">Ja, regel dit</button>
           <button class="step-btn" style="background:#555;" id="btn-choice-no">Ik regel het zelf</button>`

@@ -16,7 +16,7 @@ export const begrijpen: SceneModule = {
             </ul>
           </div>
           <div style="margin-top: 25px; display: none;" id="scene-2-next-action-container">
-            <button class="scene-btn scene-btn--primary" id="btn-to-scene-2">Ga naar het ziekenhuis →</button>
+            <button class="scene-btn scene-btn--primary" id="btn-to-scene-2" style="font-size: 16px; padding: 16px 32px; background: linear-gradient(135deg, #2c8c99, #1e6e7a); box-shadow: 0 4px 20px rgba(44,140,153,0.4); width: 100%;">🚑 Ga naar het ziekenhuis →</button>
           </div>
         </div>
         <div class="scene-display">

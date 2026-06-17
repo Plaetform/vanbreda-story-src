@@ -4051,10 +4051,12 @@ body {
 
 .phone-call-active {
   flex: 1;
+  min-height: 0;
   background: linear-gradient(180deg, #0d1b2a 0%, #162a3a 100%);
   color: #fff;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .phone-call-active-header {
@@ -4500,7 +4502,7 @@ body {
 /* Outtro family photo polaroids */
 .outtro-polaroid {
   position: absolute;
-  width: 160px;
+  width: 240px;
   z-index: 10;
   transform: rotate(var(--rot, 0deg)) scale(0.7);
   opacity: 0;

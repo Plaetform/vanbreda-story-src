@@ -27,6 +27,9 @@ export const verbinden: SceneModule = {
               <li id="uth-call-log" class="pending">Wacht op specialist...</li>
             </ul>
           </div>
+          <div style="margin-top: 25px; display: none;" id="scene-4-next-container">
+            <button class="scene-btn scene-btn--primary" id="btn-to-scene-4" style="width: 100%;">Bekijk volgende stappen →</button>
+          </div>
         </div>
         <div class="scene-display">
           <div class="iphone" id="phone-call-container">
@@ -61,9 +64,6 @@ export const verbinden: SceneModule = {
                 </div>
               </div>
             </div>
-          </div>
-          <div style="margin-top: 12px; text-align: right; width: 100%; display: none;" id="scene-4-next-container">
-            <button class="scene-btn scene-btn--primary" id="btn-to-scene-4" style="width: 100%; justify-content: center;">Bekijk volgende stappen →</button>
           </div>
         </div>
       </div>`
