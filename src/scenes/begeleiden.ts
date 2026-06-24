@@ -2,6 +2,7 @@
 import type { SceneModule } from './types'
 
 let sceneAudio: HTMLAudioElement | null = null
+let voEndedHandler: (() => void) | null = null
 
 export const begeleiden: SceneModule = {
   render() {
@@ -47,11 +48,6 @@ export const begeleiden: SceneModule = {
     const twStatus = document.getElementById('scene-3-tw-status')
     const nextContainer = document.getElementById('scene-3-next-container')
 
-    // Start audio
-    sceneAudio = new Audio('/audio/realtime.mp3')
-    sceneAudio.volume = 0.5
-    sceneAudio.play().catch(() => {})
-
     let twMinute = 47
 
     const addTranslateBubble = (speaker: string, text: string, isFr = false) => {
@@ -64,38 +60,69 @@ export const begeleiden: SceneModule = {
       twChat.scrollTop = twChat.scrollHeight
     }
 
-    if (twStatus) {
-      activeTimers.push(setTimeout(() => {
-        twStatus.style.display = 'block'
-      }, 500))
+    // Hint while the narrator speaks, before the interpreter "connects"
+    if (twChat) {
+      const hint = document.createElement('div')
+      hint.id = 'tw-connecting'
+      hint.className = 'tw-connecting'
+      hint.textContent = '🎙️ Verbinden met tolk…'
+      twChat.appendChild(hint)
     }
 
-    activeTimers.push(setTimeout(() => {
-      addTranslateBubble("FR 🇫🇷 Medewerker", "Nous allons vous examiner. Vos coordonnées d'assurance ont été reçues.", true)
-    }, 1000))
-
-    activeTimers.push(setTimeout(() => {
-      addTranslateBubble("NL 🇧🇪 Vertaling", "We gaan u nu onderzoeken. Uw verzekeringsgegevens zijn ontvangen. Ge hoeft niets voor te schieten.")
-    }, 3000))
-
-    activeTimers.push(setTimeout(() => {
-      addTranslateBubble("NL 🇧🇪 Sophie", "Dank u. Kunt ge ook aangeven wat er nu gaat gebeuren?", true)
-    }, 5000))
-
-    activeTimers.push(setTimeout(() => {
-      addTranslateBubble("FR 🇫🇷 Vertaling", "Merci. Pouvez-vous indiquer ce qui va se passer maintenant ?")
-    }, 7000))
-
-    activeTimers.push(setTimeout(() => {
-      if (twChat) {
-        const banner = document.createElement('div')
-        banner.style.cssText = 'background: rgba(255,140,0,0.1); padding: 6px; border-radius: 6px; font-size: 9px; text-align: center; color: var(--c-navy);'
-        banner.textContent = '✓ Dossier gekoppeld · Behandeling gestart'
-        twChat.appendChild(banner)
-        twChat.scrollTop = twChat.scrollHeight
+    // The live translation (audio + bubbles) waits until the opening voiceover is done,
+    // so the narrator and the realtime voice never talk over each other.
+    let started = false
+    const startTranslation = () => {
+      if (started) return
+      started = true
+      if (voEndedHandler) {
+        document.removeEventListener('vo-ended', voEndedHandler)
+        voEndedHandler = null
       }
-      if (nextContainer) nextContainer.style.display = 'block'
-    }, 8500))
+      document.getElementById('tw-connecting')?.remove()
+
+      sceneAudio = new Audio('/audio/realtime.mp3')
+      sceneAudio.volume = 0.5
+      sceneAudio.play().catch(() => {})
+
+      if (twStatus) {
+        activeTimers.push(setTimeout(() => {
+          twStatus.style.display = 'block'
+        }, 500))
+      }
+
+      activeTimers.push(setTimeout(() => {
+        addTranslateBubble("FR 🇫🇷 Medewerker", "Nous allons vous examiner. Vos coordonnées d'assurance ont été reçues.", true)
+      }, 1000))
+
+      activeTimers.push(setTimeout(() => {
+        addTranslateBubble("NL 🇧🇪 Vertaling", "We gaan u nu onderzoeken. Uw verzekeringsgegevens zijn ontvangen. Ge hoeft niets voor te schieten.")
+      }, 3000))
+
+      activeTimers.push(setTimeout(() => {
+        addTranslateBubble("NL 🇧🇪 Sophie", "Dank u. Kunt ge ook aangeven wat er nu gaat gebeuren?", true)
+      }, 5000))
+
+      activeTimers.push(setTimeout(() => {
+        addTranslateBubble("FR 🇫🇷 Vertaling", "Merci. Pouvez-vous indiquer ce qui va se passer maintenant ?")
+      }, 7000))
+
+      activeTimers.push(setTimeout(() => {
+        if (twChat) {
+          const banner = document.createElement('div')
+          banner.style.cssText = 'background: rgba(255,140,0,0.1); padding: 6px; border-radius: 6px; font-size: 9px; text-align: center; color: var(--c-navy);'
+          banner.textContent = '✓ Dossier gekoppeld · Behandeling gestart'
+          twChat.appendChild(banner)
+          twChat.scrollTop = twChat.scrollHeight
+        }
+        if (nextContainer) nextContainer.style.display = 'block'
+      }, 8500))
+    }
+
+    // Start once the narrator finishes (vo-ended). Fallback in case that signal never comes.
+    voEndedHandler = startTranslation
+    document.addEventListener('vo-ended', startTranslation)
+    activeTimers.push(setTimeout(startTranslation, 12000))
 
     document.getElementById('btn-to-scene-3')?.addEventListener('click', () => {
       navigateForward()
@@ -107,6 +134,10 @@ export const begeleiden: SceneModule = {
       sceneAudio.pause()
       sceneAudio.currentTime = 0
       sceneAudio = null
+    }
+    if (voEndedHandler) {
+      document.removeEventListener('vo-ended', voEndedHandler)
+      voEndedHandler = null
     }
   }
 }

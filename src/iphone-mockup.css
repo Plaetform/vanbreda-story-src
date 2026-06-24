@@ -278,6 +278,24 @@
   padding: 6px 0;
 }
 
+/* "Connecting to interpreter" hint shown while the opening narration plays */
+.iphone__chat .tw-connecting {
+  align-self: center;
+  margin: auto 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #8a8a8a;
+  font-style: italic;
+  font-size: 12px;
+  animation: tw-connecting-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes tw-connecting-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
 /* Map inside chat */
 .iphone__chat .svg-map-container {
   background: #fff;

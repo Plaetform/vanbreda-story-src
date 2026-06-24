@@ -579,8 +579,9 @@ function playVO(pageId: string, onEnded?: () => void): boolean {
     onEnded?.()
   })
   a.play().catch(() => {
-    // Autoplay blocked (no user gesture yet) — undo ducking; a fallback timer advances.
+    // Autoplay blocked — undo ducking and still fire onEnded so waiting flows proceed.
     if (voEl === a) { voEl = null; if (audioEl) audioEl.volume = 0.25 }
+    onEnded?.()
   })
   return true
 }
@@ -614,13 +615,7 @@ const pages: Page[] = [
   { type: 'video', id: 'video-discharge', label: 'Naar huis', videoSrc: '/video/Sophie_discharged_202606162242.mp4', subtitles: [] },
   { type: 'content', id: 'ondersteunen', label: 'Veilig naar huis', sceneIndex: 5 },
   { type: 'title', id: 'title-vision', label: 'De onzichtbare keten', date: '', quote: 'Ik hoefde mijn verhaal maar één keer te vertellen.' },
-  { type: 'video', id: 'video-outtro', label: 'Drie maanden later', videoSrc: '/video/outtro-sophie.mp4', subtitles: [
-    { t: 0, s: 'Drie maanden geleden lag ik onverwacht in een ziekenhuis in Frankrijk.' },
-    { t: 5, s: 'Nu ben ik weer thuis bij mijn gezin.' },
-    { t: 9, s: 'Ik hoefde mijn verhaal maar één keer te vertellen. Mijn assistent regelde alles — en Vanbreda stond klaar wanneer het erop aankwam.' },
-    { t: 17, s: 'Wat voor mij in 2030 vanzelfsprekend voelde, begon bij wat ge in 2026 besloten hebt te bouwen.' },
-    { t: 23, s: 'Dank u wel, Vanbreda en AE.' }
-  ] },
+  { type: 'video', id: 'video-outtro', label: 'Drie maanden later', videoSrc: '/video/outtro-sophie.mp4', subtitles: [] },
   { type: 'content', id: 'herstellen', label: 'De onzichtbare keten van zorg', sceneIndex: 6 },
 ]
 
@@ -939,9 +934,13 @@ function showPage(index: number, fromPopState = false) {
         () => {
           // Remove polaroids before navigating
           document.querySelectorAll('.outtro-polaroid').forEach(el => el.remove())
-          // If narration runs slightly past the clip, let its tail finish first
+          // Only when the clip ended on its own do we let a slightly-longer narration
+          // finish its tail. On an explicit skip we advance now (navigateForward →
+          // clearActiveTimers → stopVO stops the voiceover immediately).
+          const cv = document.getElementById('cutscene-video') as HTMLVideoElement | null
+          const naturalEnd = !!cv && cv.ended
           const a = voEl
-          if (a && !a.paused && isFinite(a.duration)) {
+          if (naturalEnd && a && !a.paused && isFinite(a.duration)) {
             const remaining = a.duration - a.currentTime
             if (remaining > 0.3 && remaining < 3) {
               let advanced = false
@@ -1017,9 +1016,11 @@ function showPage(index: number, fromPopState = false) {
           center.innerHTML = renderSceneHTML(sceneIdx)
           center.style.opacity = '1'
           bindSceneEvents(sceneIdx)
-          // Narration for this scene (no-op if none). After bindSceneEvents so its
-          // own clearActiveTimers() doesn't immediately stop the clip.
-          playVO(page.id)
+          // Narration for this scene (after bindSceneEvents so its own clearActiveTimers()
+          // doesn't stop the clip). When it ends — or right away if there's none — signal
+          // scenes that hold their auto-play until the voiceover is done (e.g. begeleiden).
+          const fireVoEnded = () => document.dispatchEvent(new Event('vo-ended'))
+          if (!playVO(page.id, fireVoEnded)) fireVoEnded()
         }, 200)
       }
 
