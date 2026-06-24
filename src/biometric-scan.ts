@@ -127,7 +127,7 @@ function createOverlayHTML(): string {
 }
 
 // ── Public API ──
-export async function startBiometricScan(onComplete: () => void): Promise<void> {
+export async function startBiometricScan(onComplete: () => void, onCameraActive?: () => void): Promise<void> {
   onCompleteCallback = onComplete
   isRunning = true
   faceWasDetected = false
@@ -163,6 +163,8 @@ export async function startBiometricScan(onComplete: () => void): Promise<void> 
       videoEl.srcObject = stream
       await videoEl.play()
     }
+    // Camera is live and the viewer now sees themselves — cue the opening narration
+    onCameraActive?.()
   } catch (err) {
     console.error('Camera access denied:', err)
     // Skip scan if no camera

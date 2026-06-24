@@ -1411,25 +1411,28 @@ function initAudio() {
     document.documentElement.requestFullscreen?.().catch(() => {})
     splash?.classList.add('splash--hidden')
 
-    // Opening narration over the clearance scan (after the click, so audio is allowed;
-    // it finishes well before Sophie's letter, so it never overlaps her own voice).
-    stopVO()
-    const opener = new Audio('/audio/vo/vo-00-opener.mp3')
-    opener.volume = 1.0
-    voEl = opener
-    opener.addEventListener('ended', () => { if (voEl === opener) voEl = null })
-    opener.play().catch(() => { if (voEl === opener) voEl = null })
-
     // Launch biometric clearance scan
-    startBiometricScan(() => {
-      // Scan complete → start music and show Sophie's letter
-      if (audioEl) {
-        audioEl.play().catch(() => {})
-        audioPlaying = true
+    startBiometricScan(
+      () => {
+        // Scan complete → start music and show Sophie's letter
+        if (audioEl) {
+          audioEl.play().catch(() => {})
+          audioPlaying = true
+        }
+        currentPageIndex = 1
+        showPage(currentPageIndex)
+      },
+      () => {
+        // Camera is live — the viewer sees themselves in the "mirror". Cue the opener now,
+        // not at the click, so the narration lands exactly on that moment.
+        stopVO()
+        const opener = new Audio('/audio/vo/vo-00-opener.mp3')
+        opener.volume = 1.0
+        voEl = opener
+        opener.addEventListener('ended', () => { if (voEl === opener) voEl = null })
+        opener.play().catch(() => { if (voEl === opener) voEl = null })
       }
-      currentPageIndex = 1
-      showPage(currentPageIndex)
-    })
+    )
   }
 
   splashBtn?.addEventListener('click', startExperience)
