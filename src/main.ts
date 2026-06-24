@@ -1,5 +1,6 @@
 import './style.css'
 import './iphone-mockup.css'
+import { startBiometricScan } from './biometric-scan'
 import { signaleren, begrijpen, begeleiden, verbinden, beslissen, ondersteunen, herstellen } from './scenes'
 import type { SceneModule } from './scenes'
 import { renderCover } from './pages/cover'
@@ -529,6 +530,61 @@ class HeartbeatGenerator {
 
 const heartbeat = new HeartbeatGenerator()
 
+// ─── Voiceover Narrator ───
+let voEl: HTMLAudioElement | null = null
+
+// Narration clips keyed by page id. A clip plays when its page is shown and
+// stops when the user navigates away. Pages without an entry stay silent.
+const voMap: Record<string, string> = {
+  'title-1': '/audio/vo/vo-01-title-1.mp3',
+  'video-pain': '/audio/vo/vo-02-video-pain.mp3',
+  'signaleren': '/audio/vo/vo-03-signaleren.mp3',
+  'begrijpen': '/audio/vo/vo-04-begrijpen.mp3',
+  'video-ambulance': '/audio/vo/vo-05-video-ambulance.mp3',
+  'begeleiden': '/audio/vo/vo-06-begeleiden.mp3',
+  'title-2': '/audio/vo/vo-07-title-2.mp3',
+  'video-morning': '/audio/vo/vo-08-video-morning.mp3',
+  'verbinden': '/audio/vo/vo-09-verbinden.mp3',
+  'beslissen': '/audio/vo/vo-10-beslissen.mp3',
+  'title-3': '/audio/vo/vo-11-title-3.mp3',
+  'video-discharge': '/audio/vo/vo-12-video-discharge.mp3',
+  'ondersteunen': '/audio/vo/vo-13-ondersteunen.mp3',
+  'title-vision': '/audio/vo/vo-14-title-vision.mp3',
+  'herstellen': '/audio/vo/vo-15-herstellen.mp3',
+  // video-outtro: geen VO — Sophie spreekt zelf
+}
+
+function stopVO() {
+  if (voEl) {
+    voEl.onended = null
+    voEl.pause()
+    voEl = null
+  }
+  // Restore background music to its default level
+  if (audioEl) audioEl.volume = 0.25
+}
+
+// Play the narration for a page id. Returns true if a clip exists.
+// onEnded fires only when the clip finishes on its own (not when interrupted).
+function playVO(pageId: string, onEnded?: () => void): boolean {
+  stopVO()
+  const src = voMap[pageId]
+  if (!src) return false
+  if (audioEl) audioEl.volume = 0.06 // duck background music under narration
+  const a = new Audio(src)
+  a.volume = 1.0
+  voEl = a
+  a.addEventListener('ended', () => {
+    if (voEl === a) { voEl = null; if (audioEl) audioEl.volume = 0.25 }
+    onEnded?.()
+  })
+  a.play().catch(() => {
+    // Autoplay blocked (no user gesture yet) — undo ducking; a fallback timer advances.
+    if (voEl === a) { voEl = null; if (audioEl) audioEl.volume = 0.25 }
+  })
+  return true
+}
+
 // ─── Pages Definition (Linear Story Flow) ───
 interface Page {
   type: 'splash' | 'letter' | 'title' | 'video' | 'content'
@@ -561,9 +617,9 @@ const pages: Page[] = [
   { type: 'video', id: 'video-outtro', label: 'Drie maanden later', videoSrc: '/video/outtro-sophie.mp4', subtitles: [
     { t: 0, s: 'Drie maanden geleden lag ik onverwacht in een ziekenhuis in Frankrijk.' },
     { t: 5, s: 'Nu ben ik weer thuis bij mijn gezin.' },
-    { t: 9, s: 'Ik hoefde mijn verhaal maar één keer te vertellen. Ik wist waar ik aan toe was. En toen het echt nodig was, was er iemand die me begreep.' },
-    { t: 17, s: 'Wat voor mij in 2030 vanzelfsprekend voelde, begon bij wat jullie in 2026 besloten te bouwen.' },
-    { t: 23, s: 'Dank jullie wel, Vanbreda en AE.' }
+    { t: 9, s: 'Ik hoefde mijn verhaal maar één keer te vertellen. Mijn assistent regelde alles — en Vanbreda stond klaar wanneer het erop aankwam.' },
+    { t: 17, s: 'Wat voor mij in 2030 vanzelfsprekend voelde, begon bij wat ge in 2026 besloten hebt te bouwen.' },
+    { t: 23, s: 'Dank u wel, Vanbreda en AE.' }
   ] },
   { type: 'content', id: 'herstellen', label: 'De onzichtbare keten van zorg', sceneIndex: 6 },
 ]
@@ -725,6 +781,8 @@ function renderSceneHTML(index: number): string {
 function clearActiveTimers() {
   activeTimers.forEach(t => clearTimeout(t))
   activeTimers = []
+  // Stop any narration tied to the page we're leaving
+  stopVO()
   // Cleanup any scene-specific resources (audio, etc.)
   sceneModules.forEach(m => m.cleanup?.())
 }
@@ -844,8 +902,11 @@ function showPage(index: number, fromPopState = false) {
           titleCardEl.classList.add('cutscene-title-card--visible')
         }, 50))
 
-        // After 4.5 seconds, fade out and auto-advance
-        activeTimers.push(setTimeout(() => {
+        // Narration drives how long the card holds; advance when it ends.
+        let titleAdvanced = false
+        const advanceTitle = () => {
+          if (titleAdvanced) return
+          titleAdvanced = true
           titleCardEl.classList.remove('cutscene-title-card--visible')
           activeTimers.push(setTimeout(() => {
             titleCardEl.style.display = 'none'
@@ -853,7 +914,10 @@ function showPage(index: number, fromPopState = false) {
             if (audioEl) audioEl.volume = 0.25
             navigateForward()
           }, 800))
-        }, 4500))
+        }
+        const titleHasVO = playVO(page.id, advanceTitle)
+        // Fallback: hold ~4.5s with no clip, or a safe ceiling past the clip length.
+        activeTimers.push(setTimeout(advanceTitle, titleHasVO ? 13000 : 4500))
       } else {
         // Fallback: skip title
         navigateForward()
@@ -875,9 +939,27 @@ function showPage(index: number, fromPopState = false) {
         () => {
           // Remove polaroids before navigating
           document.querySelectorAll('.outtro-polaroid').forEach(el => el.remove())
+          // If narration runs slightly past the clip, let its tail finish first
+          const a = voEl
+          if (a && !a.paused && isFinite(a.duration)) {
+            const remaining = a.duration - a.currentTime
+            if (remaining > 0.3 && remaining < 3) {
+              let advanced = false
+              const go = () => { if (!advanced) { advanced = true; navigateForward() } }
+              a.addEventListener('ended', go, { once: true })
+              activeTimers.push(setTimeout(go, (remaining + 0.5) * 1000))
+              return
+            }
+          }
           navigateForward()
         }
       )
+
+      // Mute the clip's own audio only when narration plays over it
+      // (keeps Sophie's own voice on the outtro).
+      const cutsceneVideo = document.getElementById('cutscene-video') as HTMLVideoElement | null
+      if (cutsceneVideo) cutsceneVideo.volume = voMap[page.id] ? 0 : 1
+      playVO(page.id)
 
       if (isOuttro) {
         const photos = [
@@ -935,6 +1017,9 @@ function showPage(index: number, fromPopState = false) {
           center.innerHTML = renderSceneHTML(sceneIdx)
           center.style.opacity = '1'
           bindSceneEvents(sceneIdx)
+          // Narration for this scene (no-op if none). After bindSceneEvents so its
+          // own clearActiveTimers() doesn't immediately stop the clip.
+          playVO(page.id)
         }, 200)
       }
 
@@ -1324,16 +1409,27 @@ function initAudio() {
 
   const startExperience = () => {
     document.documentElement.requestFullscreen?.().catch(() => {})
-    if (audioEl) {
-      audioEl.play().catch(() => {})
-      audioPlaying = true
-    }
     splash?.classList.add('splash--hidden')
-    setTimeout(() => {
-      // Navigate to letter page
+
+    // Opening narration over the clearance scan (after the click, so audio is allowed;
+    // it finishes well before Sophie's letter, so it never overlaps her own voice).
+    stopVO()
+    const opener = new Audio('/audio/vo/vo-00-opener.mp3')
+    opener.volume = 1.0
+    voEl = opener
+    opener.addEventListener('ended', () => { if (voEl === opener) voEl = null })
+    opener.play().catch(() => { if (voEl === opener) voEl = null })
+
+    // Launch biometric clearance scan
+    startBiometricScan(() => {
+      // Scan complete → start music and show Sophie's letter
+      if (audioEl) {
+        audioEl.play().catch(() => {})
+        audioPlaying = true
+      }
       currentPageIndex = 1
       showPage(currentPageIndex)
-    }, 800)
+    })
   }
 
   splashBtn?.addEventListener('click', startExperience)
@@ -1356,6 +1452,9 @@ function toggleAudio() {
 
 // ─── Init ───
 render()
+
+// Let scenes stop the narrator when their own audio takes over (e.g. the Thomas call)
+document.addEventListener('vo-stop', stopVO)
 
 // Set initial history state
 history.replaceState({ pageIndex: 0 }, '', '#splash')

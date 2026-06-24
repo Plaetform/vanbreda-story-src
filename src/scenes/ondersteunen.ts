@@ -1,4 +1,4 @@
-// Scene 5: Ondersteunen — Veilig naar huis & Nazorg
+// Scene 5: Ondersteunen — Veilig naar huis & Nazorg (via de assistent)
 import type { SceneModule } from './types'
 
 export const ondersteunen: SceneModule = {
@@ -8,8 +8,8 @@ export const ondersteunen: SceneModule = {
         <div class="scene-info">
           <span class="scene-badge">Keten: Ondersteunen</span>
           <h2>Veilig naar huis &amp; Nazorg</h2>
-          <p>Sophie is reisgeschikt verklaard. De app biedt de vluchtopties aan en coördineert de nazorg met haar huisarts in België na haar toestemming.</p>
-          <blockquote class="scene-quote" style="font-family: var(--font-serif); font-style: italic; margin-top: 15px; border-left: 2px solid var(--c-teal); padding-left: 15px; font-size: 13px;">
+          <p>Sophie is reisgeschikt verklaard. Haar assistent biedt de vluchtopties aan, heeft Jan al op de hoogte gebracht en coördineert de nazorg met haar huisdokter in België — uiteraard pas na haar toestemming.</p>
+          <blockquote class="scene-quote" style="font-family: var(--font-serif); font-style: italic; margin-top: 15px; border-left: 2px solid #ff8c00; padding-left: 15px; font-size: 13px;">
             "De keten eindigt niet wanneer de claim is verwerkt. Zij eindigt wanneer Sophie weer verder kan."
           </blockquote>
         </div>
@@ -38,10 +38,15 @@ export const ondersteunen: SceneModule = {
                 </div>
                 <button class="step-btn" id="btn-book-flight" style="width:100%; margin-top:5px; font-size:10px;">Bevestig Boeking</button>
               </div>
+
+              <div class="jan-update-section" style="margin-top:15px; border-top:1px solid #ddd; padding-top:10px; display:none;" id="jan-update-section">
+                <h3 style="font-size: 12px; color: var(--ae-primary);">✓ Jan verwittigd</h3>
+                <p class="section-desc" style="font-size:9px; color:#666; margin-bottom:4px;">Jan haalt u op aan Brussels Airport. Aankomst: 11:45.</p>
+              </div>
               
               <div class="aftercare-section" style="margin-top:15px; border-top:1px solid #ddd; padding-top:10px; display:none;" id="aftercare-section">
                 <h3>Nazorgkoppeling</h3>
-                <p class="section-desc" style="font-size:9px; color:#666; margin-bottom:8px;">Deel ontslagverslag met huisarts:</p>
+                <p class="section-desc" style="font-size:9px; color:#666; margin-bottom:8px;">Deel ontslagverslag met uw huisdokter:</p>
                 <div class="consent-box" style="margin-bottom:8px; padding:6px; border:1px solid #ddd; border-radius:4px; background:#fff;">
                   <label class="consent-label" style="display:flex; gap:6px; font-size:9.5px; align-items:center;">
                     <input type="checkbox" id="consent-gp-check">
@@ -60,10 +65,11 @@ export const ondersteunen: SceneModule = {
   },
 
   bind(navigateForward, activeTimers) {
-    void activeTimers // not used in this scene
+    void activeTimers
     const flight1 = document.getElementById('flight-1')
     const flight2 = document.getElementById('flight-2')
     const btnBook = document.getElementById('btn-book-flight')
+    const janUpdate = document.getElementById('jan-update-section')
     const aftercare = document.getElementById('aftercare-section')
     const gpCheck = document.getElementById('consent-gp-check') as HTMLInputElement | null
     const btnConfirm = document.getElementById('btn-confirm-aftercare')
@@ -85,7 +91,12 @@ export const ondersteunen: SceneModule = {
         btnBook.style.background = '#2ecc71'
         btnBook.setAttribute('disabled', 'true')
       }
-      if (aftercare) aftercare.style.display = 'block'
+      // Show Jan update
+      if (janUpdate) janUpdate.style.display = 'block'
+      // Show aftercare after brief delay
+      setTimeout(() => {
+        if (aftercare) aftercare.style.display = 'block'
+      }, 600)
     })
 
     gpCheck?.addEventListener('change', () => {

@@ -3491,6 +3491,7 @@ body {
   border: 1px solid rgba(44, 140, 153, 0.2);
   border-radius: 12px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  border-color: rgba(29, 29, 29, 0.10);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -3519,8 +3520,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-right: 1px solid rgba(44, 140, 153, 0.15);
-  background: rgba(44, 140, 153, 0.02);
+  border-right: 1px solid rgba(29, 29, 29, 0.08);
+  background: rgba(255, 140, 0, 0.015);
   overflow-y: auto;
 }
 
@@ -3557,13 +3558,13 @@ body {
 .scene-badge {
   display: inline-block;
   padding: 4px 10px;
-  background: rgba(44, 140, 153, 0.12);
-  color: var(--c-teal);
+  background: rgba(255, 75, 40, 0.10);
+  color: var(--ae-primary);
   border-radius: 4px;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   margin-bottom: 10px;
 }
 
@@ -3577,6 +3578,22 @@ body {
   font-weight: 700;
   margin: 0 0 10px;
   font-family: var(--font-serif);
+}
+
+/* AE huisstijl on the explanation ("uitleg") pages — echoes the title cards */
+.scene-info h2 {
+  font-family: var(--font-ae);
+  letter-spacing: -0.01em;
+}
+
+.scene-info h2::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 3px;
+  border-radius: 2px;
+  margin-top: 14px;
+  background: linear-gradient(135deg, #ff8c00 0%, #ff4b28 100%);
 }
 
 .scene-body {
@@ -3613,14 +3630,14 @@ body {
 }
 
 .scene-btn--primary {
-  background: var(--c-teal);
+  background: linear-gradient(135deg, #ff8c00 0%, #ff4b28 100%);
   color: #fff;
-  border-color: var(--c-teal);
+  border-color: transparent;
 }
 
 .scene-btn--primary:hover {
-  background: #23727c;
-  border-color: #23727c;
+  background: linear-gradient(135deg, #ff7a00 0%, #f23a18 100%);
+  border-color: transparent;
 }
 
 .scene-btn--secondary {
@@ -3796,10 +3813,28 @@ body {
 
 .phone-bubble {
   max-width: 80%;
-  padding: 8px 11px;
+  padding: 6px 10px 14px 10px;
   border-radius: 12px;
   position: relative;
   animation: fadeIn 0.3s ease forwards;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.phone-bubble__sender {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+  opacity: 0.7;
+}
+
+.phone-bubble__time {
+  position: absolute;
+  bottom: 3px;
+  right: 8px;
+  font-size: 7px;
+  opacity: 0.5;
 }
 
 .phone-bubble--assistant {
@@ -3810,11 +3845,36 @@ body {
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
+.phone-bubble--assistant .phone-bubble__sender {
+  color: var(--c-teal);
+}
+
 .phone-bubble--user {
   background: var(--c-teal);
   color: #fff;
   align-self: flex-end;
   border-bottom-right-radius: 2px;
+}
+
+.phone-bubble--user .phone-bubble__sender {
+  color: rgba(255, 255, 255, 0.8);
+  text-align: right;
+}
+
+.phone-bubble--user .phone-bubble__time {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.phone-bubble--system {
+  max-width: 90%;
+  background: rgba(44, 140, 153, 0.06);
+  color: var(--c-navy);
+  align-self: center;
+  border-radius: 6px;
+  border-left: 2px solid var(--c-teal);
+  font-size: 9px;
+  line-height: 1.4;
+  padding: 5px 8px;
 }
 
 .phone-typing {
@@ -3824,6 +3884,7 @@ body {
   border-radius: 12px;
   font-style: italic;
   color: #777;
+  font-size: 9px;
 }
 
 .phone-input {
@@ -3858,13 +3919,18 @@ body {
 /* --- SVG Map component --- */
 .svg-map-container {
   width: 100%;
-  height: 140px;
   background: #eef2f5;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #d6e0e6;
   margin-top: 8px;
   position: relative;
+}
+
+.svg-map-container img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .map-hospital-marker {
@@ -3879,8 +3945,8 @@ body {
 /* --- Under the Hood Logs --- */
 .under-the-hood {
   margin-top: 15px;
-  background: rgba(44, 140, 153, 0.05);
-  border: 1px solid rgba(44, 140, 153, 0.15);
+  background: rgba(255, 140, 0, 0.05);
+  border: 1px solid rgba(255, 75, 40, 0.18);
   border-radius: 6px;
   padding: 12px;
 }
@@ -3889,8 +3955,8 @@ body {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--c-teal);
-  letter-spacing: 0.05em;
+  color: var(--ae-primary);
+  letter-spacing: 0.08em;
   margin-bottom: 8px;
 }
 
@@ -4589,7 +4655,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #000;
+  /* AE brand moment: warm orange→red glow rising over brand black */
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 118%, rgba(255, 75, 40, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(255, 140, 0, 0.10) 0%, transparent 65%),
+    #000;
   gap: 0;
 }
 
@@ -4619,27 +4689,20 @@ body {
   transition-delay: 0.9s;
 }
 
-.cutscene-date-label {
-  font-family: var(--font-body, Arial, sans-serif);
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 20px;
-}
+
 
 .cutscene-title-line {
-  width: 50px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.25);
+  width: 64px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #ff8c00 0%, #ff4b28 100%);
   margin-bottom: 24px;
   transform: scaleX(0);
   transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
 .cutscene-title-text {
-  font-family: var(--font-serif, Georgia, serif);
+  font-family: "Nexa", "Century Gothic", "Avenir Next", "Montserrat", Arial, sans-serif;
   font-size: clamp(24px, 3.5vw, 42px);
   font-weight: 400;
   font-style: italic;
@@ -4648,5 +4711,376 @@ body {
   max-width: 700px;
   line-height: 1.5;
   padding: 0 30px;
+}
+
+.cutscene-date-label {
+  font-family: "Nexa", "Century Gothic", "Avenir Next", "Montserrat", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #ff8c00;
+  margin-bottom: 20px;
+}
+
+/* =========================================================
+   BIOMETRIC CLEARANCE SCANNER
+   ========================================================= */
+
+.bioscan {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #000;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  overflow: hidden;
+  font-family: 'Courier New', 'Courier', monospace;
+}
+
+.bioscan--visible {
+  opacity: 1;
+}
+
+.bioscan--fading {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+/* ── Video Feed (grayscale + high contrast) ── */
+.bioscan__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.25) brightness(0.85);
+  transform: scaleX(-1); /* Mirror for selfie cam */
+}
+
+/* ── Canvas overlay for detections ── */
+.bioscan__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 2;
+  transform: scaleX(-1); /* Mirror to match video */
+}
+
+/* ── Vignette ── */
+.bioscan__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Scanlines ── */
+.bioscan__scanlines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.15) 50%);
+  background-size: 100% 4px;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ── Decorative HUD circles ── */
+.bioscan__hud-circles {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bioscan__circle {
+  position: absolute;
+  border-radius: 50%;
+  border-style: dashed;
+}
+
+.bioscan__circle--outer {
+  width: min(600px, 80vw);
+  height: min(600px, 80vw);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  animation: bioscan-spin 60s linear infinite;
+}
+
+.bioscan__circle--inner {
+  width: min(400px, 55vw);
+  height: min(400px, 55vw);
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  animation: bioscan-spin 40s linear infinite reverse;
+}
+
+.bioscan__crosshair-h,
+.bioscan__crosshair-v {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.bioscan__crosshair-h {
+  width: 100%;
+  height: 1px;
+}
+
+.bioscan__crosshair-v {
+  width: 1px;
+  height: 100%;
+}
+
+@keyframes bioscan-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ── Status Block (top-left) ── */
+.bioscan__status-block {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  z-index: 10;
+  animation: bioscan-fadein 1s ease 0.5s both;
+}
+
+.bioscan__status-label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.bioscan__status-value {
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.bioscan__status-sub {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 4px;
+}
+
+/* ── Classification (top-right) ── */
+.bioscan__classification {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  z-index: 10;
+  text-align: right;
+  animation: bioscan-fadein 1s ease 0.8s both;
+}
+
+.bioscan__classification-label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 6px;
+}
+
+.bioscan__classification-value {
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ── Phase Text (center) ── */
+.bioscan__phase-text {
+  position: absolute;
+  bottom: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.bioscan__phase-text--visible {
+  opacity: 1;
+  animation: bioscan-phase-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes bioscan-phase-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* ── Detected Objects (bottom-left) ── */
+.bioscan__objects {
+  position: absolute;
+  bottom: 100px;
+  left: 32px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.bioscan__objects--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bioscan__object-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: bioscan-slidein 0.4s ease both;
+}
+
+.bioscan__object-dot {
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+  flex-shrink: 0;
+}
+
+.bioscan__object-name {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.9);
+  min-width: 80px;
+}
+
+.bioscan__object-check {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+@keyframes bioscan-slidein {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Readiness Meter (bottom-right) ── */
+.bioscan__meter {
+  position: absolute;
+  bottom: 100px;
+  right: 32px;
+  z-index: 10;
+  width: 180px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.bioscan__meter--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bioscan__meter-label {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 8px;
+  text-align: right;
+}
+
+.bioscan__meter-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.bioscan__meter-fill {
+  height: 100%;
+  width: 0%;
+  background: #fff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+  transition: width 0.8s ease;
+}
+
+.bioscan__meter-value {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: right;
+  margin-top: 6px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* ── Verdict Overlay ── */
+.bioscan__verdict {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.bioscan__verdict--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bioscan__verdict-icon {
+  font-size: 64px;
+  color: #fff;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(255, 255, 255, 0.4);
+  margin-bottom: 24px;
+  animation: bioscan-verdict-pop 0.6s ease both;
+}
+
+.bioscan__verdict-title {
+  font-size: 18px;
+  letter-spacing: 0.4em;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  margin-bottom: 12px;
+  animation: bioscan-verdict-pop 0.6s ease 0.2s both;
+}
+
+.bioscan__verdict-sub {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 16px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+  animation: bioscan-verdict-pop 0.6s ease 0.4s both;
+}
+
+@keyframes bioscan-verdict-pop {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bioscan-fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 

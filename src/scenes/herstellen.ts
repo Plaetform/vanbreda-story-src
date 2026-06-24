@@ -1,4 +1,4 @@
-// Scene 6: Herstellen — De onzichtbare keten van zorg (Reveal)
+// Scene 6: Herstellen — De onzichtbare keten van zorg (Reveal + AE branding)
 import type { SceneModule } from './types'
 
 export const herstellen: SceneModule = {
@@ -32,36 +32,32 @@ export const herstellen: SceneModule = {
               <h3>Zichtbaar voor Sophie</h3>
               <ul>
                 <li>Directe hulp op een kritiek moment</li>
-                <li>Duidelijke keuzes en behoud van regie</li>
+                <li>Eén gesprek met haar eigen assistent</li>
                 <li>Communicatie in haar eigen taal</li>
-                <li>Actuele status overal inzichtelijk</li>
+                <li>Duidelijke keuzes en behoud van regie</li>
                 <li>Menselijke aandacht wanneer nodig</li>
+                <li>Jan verwittigd, vlucht geregeld, huisdokter geïnformeerd</li>
               </ul>
             </div>
             <div class="dream-col">
               <h3>Achter de schermen (80% Autonomie)</h3>
               <ul>
+                <li>Sophie's assistent als orkestrator van haar ecosysteem</li>
+                <li>Vanbreda als betrouwbare schakel via MCP/A2A</li>
                 <li>Autonome agents die context uitwisselen</li>
-                <li>Directe polis- en dekkingscontrole</li>
+                <li>Directe polis- en dekkingscontrole via gestandaardiseerde koppelingen</li>
                 <li>Zorgverlener- en partnerintegratie</li>
-                <li>Slimme claimorkestratie</li>
-                <li>Menselijke uitzonderingafhandeling</li>
+                <li>Menselijke escalatie wanneer oordeel of empathie vereist is</li>
               </ul>
             </div>
           </div>
           
           <div class="dream-summary">
-            <strong>Technologie die je niet hoeft te zien. Steun die je altijd voelt.</strong><br>
-            Bij Vanbreda sta je nooit alleen.
+            <strong>Technologie die ge niet hoeft te zien. Steun die ge altijd voelt.</strong><br>
+            Vanbreda verdient zijn plek in het ecosysteem van de klant. Niet als app, maar als vertrouwde schakel.
           </div>
           
           <div class="final-ctas">
-            <a class="scene-btn scene-btn--primary" href="/vanbreda-healthcaroperatie.pdf" download id="btn-download-rfi">
-              Open onze RFI-beantwoording
-            </a>
-            <button class="scene-btn scene-btn--secondary" id="btn-view-dossier-details">
-              Bekijk de droom in één overzicht
-            </button>
             <button class="scene-btn" id="btn-close-experience">
               Sluit de experience
             </button>
@@ -73,10 +69,6 @@ export const herstellen: SceneModule = {
   bind(navigateForward, activeTimers, extra?: { openViewer?: () => void, resetToSplash?: () => void }) {
     void navigateForward
     void activeTimers
-
-    document.getElementById('btn-view-dossier-details')?.addEventListener('click', () => {
-      extra?.openViewer?.()
-    })
 
     document.getElementById('btn-close-experience')?.addEventListener('click', () => {
       extra?.resetToSplash?.()

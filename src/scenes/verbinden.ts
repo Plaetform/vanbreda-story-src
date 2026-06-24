@@ -1,4 +1,4 @@
-// Scene 3: Verbinden — Thomas belt Sophie (menselijke regie)
+// Scene 3: Verbinden — Thomas belt Sophie (menselijke regie via MCP-escalatie)
 import type { SceneModule } from './types'
 
 let callAudio: HTMLAudioElement | null = null
@@ -17,18 +17,18 @@ export const verbinden: SceneModule = {
         <div class="scene-info">
           <span class="scene-badge">Keten: Verbinden</span>
           <h2>Wat gebeurt er nu?</h2>
-          <p>De ochtend na de operatie. AI handelt de dekkingsvalidatie af. Bij de radiologiefactuur treedt een uitzondering op. Thomas (Care Specialist) belt Sophie direct op.</p>
+          <p>De ochtend na de operatie. Vanbreda's systeem handelt de dekkingsvalidatie autonoom af via MCP. Bij de radiologiefactuur treedt een uitzondering op — het systeem escaleert naar Thomas (Care Specialist) die Sophie persoonlijk belt.</p>
           <div class="under-the-hood">
-            <div class="uth-header">Orkestratie &amp; Uitzondering</div>
+            <div class="uth-header">Orkestratie &amp; Escalatie (MCP)</div>
             <ul class="uth-logs">
-              <li>✓ Spoedoperatie gedekt (STP verwerkt)</li>
-              <li>⚠ Radiologietarief code 7421 afwijkend</li>
-              <li>▸ Escalatie naar Exception Specialist</li>
+              <li>✓ Vanbreda MCP: spoedoperatie autonoom verwerkt (STP)</li>
+              <li>⚠ Vanbreda MCP: radiologietarief afwijkend — escalatie vereist</li>
+              <li>▸ Vanbreda escaleert naar menselijke specialist</li>
               <li id="uth-call-log" class="pending">Wacht op specialist...</li>
             </ul>
           </div>
           <div style="margin-top: 25px; display: none;" id="scene-4-next-container">
-            <button class="scene-btn scene-btn--primary" id="btn-to-scene-4" style="width: 100%;">Bekijk volgende stappen →</button>
+            <button class="scene-btn scene-btn--primary" id="btn-to-scene-4" style="width: 100%;">Bekijk de volgende stappen →</button>
           </div>
         </div>
         <div class="scene-display">
@@ -78,11 +78,11 @@ export const verbinden: SceneModule = {
 
     // Transcript lines synced to approximate audio timestamps (seconds)
     const transcript: { t: number, speaker: string, text: string }[] = [
-      { t: 0.5, speaker: 'Thomas', text: 'Goedemorgen Sophie, met Thomas van Vanbreda. Hoe gaat het met je na de operatie?' },
+      { t: 0.5, speaker: 'Thomas', text: 'Goeiemorgen Sophie, met Thomas van Vanbreda. Hoe gaat het met u na de operatie?' },
       { t: 5, speaker: 'Sophie', text: 'Beter, gelukkig. Nog wel wat moe en beurs.' },
-      { t: 9, speaker: 'Thomas', text: 'Begrijpelijk. De operatie is volledig gedekt. Alleen de radiologiefactuur heeft een afwijkende code; die neem ik persoonlijk over.' },
+      { t: 9, speaker: 'Thomas', text: 'Begrijpelijk. De operatie is volledig gedekt. Alleen de radiologiefactuur heeft een afwijkende code — die neem ik persoonlijk over.' },
       { t: 17, speaker: 'Sophie', text: 'Moet ik daar nog iets voor doen?' },
-      { t: 20, speaker: 'Thomas', text: 'Nee. Jij richt je op je herstel. Ik houd het dossier voor je vast en laat je weten zodra het geregeld is.' },
+      { t: 20, speaker: 'Thomas', text: 'Nee. Ge richt u op uw herstel. Ik hou het dossier voor u vast en laat u weten zodra het geregeld is.' },
     ]
 
     const addCallBubble = (speaker: string, text: string) => {
@@ -96,6 +96,8 @@ export const verbinden: SceneModule = {
     }
 
     const acceptCall = () => {
+      // Stop the narrator before Thomas starts speaking, so they never overlap
+      document.dispatchEvent(new Event('vo-stop'))
       if (callScreen) callScreen.style.display = 'none'
       if (callActive) callActive.style.display = 'flex'
       if (uthLog) {
@@ -129,17 +131,18 @@ export const verbinden: SceneModule = {
       })
     }
 
-    // Automatically triggers specialist call ringing panel on scene start
+    // The incoming-call panel rings early (reinforcing the narrated "…maar naar een mens"),
+    // and only auto-accepts once the voiceover has finished, so they never overlap.
     activeTimers.push(setTimeout(() => {
       const waiting = document.getElementById('phone-call-waiting')
       if (waiting) waiting.style.display = 'none'
       if (callScreen) callScreen.style.display = 'flex'
     }, 500))
 
-    // Auto-accept the call after a brief ring
+    // Auto-accept the call after the voiceover (vo-09 ≈ 8.8s)
     activeTimers.push(setTimeout(() => {
       acceptCall()
-    }, 2000))
+    }, 9500))
 
     // Manual accept still works (for impatient users)
     document.getElementById('btn-accept-call')?.addEventListener('click', () => {

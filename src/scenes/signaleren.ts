@@ -1,4 +1,4 @@
-// Scene 0: Signaleren — Sophie vraagt om hulp via de Vanbreda Care app
+// Scene 0: Signaleren — Sophie vraagt haar persoonlijke AI-assistent om hulp
 import type { SceneModule } from './types'
 
 export const signaleren: SceneModule = {
@@ -13,14 +13,9 @@ export const signaleren: SceneModule = {
               <span class="iphone__status-time">20:14</span>
               <span class="iphone__status-icons">● ● ●●</span>
             </div>
-            <div class="iphone__app-header">Vanbreda Care</div>
+            <div class="iphone__app-header">AI Assistent</div>
             <div class="iphone__chat" id="scene-2-chat">
-              <!-- Chat bubbles will animate here -->
-            </div>
-            <div class="iphone__input" id="scene-2-input" style="display:none;">
-              <div id="scene-2-choices">
-                <!-- Choices buttons -->
-              </div>
+              <!-- Chat bubbles and choice buttons will animate here -->
             </div>
           </div>
         </div>
@@ -32,15 +27,33 @@ export const signaleren: SceneModule = {
 
   bind(navigateForward, activeTimers) {
     const chat = document.getElementById('scene-2-chat')
-    const input = document.getElementById('scene-2-input')
-    const choices = document.getElementById('scene-2-choices')
     const nextContainer = document.getElementById('scene-2-next-container')
+
+    // Running clock starting at 20:14
+    let minuteOffset = 0
+
+    const getTime = (addMinutes = 0) => {
+      const base = 20 * 60 + 14 + minuteOffset + addMinutes
+      const h = Math.floor(base / 60)
+      const m = base % 60
+      return `${h}:${m.toString().padStart(2, '0')}`
+    }
 
     const addBubble = (text: string, isUser = false) => {
       if (!chat) return
       const bubble = document.createElement('div')
+      const sender = isUser ? 'Sophie' : 'AI Assistent'
       bubble.className = `phone-bubble phone-bubble--${isUser ? 'user' : 'assistant'}`
-      bubble.textContent = text
+      bubble.innerHTML = `<div class="phone-bubble__sender">${sender}</div>${text}<span class="phone-bubble__time">${getTime()}</span>`
+      chat.appendChild(bubble)
+      chat.scrollTop = chat.scrollHeight
+    }
+
+    const addSystemBubble = (text: string) => {
+      if (!chat) return
+      const bubble = document.createElement('div')
+      bubble.className = 'phone-bubble phone-bubble--system'
+      bubble.innerHTML = text
       chat.appendChild(bubble)
       chat.scrollTop = chat.scrollHeight
     }
@@ -50,7 +63,7 @@ export const signaleren: SceneModule = {
       const typing = document.createElement('div')
       typing.className = 'phone-typing'
       typing.id = 'chat-typing'
-      typing.textContent = 'Aan het typen...'
+      typing.textContent = 'Aan het verwerken...'
       chat.appendChild(typing)
       chat.scrollTop = chat.scrollHeight
     }
@@ -59,9 +72,9 @@ export const signaleren: SceneModule = {
       document.getElementById('chat-typing')?.remove()
     }
 
-    // Start chat flow
+    // Start chat flow — Sophie praat met haar persoonlijke AI-assistent
     activeTimers.push(setTimeout(() => {
-      addBubble("Help. Ik ben in Lyon voor mijn werk en ik heb heel veel buikpijn. Ik denk dat ik naar een ziekenhuis moet.", true)
+      addBubble("Help. Ik ben in Lyon voor mijn werk en ik heb ongelooflijk veel buikpijn. Ik denk dat ik naar het ziekenhuis moet.", true)
     }, 1000))
 
     activeTimers.push(setTimeout(() => {
@@ -70,77 +83,78 @@ export const signaleren: SceneModule = {
 
     activeTimers.push(setTimeout(() => {
       removeTyping()
-      addBubble("Dat klinkt ernstig, Sophie. Ik help je direct.")
-      addBubble("Kun je nog zelfstandig lopen en adem je normaal?")
+      minuteOffset = 1
+      addBubble("Ik zie dat ge in Lyon zijt. Er zijn 2 ziekenhuizen dichtbij. Hôpital Saint-Claire heeft een spoedafdeling en is 12 minuten van u verwijderd.")
     }, 4000))
 
     activeTimers.push(setTimeout(() => {
-      addBubble("Ja, maar de pijn wordt erger.", true)
-    }, 5500))
-
-    activeTimers.push(setTimeout(() => {
-      addTyping()
-    }, 6500))
-
-    activeTimers.push(setTimeout(() => {
-      removeTyping()
-      addBubble("Ik adviseer je om nu medische hulp te zoeken.")
-      addBubble("Hôpital Saint-Claire heeft een spoedafdeling en is 12 minuten van je verwijderd. Ze kunnen je in het Engels ontvangen.")
-
       // Inject map
       const mapDiv = document.createElement('div')
       mapDiv.innerHTML = `
         <div class="svg-map-container">
-          <svg viewBox="0 0 200 120" width="100%" height="100%">
-            <path d="M 10 10 L 190 10 M 10 50 L 190 50 M 10 90 L 190 90 M 30 10 L 30 110 M 90 10 L 90 110 M 160 10 L 160 110" stroke="#cbd5e1" stroke-width="1" fill="none" />
-            <circle cx="30" cy="90" r="3" fill="#ff6b35" />
-            <circle cx="30" cy="90" r="8" fill="none" stroke="#ff6b35" stroke-width="0.8" opacity="0.6">
-              <animate attributeName="r" values="3;9;3" dur="2s" repeatCount="indefinite"/>
-            </circle>
-            <text x="36" y="93" font-size="5" font-family="sans-serif" font-weight="bold" fill="#334155">Sophie</text>
-            <g>
-              <circle cx="90" cy="50" r="4" fill="#2c8c99" />
-              <text x="96" y="53" font-size="5" font-family="sans-serif" font-weight="bold" fill="#2c8c99">St-Claire (12m)</text>
-            </g>
-            <g opacity="0.4">
-              <circle cx="160" cy="20" r="3" fill="#64748b" />
-              <text x="120" y="23" font-size="4" font-family="sans-serif" fill="#64748b">Clinique du Parc (18m)</text>
-            </g>
-            <path d="M 30 90 L 30 50 L 90 50" stroke="#2c8c99" stroke-width="1.5" stroke-dasharray="2 2" fill="none" />
-          </svg>
+          <img src="/map-lyon-hospital.png" alt="Route naar Hôpital Saint-Claire" style="width:100%; border-radius:8px;" />
         </div>`
       chat?.appendChild(mapDiv)
       chat!.scrollTop = chat!.scrollHeight
-    }, 8000))
+    }, 5000))
 
     activeTimers.push(setTimeout(() => {
-      addBubble("Wil je dat ik een ambulance stuur en het ziekenhuis alvast laat weten dat je onderweg bent?")
-      if (chat) chat.scrollTop = chat.scrollHeight
-      if (input && choices) {
-        setTimeout(() => { input.style.display = 'block' }, 300)
-        choices.innerHTML = `
-          <button class="step-btn" id="btn-choice-yes">Ja, regel dit</button>
-          <button class="step-btn" style="background:#555;" id="btn-choice-no">Ik regel het zelf</button>`
+      addTyping()
+    }, 5800))
 
-        document.getElementById('btn-choice-yes')?.addEventListener('click', () => {
-          input.style.display = 'none'
-          addBubble("Ja, regel dit", true)
+    activeTimers.push(setTimeout(() => {
+      removeTyping()
+      addBubble("Zal ik uw Vanbreda-dekking checken en een ambulance laten komen?")
+      if (chat) chat.scrollTop = chat.scrollHeight
+      if (chat) {
+        const choicesEl = document.createElement('div')
+        choicesEl.className = 'phone-choices-inline'
+        choicesEl.innerHTML = `
+          <button class="step-btn" id="btn-choice-yes">Ja, regel dat</button>
+          <button class="step-btn" style="background:#555;" id="btn-choice-no">Ik regel het zelf</button>`
+        setTimeout(() => {
+          chat.appendChild(choicesEl)
+          chat.scrollTop = chat.scrollHeight
+        }, 300)
+
+        choicesEl.querySelector('#btn-choice-yes')?.addEventListener('click', () => {
+          choicesEl.remove()
+          minuteOffset = 2
+          addBubble("Ja, regel dat", true)
           addTyping()
 
           setTimeout(() => {
             removeTyping()
-            addBubble("Ik heb je aangemeld bij Hôpital Saint-Claire. Je dossier (ID: HC-2030-00471) staat voor ze klaar. De ambulance is onderweg en is er over 3 minuten.")
-            if (nextContainer) nextContainer.style.display = 'block'
-          }, 1200)
+            addSystemBubble("✓ <strong>Vanbreda MCP</strong>: hospitalisatieverzekering dekt spoedopnames in Frankrijk volledig.")
+          }, 800)
+
+          setTimeout(() => {
+            addSystemBubble("✓ <strong>Ambulance</strong> onderweg — 3 minuten.")
+          }, 1600)
+
+          setTimeout(() => {
+            addSystemBubble("✓ Dossier <strong>HC-2030-00471</strong> gedeeld met Hôpital Saint-Claire.")
+          }, 2400)
+
+          setTimeout(() => {
+            minuteOffset = 3
+            addBubble("Alles is geregeld. Zal ik Jan ook verwittigen?")
+            if (chat) chat.scrollTop = chat.scrollHeight
+
+            // Show next after a beat
+            setTimeout(() => {
+              if (nextContainer) nextContainer.style.display = 'block'
+            }, 1500)
+          }, 3400)
         })
 
-        document.getElementById('btn-choice-no')?.addEventListener('click', () => {
-          input.style.display = 'none'
+        choicesEl.querySelector('#btn-choice-no')?.addEventListener('click', () => {
+          choicesEl.remove()
           addBubble("Ik regel het zelf", true)
           if (nextContainer) nextContainer.style.display = 'block'
         })
       }
-    }, 9800))
+    }, 7500))
 
     document.getElementById('btn-to-scene-1')?.addEventListener('click', () => {
       navigateForward()

@@ -1,4 +1,4 @@
-// Scene 1: Begrijpen — Systeemacties achter de schermen
+// Scene 1: Begrijpen — Wat er achter de schermen gebeurt (MCP/A2A)
 import type { SceneModule } from './types'
 
 export const begrijpen: SceneModule = {
@@ -7,16 +7,16 @@ export const begrijpen: SceneModule = {
       <div class="scene-card scene-card--split">
         <div class="scene-info">
           <span class="scene-badge">Keten: Begrijpen</span>
-          <h2>Identiteit &amp; Polis Check</h2>
-          <p>Op basis van het chatgesprek start de onzichtbare keten. Onze AI verifieert haar polis via het Golden Record en deelt direct een beveiligd spoeddossier met het dichtstbijzijnde ziekenhuis.</p>
+          <h2>Wat er achter de schermen gebeurt</h2>
+          <p>Op basis van het gesprek start de onzichtbare keten. Sophie's assistent verifieert haar dekking via Vanbreda's MCP-koppeling en deelt een beveiligd spoeddossier met het ziekenhuis.</p>
           <div class="under-the-hood" style="margin-top: 20px;">
-            <div class="uth-header">Systeemacties (Autonome Keten)</div>
+            <div class="uth-header">Agent-communicatie (MCP/A2A)</div>
             <ul class="uth-logs" id="scene-2-logs">
-              <li class="pending">Systeemverificaties laden...</li>
+              <li class="pending">Koppelingen worden gelegd...</li>
             </ul>
           </div>
           <div style="margin-top: 25px; display: none;" id="scene-2-next-action-container">
-            <button class="scene-btn scene-btn--primary" id="btn-to-scene-2" style="font-size: 16px; padding: 16px 32px; background: linear-gradient(135deg, #2c8c99, #1e6e7a); box-shadow: 0 4px 20px rgba(44,140,153,0.4); width: 100%;">🚑 Ga naar het ziekenhuis →</button>
+            <button class="scene-btn scene-btn--primary" id="btn-to-scene-2" style="font-size: 16px; padding: 16px 32px; background: linear-gradient(135deg, #ff8c00, #ff4b28); box-shadow: 0 4px 20px rgba(255,75,40,0.35); width: 100%;">🚑 Ga naar het ziekenhuis →</button>
           </div>
         </div>
         <div class="scene-display">
@@ -27,7 +27,7 @@ export const begrijpen: SceneModule = {
                 <span class="iphone__status-time">20:14</span>
                 <span class="iphone__status-icons">● ●</span>
               </div>
-              <div class="iphone__app-header">Vanbreda Care</div>
+              <div class="iphone__app-header">AI Assistent</div>
               <div class="iphone__chat" id="scene-2-chat-history">
                 <!-- Chat history rendered instantly -->
               </div>
@@ -45,39 +45,41 @@ export const begrijpen: SceneModule = {
     // Instantly render completed chat history in the small phone
     if (chatHistory) {
       const messages = [
-        { text: "Help. Ik ben in Lyon voor mijn werk en ik heb heel veel buikpijn.", isUser: true },
-        { text: "Dat klinkt ernstig, Sophie. Ik help je direct.", isUser: false },
-        { text: "Ja, maar de pijn wordt erger.", isUser: true },
-        { text: "Ik heb je aangemeld bij Hôpital Saint-Claire. De ambulance is onderweg.", isUser: false }
+        { text: "Help. Ik ben in Lyon en ik heb ongelooflijk veel buikpijn.", isUser: true, time: "20:14" },
+        { text: "Ik zie dat ge in Lyon zijt. Hôpital Saint-Claire is 12 minuten van u.", isUser: false, time: "20:15" },
+        { text: "Ja, regel dat", isUser: true, time: "20:16" },
+        { text: "✓ Vanbreda bevestigt dekking. Ambulance onderweg.", isUser: false, time: "20:16" }
       ]
-      chatHistory.innerHTML = messages.map(m =>
-        `<div class="phone-bubble phone-bubble--${m.isUser ? 'user' : 'assistant'}">${m.text}</div>`
-      ).join('')
+      chatHistory.innerHTML = messages.map(m => {
+        const sender = m.isUser ? 'Sophie' : 'AI Assistent'
+        return `<div class="phone-bubble phone-bubble--${m.isUser ? 'user' : 'assistant'}"><div class="phone-bubble__sender">${sender}</div>${m.text}<span class="phone-bubble__time">${m.time}</span></div>`
+      }).join('')
     }
 
-    // Animate system logs
+    // Animate MCP system logs
     if (logs) {
       logs.innerHTML = ''
       const uthItems = [
-        "✓ Identiteit geverifieerd via Golden Record",
-        "✓ Polisdekking gecontroleerd (Hospitalisatie Premium)",
-        "✓ Spoeddekking Frankrijk actief",
-        "✓ Dossier geopend (ID: HC-2030-00471)",
-        "✓ Context gedeeld met Hôpital Saint-Claire"
+        "✓ Assistent → Vanbreda MCP: identiteit geverifieerd (Golden Record)",
+        "✓ Assistent → Vanbreda MCP: polis gevalideerd (Hospitalisatie Premium)",
+        "✓ Vanbreda MCP → Assistent: spoeddekking Frankrijk actief",
+        "✓ Vanbreda MCP: dossier HC-2030-00471 aangemaakt",
+        "✓ Assistent → Ziekenhuis MCP: context gedeeld met Hôpital Saint-Claire",
+        "✓ Assistent → Jan: partner verwittigd via berichtendienst"
       ]
       uthItems.forEach((text, i) => {
         activeTimers.push(setTimeout(() => {
           const li = document.createElement('li')
           li.textContent = text
           logs.appendChild(li)
-        }, i * 400))
+        }, i * 500))
       })
     }
 
     // Show next button after logs animate
     activeTimers.push(setTimeout(() => {
       if (nextContainer) nextContainer.style.display = 'block'
-    }, 2500))
+    }, 3500))
 
     document.getElementById('btn-to-scene-2')?.addEventListener('click', () => {
       navigateForward()

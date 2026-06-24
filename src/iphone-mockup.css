@@ -288,7 +288,8 @@
 }
 
 /* Choice buttons inside phone */
-.iphone__input .step-btn {
+.iphone__input .step-btn,
+.iphone__chat .phone-choices-inline .step-btn {
   display: block;
   width: 100%;
   padding: 10px 16px;
@@ -299,4 +300,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+/* Choice buttons rendered as part of the chat flow */
+.iphone__chat .phone-choices-inline {
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.3s ease forwards;
 }
