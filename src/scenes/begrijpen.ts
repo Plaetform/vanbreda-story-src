@@ -8,7 +8,7 @@ export const begrijpen: SceneModule = {
         <div class="scene-info">
           <span class="scene-badge">Keten: Begrijpen</span>
           <h2>Wat er achter de schermen gebeurt</h2>
-          <p>Op basis van het gesprek start de onzichtbare keten. Sophie's assistent verifieert haar dekking via Vanbreda's MCP-koppeling en deelt een beveiligd spoeddossier met het ziekenhuis.</p>
+          <p>Op basis van het gesprek start de onzichtbare keten. Sophie's assistent verifieert haar dekking via Vanbreda's MCP-koppeling. Via Vanbreda's internationale partnernetwerk wordt een beveiligd spoeddossier gedeeld met het Franse ziekenhuis.</p>
           <div class="under-the-hood" style="margin-top: 20px;">
             <div class="uth-header">Agent-communicatie (MCP/A2A)</div>
             <ul class="uth-logs" id="scene-2-logs">
@@ -65,6 +65,7 @@ export const begrijpen: SceneModule = {
         "✓ Vanbreda MCP → Assistent: spoeddekking Frankrijk actief",
         "✓ Vanbreda MCP: dossier HC-2030-00471 aangemaakt",
         "✓ Assistent → Ziekenhuis MCP: context gedeeld met Hôpital Saint-Claire",
+        "✓ Vanbreda Partner Network → Hôpital Saint-Claire: administratie afgestemd",
         "✓ Assistent → Jan: partner verwittigd via berichtendienst"
       ]
       uthItems.forEach((text, i) => {

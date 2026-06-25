@@ -17,12 +17,12 @@ export const verbinden: SceneModule = {
         <div class="scene-info">
           <span class="scene-badge">Keten: Verbinden</span>
           <h2>Wat gebeurt er nu?</h2>
-          <p>De ochtend na de operatie. Vanbreda's systeem handelt de dekkingsvalidatie autonoom af via MCP. Bij de radiologiefactuur treedt een uitzondering op — het systeem escaleert naar Thomas (Care Specialist) die Sophie persoonlijk belt.</p>
+          <p>Vanbreda's systeem verwerkt de buitenlandse ziekenhuisfacturen autonoom via hun partnernetwerk. Bij de radiologiefactuur treedt een uitzondering op — een afwijkend Frans tariefcode. Het systeem escaleert naar Thomas (Care Specialist) die Sophie persoonlijk belt.</p>
           <div class="under-the-hood">
             <div class="uth-header">Orkestratie &amp; Escalatie (MCP)</div>
             <ul class="uth-logs">
-              <li>✓ Vanbreda MCP: spoedoperatie autonoom verwerkt (STP)</li>
-              <li>⚠ Vanbreda MCP: radiologietarief afwijkend — escalatie vereist</li>
+              <li>✓ Vanbreda MCP: spoedoperatie via internationaal partnernetwerk verwerkt (STP)</li>
+              <li>⚠ Vanbreda MCP: Frans radiologietarief afwijkend — escalatie vereist</li>
               <li>▸ Vanbreda escaleert naar menselijke specialist</li>
               <li id="uth-call-log" class="pending">Wacht op specialist...</li>
             </ul>

@@ -11,9 +11,9 @@ export const begeleiden: SceneModule = {
         <div class="scene-info">
           <span class="scene-badge">Keten: Begeleiden</span>
           <h2>Aankomst &amp; Vertaling</h2>
-          <p>Sophie arriveert bij het ziekenhuis. Dankzij de koppeling tussen haar assistent en het ziekenhuis is haar administratie al gedeeld. De assistent fungeert als real-time tolk aan de balie.</p>
+          <p>Sophie arriveert bij het Franse ziekenhuis. Dankzij Vanbreda's internationale partnernetwerk is haar administratie al afgestemd — ondanks de verschillende zorgsystemen.</p>
           <blockquote class="scene-quote" style="font-family: var(--font-serif); font-style: italic; margin-top: 15px; border-left: 2px solid #ff8c00; padding-left: 15px; font-size: 13px;">
-            "Sophie hoeft de verbinding niet zelf te organiseren. De keten kent haar en beweegt met haar mee."
+            "Vanbreda's partners zijn al verwittigd. Het enige dat Sophie nog merkt, is dat het gewoon werkt."
           </blockquote>
           <div style="margin-top: 25px; display: none;" id="scene-3-next-container">
             <button class="scene-btn scene-btn--primary" id="btn-to-scene-3" style="width: 100%;">Volgende ochtend →</button>
@@ -122,7 +122,7 @@ export const begeleiden: SceneModule = {
     // Start once the narrator finishes (vo-ended). Fallback in case that signal never comes.
     voEndedHandler = startTranslation
     document.addEventListener('vo-ended', startTranslation)
-    activeTimers.push(setTimeout(startTranslation, 12000))
+    activeTimers.push(setTimeout(startTranslation, 18000))
 
     document.getElementById('btn-to-scene-3')?.addEventListener('click', () => {
       navigateForward()

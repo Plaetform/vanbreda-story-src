@@ -8,7 +8,7 @@ export const ondersteunen: SceneModule = {
         <div class="scene-info">
           <span class="scene-badge">Keten: Ondersteunen</span>
           <h2>Veilig naar huis &amp; Nazorg</h2>
-          <p>Sophie is reisgeschikt verklaard. Haar assistent biedt de vluchtopties aan, heeft Jan al op de hoogte gebracht en coördineert de nazorg met haar huisdokter in België — uiteraard pas na haar toestemming.</p>
+          <p>Sophie is reisgeschikt verklaard door het Franse ziekenhuis. Haar assistent coördineert de terugreis. Vanbreda's netwerk zorgt ervoor dat het ontslagverslag naadloos naar haar Belgische huisdokter gaat — over de grens heen, maar pas na haar toestemming.</p>
           <blockquote class="scene-quote" style="font-family: var(--font-serif); font-style: italic; margin-top: 15px; border-left: 2px solid #ff8c00; padding-left: 15px; font-size: 13px;">
             "De keten eindigt niet wanneer de claim is verwerkt. Zij eindigt wanneer Sophie weer verder kan."
           </blockquote>
@@ -50,7 +50,7 @@ export const ondersteunen: SceneModule = {
                 <div class="consent-box" style="margin-bottom:8px; padding:6px; border:1px solid #ddd; border-radius:4px; background:#fff;">
                   <label class="consent-label" style="display:flex; gap:6px; font-size:9.5px; align-items:center;">
                     <input type="checkbox" id="consent-gp-check">
-                    <span>Deel met dr. Martens (België)</span>
+                    <span>Deel met dr. Martens (België) — vanuit Frans dossier</span>
                   </label>
                 </div>
                 <button class="step-btn" id="btn-confirm-aftercare" style="width:100%; font-size:10px;" disabled>Bevestig &amp; Deel</button>

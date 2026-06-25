@@ -63,7 +63,7 @@ const phases: ScanPhase[] = [
   { label: 'SCANNING...', duration: 2000, status: 'FACE MESH ANALYSE' },
   { label: 'TEMPORELE COMPATIBILITEIT: CONTROLEREN...', duration: 1800, status: 'QUANTUM VERIFY' },
   { label: 'TOEKOMSTBEREIDHEID: ANALYSEREN...', duration: 2000, status: 'READINESS INDEX' },
-  { label: 'OMGEVING EVALUEREN...', duration: 1500, status: 'ENVIRONMENT SCAN' },
+  { label: 'DE PERSOON IN BEELD MAAKT DE KEUZES', duration: 1500, status: 'DECISION MAKER ✓' },
   { label: 'CLEARANCE VERLEEND', duration: 2500, status: 'ACCESS GRANTED ✓' },
 ]
 
@@ -118,7 +118,7 @@ function createOverlayHTML(): string {
   <div class="bioscan__verdict" id="bioscan-verdict">
     <div class="bioscan__verdict-icon">✓</div>
     <div class="bioscan__verdict-title">CLEARANCE VERLEEND</div>
-    <div class="bioscan__verdict-sub">Sophie wacht op je.</div>
+    <div class="bioscan__verdict-sub">De keuzes die ú maakt, bepalen welke ervaring Sophie in 2030 krijgt.</div>
   </div>
 
   <!-- Skip button (same style as video cutscene skip) -->

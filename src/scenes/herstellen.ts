@@ -47,6 +47,7 @@ export const herstellen: SceneModule = {
                 <li>Autonome agents die context uitwisselen</li>
                 <li>Directe polis- en dekkingscontrole via gestandaardiseerde koppelingen</li>
                 <li>Zorgverlener- en partnerintegratie</li>
+                <li>Internationaal partnernetwerk voor grensoverschrijdende zorg</li>
                 <li>Menselijke escalatie wanneer oordeel of empathie vereist is</li>
               </ul>
             </div>
@@ -54,7 +55,7 @@ export const herstellen: SceneModule = {
           
           <div class="dream-summary">
             <strong>Technologie die ge niet hoeft te zien. Steun die ge altijd voelt.</strong><br>
-            Vanbreda verdient zijn plek in het ecosysteem van de klant. Niet als app, maar als vertrouwde schakel.
+            In 2030 maakt het kanaal niet uit. Wat telt, is dat Vanbreda er is wanneer het erop aankomt — over grenzen heen.
           </div>
           
           <div class="final-ctas">
