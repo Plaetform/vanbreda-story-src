@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sophie's Reis — De Onzichtbare Keten van Zorg</title>
+<meta name="description" content="Hoe Vanbreda en AE samen zorgen voor een naadloze ervaring wanneer het erop aankomt — het verhaal van Sophie.">
+<style>
+  :root {
+    --ae-black: #000000;
+    --ae-white: #ffffff;
+    --ae-orange: #ff8c00;
+    --ae-red: #ff4b28;
+    --ae-grey-1: #faf7f7;
+    --ae-grey-2: #e8e3e1;
+    --ae-grey-3: #beb9b4;
+    --ae-grey-5: #7a7674;
+    --ae-grey-6: #484644;
+    --ae-gradient: linear-gradient(135deg, #ff8c00 0%, #ff4b28 100%);
+    --ae-font: "Nexa", "Century Gothic", "Avenir Next", "Montserrat", Arial, sans-serif;
+    --vb-blue: #1a3d8f;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--ae-font);
+    background: var(--ae-white);
+    color: var(--ae-black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--ae-black);
+    color: var(--ae-white);
+    padding: 48px 40px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--ae-gradient);
+  }
+  .header__logos {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+  .header__logos img {
+    height: 28px;
+    width: auto;
+  }
+  .header__logos .logo-divider {
+    width: 1px;
+    height: 24px;
+    background: var(--ae-grey-5);
+  }
+  .header__eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ae-orange);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .header__title {
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .header__title span {
+    background: var(--ae-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header__sub {
+    font-size: 15px;
+    color: var(--ae-grey-3);
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  /* ── Intro ── */
+  .intro {
+    background: var(--ae-grey-1);
+    padding: 36px 40px;
+    border-bottom: 1px solid var(--ae-grey-2);
+  }
+  .intro__text {
+    max-width: 640px;
+    font-size: 15px;
+    color: var(--ae-grey-6);
+  }
+  .intro__text strong {
+    color: var(--ae-black);
+  }
+
+  /* ── Chain Flow ── */
+  .chain {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 28px 40px;
+    background: var(--ae-white);
+    border-bottom: 1px solid var(--ae-grey-2);
+  }
+  .chain__item {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: var(--ae-grey-1);
+    border: 1px solid var(--ae-grey-2);
+    color: var(--ae-grey-6);
+  }
+  .chain__arrow {
+    display: flex;
+    align-items: center;
+    color: var(--ae-orange);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    padding: 44px 40px;
+    max-width: 920px;
+  }
+  .timeline__title {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ae-orange);
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    position: relative;
+  }
+  .step::before {
+    content: '';
+    position: absolute;
+    left: 35px;
+    top: 50px;
+    bottom: -2px;
+    width: 2px;
+    background: var(--ae-grey-2);
+  }
+  .step:last-child::before { display: none; }
+
+  .step__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2px;
+  }
+  .step__number {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--ae-white);
+    background: var(--ae-gradient);
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(255, 140, 0, 0.2);
+  }
+  .step__time {
+    font-size: 10px;
+    color: var(--ae-grey-5);
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+  }
+
+  .step__content {
+    padding: 0 0 32px 18px;
+  }
+  .step__badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ae-orange);
+    margin-bottom: 3px;
+  }
+  .step__heading {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--ae-black);
+  }
+  .step__desc {
+    font-size: 13.5px;
+    color: var(--ae-grey-6);
+    max-width: 540px;
+  }
+  .step__highlight {
+    margin-top: 10px;
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background: rgba(255, 140, 0, 0.06);
+    border-left: 3px solid var(--ae-orange);
+    color: var(--ae-grey-6);
+    max-width: 540px;
+  }
+  .step__highlight strong {
+    color: var(--ae-black);
+  }
+  .step__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+  }
+  .step__tag {
+    font-size: 9.5px;
+    padding: 3px 9px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--ae-grey-5);
+    border: 1px solid var(--ae-grey-2);
+  }
+
+  /* ── Divider ── */
+  .divider {
+    background: var(--ae-black);
+    color: var(--ae-white);
+    padding: 24px 40px;
+    position: relative;
+    margin: 4px 0;
+  }
+  .divider::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--ae-gradient);
+  }
+  .divider__date {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ae-orange);
+    font-weight: 600;
+  }
+  .divider__quote {
+    font-size: 15px;
+    font-style: italic;
+    color: var(--ae-grey-3);
+    margin-top: 3px;
+  }
+
+  /* ── Reveal ── */
+  .reveal {
+    background: var(--ae-black);
+    color: var(--ae-white);
+    padding: 52px 40px;
+    position: relative;
+  }
+  .reveal::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--ae-gradient);
+  }
+  .reveal__title {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ae-orange);
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .reveal__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 36px;
+  }
+  .reveal__col {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .reveal__col h3 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--ae-white);
+  }
+  .reveal__col ul {
+    list-style: none;
+    padding: 0;
+  }
+  .reveal__col li {
+    font-size: 13px;
+    color: var(--ae-grey-3);
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+  .reveal__col li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--ae-orange);
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  .reveal__payoff {
+    font-size: 19px;
+    font-weight: 700;
+    text-align: center;
+    padding: 28px 32px;
+    border-radius: 8px;
+    background: rgba(255, 140, 0, 0.08);
+    border: 1px solid rgba(255, 140, 0, 0.15);
+    margin-bottom: 32px;
+  }
+  .reveal__payoff span {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ae-grey-3);
+    margin-top: 8px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 36px 40px;
+    border-top: 1px solid var(--ae-grey-2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer__logos {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .footer__logos img {
+    height: 22px;
+    width: auto;
+  }
+  .footer__logos .logo-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--ae-grey-3);
+  }
+  .footer__text {
+    font-size: 11px;
+    color: var(--ae-grey-5);
+    text-align: right;
+  }
+
+  .cta-bar {
+    text-align: center;
+    padding: 24px 40px;
+    background: var(--ae-black);
+  }
+  .cta-bar a {
+    display: inline-block;
+    padding: 14px 36px;
+    border-radius: 6px;
+    background: var(--ae-gradient);
+    color: var(--ae-white);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta-bar a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(255, 140, 0, 0.35);
+  }
+
+  @media (max-width: 640px) {
+    .header, .intro, .timeline, .reveal, .footer { padding-left: 20px; padding-right: 20px; }
+    .intro__grid, .reveal__grid { grid-template-columns: 1fr; }
+    .header__logos img { height: 22px; }
+    .footer { flex-direction: column; gap: 16px; text-align: center; }
+    .footer__text { text-align: center; }
+  }
+
+  @media print {
+    body { font-size: 11px; }
+    .cta-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="header__logos">
+    <img src="/ae-logo-neg.svg" alt="AE logo">
+    <div class="logo-divider"></div>
+    <img src="/vanbreda-logo-white.svg" alt="Vanbreda Risk & Benefits logo">
+  </div>
+  <div class="header__eyebrow">Toekomstscenario · 2030</div>
+  <h1 class="header__title">Sophie's Reis<br><span>De Onzichtbare Keten van Zorg</span></h1>
+  <p class="header__sub">Wanneer het erop aankomt, maakt het niet uit via welk kanaal u ons bereikt. Wat telt, is dat wij er zijn — snel, persoonlijk en over grenzen heen.</p>
+</header>
+
+<!-- ═══ INTRO ═══ -->
+<section class="intro">
+  <p class="intro__text">
+    <strong>Sophie De Winter</strong> (34) is op zakenreis in Lyon wanneer ze plotseling hevige buikpijn krijgt. Alleen, in een ander land, in een ander zorgsysteem. Wat volgt, is een reis door een keten van zorg die ze nauwelijks opmerkt — maar die haar op elk moment draagt.
+  </p>
+</section>
+
+<!-- ═══ KETEN FLOW ═══ -->
+<div class="chain">
+  <div class="chain__item">Signaleren</div>
+  <div class="chain__arrow">→</div>
+  <div class="chain__item">Begrijpen</div>
+  <div class="chain__arrow">→</div>
+  <div class="chain__item">Begeleiden</div>
+  <div class="chain__arrow">→</div>
+  <div class="chain__item">Verbinden</div>
+  <div class="chain__arrow">→</div>
+  <div class="chain__item">Beslissen</div>
+  <div class="chain__arrow">→</div>
+  <div class="chain__item">Ondersteunen</div>
+  <div class="chain__arrow">→</div>
+  <div class="chain__item">Herstellen</div>
+</div>
+
+<!-- ═══ TIMELINE ═══ -->
+<section class="timeline">
+  <div class="timeline__title">Het Verhaal</div>
+
+  <!-- 1 -->
+  <div class="step">
+    <div class="step__marker">
+      <div class="step__number">1</div>
+      <div class="step__time">20:14</div>
+    </div>
+    <div class="step__content">
+      <div class="step__badge">Signaleren</div>
+      <div class="step__heading">Sophie vraagt om hulp</div>
+      <p class="step__desc">Vanuit haar hotelkamer in Lyon spreekt Sophie haar assistent aan. Binnen seconden wordt het dichtstbijzijnde ziekenhuis gevonden, haar verzekeringsdekking gecontroleerd en een ambulance gestuurd.</p>
+      <div class="step__highlight"><strong>Resultaat voor Sophie:</strong> Eén vraag, directe hulp. Geen papierwerk, geen onzekerheid over dekking.</div>
+      <div class="step__tags">
+        <span class="step__tag">Polisvalidatie</span>
+        <span class="step__tag">Locatiebepaling</span>
+        <span class="step__tag">Ambulancedispatch</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="step">
+    <div class="step__marker">
+      <div class="step__number">2</div>
+      <div class="step__time">20:15</div>
+    </div>
+    <div class="step__content">
+      <div class="step__badge">Begrijpen</div>
+      <div class="step__heading">Alles wordt geregeld</div>
+      <p class="step__desc">Terwijl Sophie wacht op de ambulance, worden haar gegevens veilig gedeeld met het Franse ziekenhuis. Haar identiteit is geverifieerd, haar polis gevalideerd en een spoeddossier aangemaakt — automatisch en in seconden.</p>
+      <div class="step__highlight"><strong>Resultaat voor Sophie:</strong> Nul telefoontjes, nul formulieren. Het ziekenhuis weet al wie ze is.</div>
+      <div class="step__tags">
+        <span class="step__tag">Golden Record</span>
+        <span class="step__tag">MCP/A2A</span>
+        <span class="step__tag">Internationaal Partnernetwerk</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider__date">20:47 · Hôpital Saint-Claire, Lyon</div>
+    <div class="divider__quote">"De ambulance arriveert. Sophie wordt opgenomen."</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="step">
+    <div class="step__marker">
+      <div class="step__number">3</div>
+      <div class="step__time">20:47</div>
+    </div>
+    <div class="step__content">
+      <div class="step__badge">Begeleiden</div>
+      <div class="step__heading">Taal is geen barrière</div>
+      <p class="step__desc">Sophie arriveert bij een Frans ziekenhuis. Ze spreekt de taal niet, het zorgsysteem is anders. Maar haar assistent vertaalt in real-time aan de balie, en haar administratie is al afgestemd met het ziekenhuis.</p>
+      <div class="step__highlight"><strong>Resultaat voor Sophie:</strong> Ze wordt begrepen. In haar eigen taal, op elk moment.</div>
+      <div class="step__tags">
+        <span class="step__tag">Real-time Vertaling</span>
+        <span class="step__tag">Cross-border Dossierdeling</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider__date">9 april 2030 · De ochtend na de operatie</div>
+    <div class="divider__quote">"De spoedoperatie is geslaagd."</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="step">
+    <div class="step__marker">
+      <div class="step__number">4</div>
+      <div class="step__time">08:42</div>
+    </div>
+    <div class="step__content">
+      <div class="step__badge">Verbinden</div>
+      <div class="step__heading">Persoonlijk contact wanneer het telt</div>
+      <p class="step__desc">Het merendeel van de facturatie verloopt automatisch. Maar wanneer een afwijkende code opduikt bij de radiologie, neemt een echte specialist persoonlijk contact op. Thomas belt Sophie om haar gerust te stellen.</p>
+      <div class="step__highlight"><strong>Resultaat voor Sophie:</strong> Technologie waar het kan. Een mens wanneer het moet.</div>
+      <div class="step__tags">
+        <span class="step__tag">STP Verwerking</span>
+        <span class="step__tag">Exception Handling</span>
+        <span class="step__tag">Menselijke Escalatie</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="step">
+    <div class="step__marker">
+      <div class="step__number">5</div>
+      <div class="step__time">11:30</div>
+    </div>
+    <div class="step__content">
+      <div class="step__badge">Beslissen</div>
+      <div class="step__heading">Sophie houdt de regie</div>
+      <p class="step__desc">Geen verrassingen, geen onduidelijkheid. Sophie krijgt een helder overzicht van haar opties: vluchtmogelijkheden, haar partner verwittigen, een afwezigheidsattest aanvragen. Zij kiest, het systeem voert uit.</p>
+      <div class="step__highlight"><strong>Resultaat voor Sophie:</strong> Duidelijke keuzes op een moeilijk moment. Zij beslist, altijd.</div>
+      <div class="step__tags">
+        <span class="step__tag">Proactieve Orkestratie</span>
+        <span class="step__tag">Consent-driven</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider__date">12 april 2030 · Ontslag uit het ziekenhuis</div>
+    <div class="divider__quote">"Sophie mag naar huis."</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="step">
+    <div class="step__marker">
+      <div class="step__number">6</div>
+      <div class="step__time">14:15</div>
+    </div>
+    <div class="step__content">
+      <div class="step__badge">Ondersteunen</div>
+      <div class="step__heading">De zorg stopt niet aan de grens</div>
+      <p class="step__desc">Het ontslagverslag van het Franse ziekenhuis wordt — met haar toestemming — naadloos gedeeld met haar Belgische huisdokter. De vlucht is geboekt, haar partner Jan wacht haar op in Brussel.</p>
+      <div class="step__highlight"><strong>Resultaat voor Sophie:</strong> Naadloze overgang van Frans naar Belgisch zorgsysteem. Geen enkel document zelf verstuurd.</div>
+      <div class="step__tags">
+        <span class="step__tag">Cross-border Datadeling</span>
+        <span class="step__tag">Consent Management</span>
+        <span class="step__tag">Zorgverlenerintegratie</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="step">
+    <div class="step__marker">
+      <div class="step__number">7</div>
+      <div class="step__time">Thuis</div>
+    </div>
+    <div class="step__content">
+      <div class="step__badge">Herstellen</div>
+      <div class="step__heading">Eén verhaal, één keer verteld</div>
+      <p class="step__desc">Sophie is weer thuis. Het hele traject — van alarm in Lyon tot nazorg in België — verliep als één vloeiende ervaring. Ze hoefde haar verhaal maar één keer te vertellen. De rest werd voor haar geregeld.</p>
+      <div class="step__highlight"><strong>Resultaat voor Sophie:</strong> Op het moment dat het ertoe deed, was alles geregeld. Onzichtbaar, maar altijd aanwezig.</div>
+      <div class="step__tags">
+        <span class="step__tag">End-to-end Orkestratie</span>
+        <span class="step__tag">Ecosysteemintegratie</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REVEAL ═══ -->
+<section class="reveal">
+  <div class="reveal__title">Wat dit voor u betekent</div>
+  <div class="reveal__grid">
+    <div class="reveal__col">
+      <h3>Wat Sophie ervaarde</h3>
+      <ul>
+        <li>Directe hulp op het moment dat het ertoe deed</li>
+        <li>Eén gesprek — haar verhaal maar één keer verteld</li>
+        <li>Communicatie in haar eigen taal, ook in het buitenland</li>
+        <li>Duidelijke keuzes en altijd de regie</li>
+        <li>Persoonlijk contact wanneer het verschil maakt</li>
+        <li>Naadloze overdracht tussen landen en zorgsystemen</li>
+      </ul>
+    </div>
+    <div class="reveal__col">
+      <h3>Wat Vanbreda & AE mogelijk maakten</h3>
+      <ul>
+        <li>Polisvalidatie via Golden Record — in seconden</li>
+        <li>Internationale coördinatie via partnernetwerk (MCP/A2A)</li>
+        <li>Veilige, gestandaardiseerde gegevensuitwisseling over landsgrenzen</li>
+        <li>STP-verwerking van buitenlandse facturen met exception handling</li>
+        <li>Autonome agents met menselijke escalatie bij uitzonderingen</li>
+        <li>Grensoverschrijdende nazorgkoppeling met consent management</li>
+      </ul>
+    </div>
+  </div>
+  <div class="reveal__payoff">
+    Technologie die ge niet hoeft te zien. Steun die ge altijd voelt.
+    <span>In 2030 maakt het kanaal niet uit. Wat telt, is dat wij er zijn wanneer het erop aankomt — over grenzen heen.</span>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<div class="cta-bar">
+  <a href="/">Beleef de volledige experience →</a>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer__logos">
+    <img src="/ae-logo-pos.svg" alt="AE">
+    <div class="logo-divider"></div>
+    <img src="/vanbreda-logo.svg" alt="Vanbreda Risk & Benefits">
+  </div>
+  <div class="footer__text">
+    Sophie's Reis — De Onzichtbare Keten van Zorg<br>
+    Een toekomstscenario van Vanbreda & AE · 2030
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1130,6 +1130,7 @@ function renderDesk(): string {
     <div class="splash__subtitle">Open alleen als je bereid bent de toekomst te veranderen.</div>
     <div class="splash__sound-notice" id="splash-sound">🎧 beste ervaring met geluid</div>
     <button class="splash__btn" id="splash-btn">Maak kennis met Sophie →</button>
+    <a href="/infographic-storyline.html" target="_blank" style="display:block; margin-top:14px; font-size:11px; color:rgba(255,255,255,0.4); text-decoration:none; letter-spacing:0.5px; transition: color 0.2s;" onmouseover="this.style.color='rgba(255,140,0,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Geen tijd? Bekijk de samenvatting →</a>
   </div>
 </div>
 

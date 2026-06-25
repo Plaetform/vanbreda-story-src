@@ -59,6 +59,9 @@ export const herstellen: SceneModule = {
           </div>
           
           <div class="final-ctas">
+            <a class="scene-btn scene-btn--primary" href="/infographic-storyline.html" target="_blank" style="text-decoration:none; text-align:center; display:block;">
+              📄 Bekijk de samenvatting
+            </a>
             <button class="scene-btn" id="btn-close-experience">
               Sluit de experience
             </button>
