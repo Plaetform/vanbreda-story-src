@@ -32,23 +32,24 @@ export const herstellen: SceneModule = {
               <h3>Zichtbaar voor Sophie</h3>
               <ul>
                 <li>Directe hulp op een kritiek moment</li>
-                <li>Eén gesprek met haar eigen assistent</li>
+                <li>Een Vlaamse huisdokter via Doktr — vanuit Frankrijk</li>
+                <li>Eén assistent die alles orkestreert</li>
                 <li>Communicatie in haar eigen taal</li>
                 <li>Duidelijke keuzes en behoud van regie</li>
-                <li>Menselijke aandacht wanneer nodig</li>
-                <li>Jan verwittigd, vlucht geregeld, huisdokter geïnformeerd</li>
+                <li>Menselijke aandacht wanneer nodig (Thomas belt)</li>
+                <li>Jan verwittigd, vlucht geregeld, attest verstuurd</li>
               </ul>
             </div>
             <div class="dream-col">
               <h3>Achter de schermen (80% Autonomie)</h3>
               <ul>
-                <li>Sophie's assistent als orkestrator van haar ecosysteem</li>
-                <li>Vanbreda als betrouwbare schakel via MCP/A2A</li>
-                <li>Autonome agents die context uitwisselen</li>
-                <li>Directe polis- en dekkingscontrole via gestandaardiseerde koppelingen</li>
-                <li>Zorgverlener- en partnerintegratie</li>
-                <li>Internationaal partnernetwerk voor grensoverschrijdende zorg</li>
-                <li>Menselijke escalatie wanneer oordeel of empathie vereist is</li>
+                <li>Identiteit via itsme, polis via Assulink+</li>
+                <li>Doktr-consult met doorverwijzing naar ziekenhuis</li>
+                <li>CM (mutualiteit) → EZVK-coördinatie → aanvullende dekking</li>
+                <li>Internationale coördinatie via Mutas</li>
+                <li>Consent-driven gegevensdeling op elk moment</li>
+                <li>STP-verwerking met menselijke escalatie bij uitzonderingen</li>
+                <li>Arbeidsongeschiktheidsattest automatisch naar werkgever</li>
               </ul>
             </div>
           </div>
