@@ -1020,7 +1020,16 @@ function showPage(index: number, fromPopState = false) {
           // doesn't stop the clip). When it ends — or right away if there's none — signal
           // scenes that hold their auto-play until the voiceover is done (e.g. begeleiden).
           const fireVoEnded = () => document.dispatchEvent(new Event('vo-ended'))
-          if (!playVO(page.id, fireVoEnded)) fireVoEnded()
+
+          if (page.id === 'doktr-consult') {
+            // Doktr scene: play VO AFTER the video ends, not immediately
+            const doktrHandler = () => {
+              if (!playVO(page.id, fireVoEnded)) fireVoEnded()
+            }
+            document.addEventListener('doktr-video-ended', doktrHandler, { once: true })
+          } else {
+            if (!playVO(page.id, fireVoEnded)) fireVoEnded()
+          }
         }, 200)
       }
 

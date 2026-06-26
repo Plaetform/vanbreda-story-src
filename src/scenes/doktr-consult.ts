@@ -56,50 +56,47 @@ export const doktrConsult: SceneModule = {
     const videoEl = document.getElementById('doktr-video-el') as HTMLVideoElement | null
     const placeholderEl = document.getElementById('doktr-video-placeholder')
 
-    // ── Start video AFTER voiceover ends ──
-    let videoStarted = false
+    // ── Start video IMMEDIATELY when scene loads ──
+    // The voiceover will play AFTER the video ends.
+    let videoLoaded = false
 
-    const startVideo = () => {
-      if (videoStarted) return
-      videoStarted = true
+    const loadAndPlayVideo = () => {
+      if (videoLoaded || !videoEl) return
+      videoLoaded = true
 
-      if (videoEl) {
-        videoEl.src = '/video/video-dokter.mov'
-        videoEl.load()
-        videoEl.addEventListener('canplay', () => {
-          videoEl.style.display = 'block'
-          if (placeholderEl) placeholderEl.style.display = 'none'
-          videoEl.play().catch(() => {})
-        }, { once: true })
-        videoEl.addEventListener('error', () => {
-          // No video available — show fallback message
-          if (placeholderEl) {
-            placeholderEl.innerHTML = `
-              <div class="doktr-video-icon">👨‍⚕️</div>
-              <div class="doktr-video-label">Videoconsult in voorbereiding</div>
-              <div style="font-size:10px; color:#666; margin-top:8px;">Plaats een video als /video/doktr-consult.mp4</div>`
-          }
-        }, { once: true })
+      videoEl.src = '/video/video-dokter.mov'
+      videoEl.load()
+      videoEl.addEventListener('canplay', () => {
+        videoEl.style.display = 'block'
+        if (placeholderEl) placeholderEl.style.display = 'none'
+        videoEl.play().catch(() => {})
+      }, { once: true })
+      videoEl.addEventListener('error', () => {
+        // No video available — show fallback message
+        if (placeholderEl) {
+          placeholderEl.innerHTML = `
+            <div class="doktr-video-icon">👨‍⚕️</div>
+            <div class="doktr-video-label">Videoconsult in voorbereiding</div>`
+        }
+      }, { once: true })
 
-        // When the video ends, show the referral + ambulance + next button
-        videoEl.addEventListener('ended', () => {
-          if (statusEl) {
-            statusEl.innerHTML = '<span>CONSULT BEËINDIGD</span>'
-            statusEl.style.color = '#bbb'
-          }
+      // When the video ends → trigger the voiceover
+      videoEl.addEventListener('ended', () => {
+        if (statusEl) {
+          statusEl.innerHTML = '<span>CONSULT BEËINDIGD</span>'
+          statusEl.style.color = '#bbb'
+        }
+        // Dispatch event so main.ts knows to play the VO now
+        document.dispatchEvent(new Event('doktr-video-ended'))
+        // Show next button after a short delay (VO will play in parallel)
+        setTimeout(() => {
           if (nextContainer) nextContainer.style.display = 'block'
-        }, { once: true })
-      }
+        }, 3000)
+      }, { once: true })
     }
 
-    // Listen for voiceover end
-    const voHandler = () => startVideo()
-    document.addEventListener('vo-ended', voHandler, { once: true })
-
-    // Fallback: if VO doesn't fire (e.g. muted), start after 30s
-    activeTimers.push(setTimeout(() => {
-      startVideo()
-    }, 30000))
+    // Start video right away
+    loadAndPlayVideo()
 
     // ── MCP logs (appear during voiceover, before video starts) ──
     const mcpItems = [
