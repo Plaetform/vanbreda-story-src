@@ -60,13 +60,13 @@ export const begrijpen: SceneModule = {
     if (logs) {
       logs.innerHTML = ''
       const uthItems = [
-        "✓ Assistent → Vanbreda MCP: identiteit geverifieerd (Golden Record)",
-        "✓ Assistent → Vanbreda MCP: polis gevalideerd (Hospitalisatie Premium)",
-        "✓ Vanbreda MCP → Assistent: spoeddekking Frankrijk actief",
-        "✓ Vanbreda MCP: dossier HC-2030-00471 aangemaakt",
-        "✓ Assistent → Ziekenhuis MCP: context gedeeld met Hôpital Saint-Claire",
-        "✓ Vanbreda Partner Network → Hôpital Saint-Claire: administratie afgestemd",
-        "✓ Assistent → Jan: partner verwittigd via berichtendienst"
+        "✓ Identiteit geverifieerd (Golden Record via itsme)",
+        "✓ Polis gevalideerd (Assulink+)",
+        "✓ CM: EZVK-coördinatie opgestart → Assulink+ aanvullende dekking bevestigd",
+        "⚠ Gegevens alleen verwerkt met toestemming van Sophie",
+        "✓ Dossier HC-2030-00471 aangemaakt",
+        "✓ Via Mutas: context gedeeld met Hôpital Saint-Claire",
+        "✓ Jan verwittigd via berichtendienst"
       ]
       uthItems.forEach((text, i) => {
         activeTimers.push(setTimeout(() => {

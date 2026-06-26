@@ -1,5 +1,6 @@
 // Barrel export for all scene modules
 export { signaleren } from './signaleren'
+export { doktrConsult } from './doktr-consult'
 export { begrijpen } from './begrijpen'
 export { begeleiden } from './begeleiden'
 export { verbinden } from './verbinden'

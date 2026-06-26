@@ -3967,6 +3967,8 @@ body {
   font-family: var(--font-mono);
   font-size: 10px;
   line-height: 1.6;
+  max-height: 180px;
+  overflow-y: auto;
 }
 
 .uth-logs li {
@@ -5084,3 +5086,161 @@ body {
   to { opacity: 1; }
 }
 
+/* ── Doktr Videoconsult ── */
+.doktr-consult {
+  background: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #333;
+}
+
+.doktr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid #333;
+}
+
+.doktr-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #e74c3c;
+}
+
+.doktr-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e74c3c;
+  animation: doktr-pulse-anim 1.5s infinite;
+}
+
+@keyframes doktr-pulse-anim {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.doktr-doctor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.doktr-doctor-avatar {
+  font-size: 22px;
+}
+
+.doktr-doctor-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.doktr-doctor-role {
+  font-size: 10px;
+  color: #888;
+}
+
+.doktr-video-panel {
+  background: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #333;
+  width: 100%;
+}
+
+.doktr-video-area {
+  position: relative;
+  min-height: 320px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.doktr-video-placeholder {
+  text-align: center;
+  color: #555;
+}
+
+.doktr-video-icon {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.doktr-video-label {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.doktr-transcript {
+  padding: 12px 14px;
+  max-height: 160px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.doktr-bubble {
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.4;
+  max-width: 90%;
+  animation: doktr-bubble-in 0.3s ease-out;
+}
+
+@keyframes doktr-bubble-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.doktr-bubble-speaker {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.doktr-bubble--doctor {
+  background: #2a3a4a;
+  color: #d0e0f0;
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+}
+
+.doktr-bubble--doctor .doktr-bubble-speaker {
+  color: #4fc3f7;
+}
+
+.doktr-bubble--patient {
+  background: #3a2a2a;
+  color: #f0d0d0;
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+}
+
+.doktr-bubble--patient .doktr-bubble-speaker {
+  color: #ff8c00;
+}
+
+.doktr-referral {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(76, 175, 80, 0.15);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  color: #81c784;
+  font-size: 11px;
+  text-align: center;
+  animation: doktr-bubble-in 0.3s ease-out;
+}

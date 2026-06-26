@@ -79,7 +79,7 @@ export const verbinden: SceneModule = {
     // Transcript lines synced to approximate audio timestamps (seconds)
     const transcript: { t: number, speaker: string, text: string }[] = [
       { t: 0.5, speaker: 'Thomas', text: 'Goeiemorgen Sophie, met Thomas van Vanbreda. Hoe gaat het met u na de operatie?' },
-      { t: 5, speaker: 'Sophie', text: 'Beter, gelukkig. Nog wel wat moe en beurs.' },
+      { t: 5, speaker: 'Sophie', text: 'Beter, gelukkig. Nog wel wat moe en aangeslagen.' },
       { t: 9, speaker: 'Thomas', text: 'Begrijpelijk. De operatie is volledig gedekt. Alleen de radiologiefactuur heeft een afwijkende code — die neem ik persoonlijk over.' },
       { t: 17, speaker: 'Sophie', text: 'Moet ik daar nog iets voor doen?' },
       { t: 20, speaker: 'Thomas', text: 'Nee. Ge richt u op uw herstel. Ik hou het dossier voor u vast en laat u weten zodra het geregeld is.' },

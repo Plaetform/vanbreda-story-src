@@ -59,9 +59,9 @@ export const beslissen: SceneModule = {
                 <div class="step-item">
                   <div class="step-checkbox">○</div>
                   <div class="step-content">
-                    <h4>Afwezigheidsattest</h4>
-                    <p>Neutrale afwezigheidsbevestiging voor uw werkgever.</p>
-                    <button class="step-btn step-btn--small" id="btn-download-cert" style="background:#555;">Download PDF</button>
+                    <h4>Arbeidsongeschiktheidsattest</h4>
+                    <p>Automatisch verstuurd naar uw werkgever. Neutraal — zonder medische details.</p>
+                    <span style="font-size:10px; color:#4caf50; font-weight:600;">✓ Verstuurd naar HR</span>
                   </div>
                 </div>
               </div>

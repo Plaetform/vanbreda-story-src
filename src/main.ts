@@ -1,7 +1,7 @@
 import './style.css'
 import './iphone-mockup.css'
 import { startBiometricScan } from './biometric-scan'
-import { signaleren, begrijpen, begeleiden, verbinden, beslissen, ondersteunen, herstellen } from './scenes'
+import { signaleren, doktrConsult, begeleiden, verbinden, beslissen, ondersteunen, herstellen } from './scenes'
 import type { SceneModule } from './scenes'
 import { renderCover } from './pages/cover'
 import { renderPersona } from './pages/persona'
@@ -539,7 +539,7 @@ const voMap: Record<string, string> = {
   'title-1': '/audio/vo/vo-01-title-1.mp3',
   'video-pain': '/audio/vo/vo-02-video-pain.mp3',
   'signaleren': '/audio/vo/vo-03-signaleren.mp3',
-  'begrijpen': '/audio/vo/vo-04-begrijpen.mp3',
+  'doktr-consult': '/audio/vo/vo-04-begrijpen.mp3',
   'video-ambulance': '/audio/vo/vo-05-video-ambulance.mp3',
   'begeleiden': '/audio/vo/vo-06-begeleiden.mp3',
   'title-2': '/audio/vo/vo-07-title-2.mp3',
@@ -604,7 +604,7 @@ const pages: Page[] = [
   { type: 'title', id: 'title-1', label: 'Het moment van pijn', date: '8 april 2030 · Lyon', quote: 'Ik kan het alleen, maar hou me vast als het nodig is.' },
   { type: 'video', id: 'video-pain', label: 'Het moment van pijn', videoSrc: '/video/Sophie_gets_stomach_pain_202606162156.mp4', subtitles: [] },
   { type: 'content', id: 'signaleren', label: 'Sophie vraagt om hulp', sceneIndex: 0 },
-  { type: 'content', id: 'begrijpen', label: 'De keten komt in beweging', sceneIndex: 1 },
+  { type: 'content', id: 'doktr-consult', label: 'Videoconsult met arts', sceneIndex: 1 },
   { type: 'video', id: 'video-ambulance', label: 'Onderweg naar het ziekenhuis', videoSrc: '/video/Ambulance_arrives_at_hospital_202606162155.mp4', subtitles: [] },
   { type: 'content', id: 'begeleiden', label: 'Het ziekenhuis verwacht haar', sceneIndex: 2 },
   { type: 'title', id: 'title-2', label: 'De ochtend erna', date: '9 april 2030 · Hôpital Saint-Claire', quote: 'De spoedoperatie is achter de rug.' },
@@ -758,8 +758,8 @@ function playCutscene(
 
 // ─── Scene Modules (indexed by sceneIndex) ───
 const sceneModules: SceneModule[] = [
-  signaleren,  // 0
-  begrijpen,   // 1
+  signaleren,     // 0
+  doktrConsult,   // 1
   begeleiden,  // 2
   verbinden,   // 3
   beslissen,   // 4
@@ -991,7 +991,7 @@ function showPage(index: number, fromPopState = false) {
       const sceneIdx = page.sceneIndex ?? 0
       const sceneBackgrounds = [
         '/bg-signaleren.png',   // 0
-        '/bg-begrijpen.png',    // 1
+        '/bg-begrijpen.png',    // 1 (reused for doktr-consult)
         '/bg-begeleiden.png',   // 2
         '/bg-verbinden.png',    // 3
         '/bg-beslissen.png',    // 4

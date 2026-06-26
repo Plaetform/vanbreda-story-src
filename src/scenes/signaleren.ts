@@ -15,12 +15,12 @@ export const signaleren: SceneModule = {
             </div>
             <div class="iphone__app-header">AI Assistent</div>
             <div class="iphone__chat" id="scene-2-chat">
-              <!-- Chat bubbles and choice buttons will animate here -->
+              <!-- Chat bubbles will animate here -->
             </div>
           </div>
         </div>
         <div class="scene-phone-next" id="scene-2-next-container" style="display: none;">
-          <button class="scene-btn scene-btn--primary" id="btn-to-scene-1">Bekijk wat er achter de schermen gebeurt →</button>
+          <button class="scene-btn scene-btn--primary" id="btn-to-scene-1">Start videoconsult met arts →</button>
         </div>
       </div>`
   },
@@ -29,7 +29,6 @@ export const signaleren: SceneModule = {
     const chat = document.getElementById('scene-2-chat')
     const nextContainer = document.getElementById('scene-2-next-container')
 
-    // Running clock starting at 20:14
     let minuteOffset = 0
 
     const getTime = (addMinutes = 0) => {
@@ -72,9 +71,9 @@ export const signaleren: SceneModule = {
       document.getElementById('chat-typing')?.remove()
     }
 
-    // Start chat flow — Sophie praat met haar persoonlijke AI-assistent
+    // ── Chat flow ──
     activeTimers.push(setTimeout(() => {
-      addBubble("Help. Ik ben in Lyon voor mijn werk en ik heb ongelooflijk veel buikpijn. Ik denk dat ik naar het ziekenhuis moet.", true)
+      addBubble("Help. Ik ben in Lyon voor mijn werk en ik heb ongelooflijk veel buikpijn.", true)
     }, 1000))
 
     activeTimers.push(setTimeout(() => {
@@ -84,33 +83,22 @@ export const signaleren: SceneModule = {
     activeTimers.push(setTimeout(() => {
       removeTyping()
       minuteOffset = 1
-      addBubble("Ik zie dat ge in Lyon zijt. Er zijn 2 ziekenhuizen dichtbij. Hôpital Saint-Claire heeft een spoedafdeling en is 12 minuten van u verwijderd.")
+      addBubble("Ik zie dat ge in Lyon zijt. Ik verbind u nu met een Vlaamse huisdokter via Doktr zodat die uw klachten kan beoordelen.")
     }, 4000))
 
     activeTimers.push(setTimeout(() => {
-      // Inject map
-      const mapDiv = document.createElement('div')
-      mapDiv.innerHTML = `
-        <div class="svg-map-container">
-          <img src="/map-lyon-hospital.png" alt="Route naar Hôpital Saint-Claire" style="width:100%; border-radius:8px;" />
-        </div>`
-      chat?.appendChild(mapDiv)
-      chat!.scrollTop = chat!.scrollHeight
+      addTyping()
     }, 5000))
 
     activeTimers.push(setTimeout(() => {
-      addTyping()
-    }, 5800))
-
-    activeTimers.push(setTimeout(() => {
       removeTyping()
-      addBubble("Zal ik uw Vanbreda-dekking checken en een ambulance laten komen?")
+      addBubble("Mag ik uw gegevens delen met de arts en uw verzekeraar?")
       if (chat) chat.scrollTop = chat.scrollHeight
       if (chat) {
         const choicesEl = document.createElement('div')
         choicesEl.className = 'phone-choices-inline'
         choicesEl.innerHTML = `
-          <button class="step-btn" id="btn-choice-yes">Ja, regel dat</button>
+          <button class="step-btn" id="btn-choice-yes">Ja, verbind me</button>
           <button class="step-btn" style="background:#555;" id="btn-choice-no">Ik regel het zelf</button>`
         setTimeout(() => {
           chat.appendChild(choicesEl)
@@ -120,32 +108,19 @@ export const signaleren: SceneModule = {
         choicesEl.querySelector('#btn-choice-yes')?.addEventListener('click', () => {
           choicesEl.remove()
           minuteOffset = 2
-          addBubble("Ja, regel dat", true)
-          addTyping()
+          addBubble("Ja, verbind me", true)
 
           setTimeout(() => {
-            removeTyping()
-            addSystemBubble("✓ <strong>Vanbreda MCP</strong>: hospitalisatieverzekering dekt spoedopnames in Frankrijk volledig.")
-          }, 800)
+            addSystemBubble("✓ <strong>Toestemming verleend</strong> voor gegevensdeling.")
+          }, 600)
 
           setTimeout(() => {
-            addSystemBubble("✓ <strong>Ambulance</strong> onderweg — 3 minuten.")
-          }, 1600)
+            addSystemBubble("📹 <strong>Doktr-consult</strong> wordt opgestart... Eén moment.")
+          }, 1400)
 
           setTimeout(() => {
-            addSystemBubble("✓ Dossier <strong>HC-2030-00471</strong> gedeeld met Hôpital Saint-Claire.")
-          }, 2400)
-
-          setTimeout(() => {
-            minuteOffset = 3
-            addBubble("Alles is geregeld. Zal ik Jan ook verwittigen?")
-            if (chat) chat.scrollTop = chat.scrollHeight
-
-            // Show next after a beat
-            setTimeout(() => {
-              if (nextContainer) nextContainer.style.display = 'block'
-            }, 1500)
-          }, 3400)
+            if (nextContainer) nextContainer.style.display = 'block'
+          }, 2500)
         })
 
         choicesEl.querySelector('#btn-choice-no')?.addEventListener('click', () => {
