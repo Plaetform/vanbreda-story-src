@@ -78,7 +78,9 @@ jobs:
           if [ -n "${{ matrix.cache_ref_suffix }}" ]; then
             CACHE_ARGS="--cache-from=type=registry,ref=$ACR_REGISTRY/cache/${{ matrix.cache_ref_suffix }}:buildcache"
           fi
-          docker buildx build $CACHE_ARGS -t "${{ steps.tag.outputs.tag }}" --push .
+          docker buildx build $CACHE_ARGS \
+            --build-arg ACCESS_KEY="${{ secrets.ACCESS_KEY }}" \
+            -t "${{ steps.tag.outputs.tag }}" --push .
 
       - name: Build image (PR validation)
         if: github.ref != 'refs/heads/main'

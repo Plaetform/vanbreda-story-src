@@ -15,4 +15,16 @@ RUN npm run build
 FROM nginx:1.27-alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Shared access key for the customer share link, baked into the nginx config at
+# build time. Supplied by the deploy workflow from a repo secret (same pattern as
+# the App Insights string above). When empty, the placeholder is swapped for an
+# unguessable sentinel so the access-key path stays closed (AE SSO still works).
+ARG ACCESS_KEY=""
+RUN if [ -n "$ACCESS_KEY" ]; then \
+        sed -i "s|__ACCESS_KEY__|$ACCESS_KEY|g" /etc/nginx/conf.d/default.conf; \
+    else \
+        sed -i "s|__ACCESS_KEY__|__ACCESS_KEY_NOT_SET__|g" /etc/nginx/conf.d/default.conf; \
+    fi
+
 EXPOSE 80
