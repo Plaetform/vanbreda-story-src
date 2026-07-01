@@ -64,7 +64,7 @@ export function renderPersona(): string {
       <p style="font-family:var(--font-serif);font-size:14px;line-height:1.55;color:#2d2a22;margin:0;">
         Sophie wordt tijdens een zakenreis in Lyon onverwacht opgenomen met <b>${d.medisch.hoofdreden}</b>. 
         Er volgt een spoedoperatie (<i>${d.medisch.behandeling}</i>) in ${d.medisch.ziekenhuis}. 
-        Na ontslag uploadt ze haar documenten via de app en neemt contact op met Vanbreda — 
+        Na ontslag uploadt ze haar documenten via de app en neemt contact op met Vanbreda. 
         ze wil weten wat er vergoed wordt. Totale kosten: <b>${d.financieel.totaalKosten}</b>.
       </p>
     </div>
@@ -72,7 +72,7 @@ export function renderPersona(): string {
     <!-- Bottom framing note -->
     <div style="margin-top:7mm;background:#fbf6ea;border:1px solid var(--c-border);padding:5mm 6mm;">
       <p style="font-family:var(--font-serif);font-size:13.5px;line-height:1.5;color:#4a4536;margin:0;">
-        <b>Sophie is geen edge case.</b> Ze is een standaardverzekerde met een iets complexere claim — buitenlandse hospitalisatie, meerdere facturen, 
+        <b>Sophie is geen edge case.</b> Ze is een standaardverzekerde met een iets complexere claim: buitenlandse hospitalisatie, meerdere facturen, 
         een nabeschouwing in België. Precies het soort dossier dat vandaag door te veel handen gaat. 
         In 2030 werkt het anders. Dit dossier laat zien hoe.
       </p>

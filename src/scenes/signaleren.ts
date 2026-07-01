@@ -83,7 +83,7 @@ export const signaleren: SceneModule = {
     activeTimers.push(setTimeout(() => {
       removeTyping()
       minuteOffset = 1
-      addBubble("Ik zie dat ge in Lyon zijt. Ik verbind u nu met een Vlaamse huisdokter via Doktr zodat die uw klachten kan beoordelen.")
+      addBubble("Ik zie dat je in Lyon bent. Ik verbind je nu met een Vlaamse huisdokter via Doktr zodat die je klachten kan beoordelen.")
     }, 4000))
 
     activeTimers.push(setTimeout(() => {

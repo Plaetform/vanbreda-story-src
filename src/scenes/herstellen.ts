@@ -12,19 +12,19 @@ export const herstellen: SceneModule = {
         
         <div class="chain-reveal-container" id="chain-reveal-container" style="display:flex;">
           <div class="chain-links-horizontal">
-            <div class="chain-link-item"><span>Signaleren</span></div>
+            <div class="chain-link-item"><span>Opvangen</span></div>
             <div class="chain-arrow">→</div>
-            <div class="chain-link-item"><span>Begrijpen</span></div>
+            <div class="chain-link-item"><span>Herkennen</span></div>
             <div class="chain-arrow">→</div>
-            <div class="chain-link-item"><span>Begeleiden</span></div>
+            <div class="chain-link-item"><span>Wegwijzen</span></div>
             <div class="chain-arrow">→</div>
-            <div class="chain-link-item"><span>Verbinden</span></div>
+            <div class="chain-link-item"><span>Overdragen</span></div>
             <div class="chain-arrow">→</div>
-            <div class="chain-link-item"><span>Beslissen</span></div>
+            <div class="chain-link-item"><span>Afhandelen</span></div>
             <div class="chain-arrow">→</div>
-            <div class="chain-link-item"><span>Ondersteunen</span></div>
+            <div class="chain-link-item"><span>Bijstaan</span></div>
             <div class="chain-arrow">→</div>
-            <div class="chain-link-item"><span>Herstellen</span></div>
+            <div class="chain-link-item"><span>Afronden</span></div>
           </div>
           
           <div class="dream-grid">
@@ -32,7 +32,7 @@ export const herstellen: SceneModule = {
               <h3>Zichtbaar voor Sophie</h3>
               <ul>
                 <li>Directe hulp op een kritiek moment</li>
-                <li>Een Vlaamse huisdokter via Doktr — vanuit Frankrijk</li>
+                <li>Een Vlaamse huisdokter via Doktr, vanuit Frankrijk</li>
                 <li>Eén assistent die alles orkestreert</li>
                 <li>Communicatie in haar eigen taal</li>
                 <li>Duidelijke keuzes en behoud van regie</li>
@@ -55,8 +55,8 @@ export const herstellen: SceneModule = {
           </div>
           
           <div class="dream-summary">
-            <strong>Technologie die ge niet hoeft te zien. Steun die ge altijd voelt.</strong><br>
-            In 2030 maakt het kanaal niet uit. Wat telt, is dat Vanbreda er is wanneer het erop aankomt — over grenzen heen.
+            <strong>Technologie die je niet hoeft te zien. Steun die je altijd voelt.</strong><br>
+            In 2030 maakt het kanaal niet uit. Wat telt, is dat Vanbreda er is wanneer het erop aankomt, over grenzen heen.
           </div>
           
           <div class="final-ctas">

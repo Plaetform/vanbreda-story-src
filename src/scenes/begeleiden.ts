@@ -96,11 +96,11 @@ export const begeleiden: SceneModule = {
       }, 1000))
 
       activeTimers.push(setTimeout(() => {
-        addTranslateBubble("NL 🇧🇪 Vertaling", "We gaan u nu onderzoeken. Uw verzekeringsgegevens zijn ontvangen. Ge hoeft niets voor te schieten.")
+        addTranslateBubble("NL 🇧🇪 Vertaling", "We gaan u nu onderzoeken. Uw verzekeringsgegevens zijn ontvangen. Je hoeft niets voor te schieten.")
       }, 3000))
 
       activeTimers.push(setTimeout(() => {
-        addTranslateBubble("NL 🇧🇪 Sophie", "Dank u. Kunt ge ook aangeven wat er nu gaat gebeuren?", true)
+        addTranslateBubble("NL 🇧🇪 Sophie", "Dank u. Kun je ook aangeven wat er nu gaat gebeuren?", true)
       }, 5000))
 
       activeTimers.push(setTimeout(() => {

@@ -159,7 +159,7 @@ const chapterPages = [
           </div>
         </div>
       </div>
-      <div class="cp-connector">Bewezen capabilities — nog niet altijd één keten</div>
+      <div class="cp-connector">Bewezen capabilities, nog niet altijd één keten</div>
       <div class="cp-pillars">
         <span class="cp-pillar cp-pillar--active">Claims</span>
         <span class="cp-pillar cp-pillar--active">Communicatie</span>
@@ -180,7 +180,7 @@ const chapterPages = [
         <li>Automatische stappen kunnen verborgen handwerk veroorzaken</li>
         <li>Lokale optimalisatie leidt niet automatisch tot <strong>end-to-end waarde</strong></li>
       </ul>
-      <div class="cp-note">Hypothese — te onderzoeken</div>
+      <div class="cp-note">Hypothese – te onderzoeken</div>
       <div class="cp-flow">
         <div class="cp-flow__step"><div class="cp-flow__label">Intake</div></div>
         <div class="cp-flow__break">⚡<span class="cp-flow__break-label">overdracht</span></div>
@@ -323,14 +323,14 @@ const chapterPages = [
     subtitle: 'Sophie\'s claim in 2030',
     content: `
       <ul class="cp-list cp-list--numbered">
-        <li><strong>Opname</strong> — Sophie wordt onverwacht opgenomen tijdens een reis</li>
-        <li><strong>Intake</strong> — documenten worden herkend, vertaald en gekoppeld</li>
-        <li><strong>Context</strong> — polis, werkgever, claimhistorie en communicatie komen samen</li>
-        <li><strong>Automatische verwerking</strong> — eenvoudige onderdelen worden goedgekeurd</li>
-        <li><strong>Uitzondering</strong> — buitenlandse code en mogelijke dubbele factuur herkend</li>
-        <li><strong>Menselijk oordeel</strong> — een claimspecialist beoordeelt de uitzondering</li>
-        <li><strong>Communicatie</strong> — Sophie ontvangt één duidelijk, persoonlijk antwoord</li>
-        <li><strong>Afronding</strong> — juiste betaling voorbereid, dubbele betaling voorkomen, feedback opgeslagen</li>
+        <li><strong>Opname</strong> – Sophie wordt onverwacht opgenomen tijdens een reis</li>
+        <li><strong>Intake</strong> – documenten worden herkend, vertaald en gekoppeld</li>
+        <li><strong>Context</strong> – polis, werkgever, claimhistorie en communicatie komen samen</li>
+        <li><strong>Automatische verwerking</strong> – eenvoudige onderdelen worden goedgekeurd</li>
+        <li><strong>Uitzondering</strong> – buitenlandse code en mogelijke dubbele factuur herkend</li>
+        <li><strong>Menselijk oordeel</strong> – een claimspecialist beoordeelt de uitzondering</li>
+        <li><strong>Communicatie</strong> – Sophie ontvangt één duidelijk, persoonlijk antwoord</li>
+        <li><strong>Afronding</strong> – juiste betaling voorbereid, dubbele betaling voorkomen, feedback opgeslagen</li>
       </ul>
       <div class="cp-swimlanes">
         <div class="cp-swimlane">
@@ -418,7 +418,7 @@ const chapterPages = [
       <div class="cp-dream__cta" style="text-align:center; margin-top:20px;">
         <a class="cp-cta cp-cta--primary" href="/vanbreda-healthcaroperatie.pdf" download>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="margin-right:8px;vertical-align:middle"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download onze visie — Health Care 2030
+          Download onze visie – Health Care 2030
         </a>
       </div>`,
     footnote: 'Haar ervaring in 2030 begint met de keuzes die we vandaag maken.',

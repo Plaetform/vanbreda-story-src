@@ -50,7 +50,7 @@ export function renderCover(): string {
     <!-- Title -->
     <div style="margin-top:10mm;">
       <h1 style="font-weight:900;color:var(--c-navy);font-size:96px;line-height:.92;letter-spacing:-.025em;">DOSSIER<br>2030</h1>
-      <div style="font-family:var(--font-serif);font-size:21px;color:#3a2f15;margin-top:6mm;max-width:140mm;line-height:1.35;">Blauwdrukken, ideeën en schetsen voor de Health&nbsp;Care-operatie van morgen — vanuit één klantdossier uitgetekend.</div>
+      <div style="font-family:var(--font-serif);font-size:21px;color:#3a2f15;margin-top:6mm;max-width:140mm;line-height:1.35;">Blauwdrukken, ideeën en schetsen voor de Health&nbsp;Care-operatie van morgen, vanuit één klantdossier uitgetekend.</div>
     </div>
 
     <!-- Meta sticker -->
@@ -75,7 +75,7 @@ export function renderCover(): string {
     <!-- Opening note -->
     <div style="margin-top:8mm;background:#fcf8ee;box-shadow:0 4px 14px rgba(0,0,0,.22);transform:rotate(.35deg);padding:7mm 9mm;border:1px solid var(--c-border);max-width:158mm;">
       <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;color:var(--c-gold);margin-bottom:3mm;">OPENINGSNOTITIE</div>
-      <p style="font-family:var(--font-serif);font-size:14.5px;line-height:1.5;color:#33302a;">Dit dossier komt uit 2030. Het bevat geen oplossing die al vaststaat — maar de blauwdruk van wat mogelijk is. Eén klantdossier, uitgetekend van begin tot eind: hoe Claims, Communicatie en B2B/B2I als één geheel kunnen werken. Met schetsen, ideeën en concrete bewijsstukken. De vraag is niet óf het technologisch kan. De vraag is wat er nodig is om het te bouwen.</p>
+      <p style="font-family:var(--font-serif);font-size:14.5px;line-height:1.5;color:#33302a;">Dit dossier komt uit 2030. Het bevat geen oplossing die al vaststaat, maar de blauwdruk van wat mogelijk is. Eén klantdossier, uitgetekend van begin tot eind: hoe Claims, Communicatie en B2B/B2I als één geheel kunnen werken. Met schetsen, ideeën en concrete bewijsstukken. De vraag is niet óf het technologisch kan. De vraag is wat er nodig is om het te bouwen.</p>
     </div>
   </div>
 

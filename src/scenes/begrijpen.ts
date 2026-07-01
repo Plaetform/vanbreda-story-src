@@ -46,7 +46,7 @@ export const begrijpen: SceneModule = {
     if (chatHistory) {
       const messages = [
         { text: "Help. Ik ben in Lyon en ik heb ongelooflijk veel buikpijn.", isUser: true, time: "20:14" },
-        { text: "Ik zie dat ge in Lyon zijt. Hôpital Saint-Claire is 12 minuten van u.", isUser: false, time: "20:15" },
+        { text: "Ik zie dat je in Lyon bent. Hôpital Saint-Claire is 12 minuten van je.", isUser: false, time: "20:15" },
         { text: "Ja, regel dat", isUser: true, time: "20:16" },
         { text: "✓ Vanbreda bevestigt dekking. Ambulance onderweg.", isUser: false, time: "20:16" }
       ]

@@ -57,7 +57,7 @@ export function renderDecisionRecord(): string {
     <!-- Escalation reason -->
     <div class="info-card info-card--red">
       <div class="info-card__label info-card__label--red">REDEN VAN ESCALATIE</div>
-      <p style="font-family:var(--font-serif);font-size:16px;line-height:1.45;color:#5a2c20;">Afwijkende combinatie van buitenlandse behandeling en waarborg. De Franse procedurecode sluit niet rechtstreeks aan op de Belgische polisconfiguratie. Patiëntidentificatie op de radiologiefactuur is onvoldoende. Beide onderdelen liggen buiten de marge waarbinnen autonoom mag worden beslist — daarom: menselijke beoordeling vereist.</p>
+      <p style="font-family:var(--font-serif);font-size:16px;line-height:1.45;color:#5a2c20;">Afwijkende combinatie van buitenlandse behandeling en waarborg. De Franse procedurecode sluit niet rechtstreeks aan op de Belgische polisconfiguratie. Patiëntidentificatie op de radiologiefactuur is onvoldoende. Beide onderdelen liggen buiten de marge waarbinnen autonoom mag worden beslist. Daarom: menselijke beoordeling vereist.</p>
     </div>
   </div>
 

@@ -50,7 +50,7 @@ export const ondersteunen: SceneModule = {
                 <div class="consent-box" style="margin-bottom:8px; padding:6px; border:1px solid #ddd; border-radius:4px; background:#fff;">
                   <label class="consent-label" style="display:flex; gap:6px; font-size:9.5px; align-items:center;">
                     <input type="checkbox" id="consent-gp-check">
-                    <span>Deel met dr. Martens (België) — vanuit Frans dossier</span>
+                    <span>Deel met dr. Martens (België), vanuit Frans dossier</span>
                   </label>
                 </div>
                 <button class="step-btn" id="btn-confirm-aftercare" style="width:100%; font-size:10px;" disabled>Bevestig &amp; Deel</button>

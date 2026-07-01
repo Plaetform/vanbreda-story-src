@@ -3485,7 +3485,7 @@ body {
   width: 80vw;
   max-width: 1000px;
   height: 70vh;
-  max-height: 550px;
+  max-height: 520px;
   background: rgba(253, 251, 246, 0.95); /* Warm paper color with subtle glass transparency */
   backdrop-filter: blur(10px);
   border: 1px solid rgba(44, 140, 153, 0.2);
@@ -3496,7 +3496,7 @@ body {
   flex-direction: column;
   overflow: hidden;
   position: absolute;
-  top: 45%;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);

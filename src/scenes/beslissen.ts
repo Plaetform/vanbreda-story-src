@@ -60,7 +60,7 @@ export const beslissen: SceneModule = {
                   <div class="step-checkbox">○</div>
                   <div class="step-content">
                     <h4>Arbeidsongeschiktheidsattest</h4>
-                    <p>Automatisch verstuurd naar uw werkgever. Neutraal — zonder medische details.</p>
+                    <p>Automatisch verstuurd naar uw werkgever. Neutraal, zonder medische details.</p>
                     <span style="font-size:10px; color:#4caf50; font-weight:600;">✓ Verstuurd naar HR</span>
                   </div>
                 </div>
@@ -85,9 +85,35 @@ export const beslissen: SceneModule = {
     let flightsDone = false
     let janDone = false
 
+    // Auto-scroll the phone container to show all items including the attest at the bottom
+    const scrollContainer = document.querySelector('.phone-scroll') as HTMLElement | null
+    const scrollToBottom = () => {
+      if (scrollContainer) {
+        setTimeout(() => {
+          scrollContainer.scrollTo({ top: scrollContainer.scrollHeight, behavior: 'smooth' })
+        }, 300)
+      }
+    }
+
+    // On load: slowly scroll down to reveal all items, then back up
+    if (scrollContainer) {
+      activeTimers.push(setTimeout(() => {
+        const totalHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight
+        if (totalHeight > 0) {
+          // Scroll down slowly
+          scrollContainer.scrollTo({ top: totalHeight, behavior: 'smooth' })
+          // After reaching the bottom, scroll back up
+          activeTimers.push(setTimeout(() => {
+            scrollContainer.scrollTo({ top: 0, behavior: 'smooth' })
+          }, 2500))
+        }
+      }, 1500))
+    }
+
     const checkShowNext = () => {
       if (flightsDone && janDone && nextContainer) {
         nextContainer.style.display = 'block'
+        scrollToBottom()
       }
     }
 
@@ -104,6 +130,7 @@ export const beslissen: SceneModule = {
         if (box) box.textContent = '✓'
       }
       flightsDone = true
+      scrollToBottom()
       checkShowNext()
     })
 
@@ -120,6 +147,7 @@ export const beslissen: SceneModule = {
         if (box) box.textContent = '✓'
       }
       janDone = true
+      scrollToBottom()
       checkShowNext()
     })
 

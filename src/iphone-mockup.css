@@ -230,14 +230,14 @@
 /* ─── Centered Layout (no white card) ─── */
 .scene-phone-centered {
   position: absolute;
-  top: 45%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -55%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  max-height: calc(100vh - 140px);
+  max-height: calc(100vh - 200px);
 }
 
 .scene-phone-next {

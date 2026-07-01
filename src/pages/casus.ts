@@ -21,7 +21,7 @@ export function renderCasus(): string {
 
     <div class="info-card info-card--navy">
       <div class="info-card__label">DE AANLEIDING</div>
-      <p class="info-card__text">${d.verzekerde.roepnaam} wordt tijdens een zakelijke reis in Lyon onverwacht opgenomen na ernstige buikpijn. Na onderzoek blijkt sprake van acute galblaasontsteking. Er volgt een spoedoperatie. Na ontslag uploadt ze haar documenten via de mobiele app en neemt ze contact op met Vanbreda — ze wil weten wat er wordt terugbetaald.</p>
+      <p class="info-card__text">${d.verzekerde.roepnaam} wordt tijdens een zakelijke reis in Lyon onverwacht opgenomen na ernstige buikpijn. Na onderzoek blijkt sprake van acute galblaasontsteking. Er volgt een spoedoperatie. Na ontslag uploadt ze haar documenten via de mobiele app en neemt ze contact op met Vanbreda. Ze wil weten wat er wordt terugbetaald.</p>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 12mm;margin-top:9mm;">
@@ -35,7 +35,7 @@ export function renderCasus(): string {
     </div>
 
     <div style="position:relative;margin-top:14mm;background:#fbf6ea;border:1px solid var(--c-border);padding:6mm 7mm;max-width:130mm;">
-      <p style="font-family:var(--font-serif);font-size:14px;line-height:1.5;color:#4a4536;">Eén gebeurtenis loopt door Claims, Communicatie én B2B/B2I. Dit dossier volgt die ene gebeurtenis — stap voor stap — van intake tot terugbetaling.</p>
+      <p style="font-family:var(--font-serif);font-size:14px;line-height:1.5;color:#4a4536;">Eén gebeurtenis loopt door Claims, Communicatie én B2B/B2I. Dit dossier volgt die ene gebeurtenis, stap voor stap, van intake tot terugbetaling.</p>
       <div style="position:absolute;right:6mm;bottom:-9mm;" class="hw-accent" style="font-size:24px;color:var(--c-copper);transform:rotate(-5deg);">Lyon → Antwerpen ↗</div>
     </div>
   </div>

@@ -44,7 +44,7 @@ export function renderKeten(): string {
     <div class="doc-title">
       <div class="doc-title__number">DOCUMENT 02</div>
       <h1 class="doc-title__heading">De keten van 2030</h1>
-      <div class="doc-title__sub">Eén gebeurtenis, negen stappen — met bij elke stap: wat doet AI, wat doet de mens, welke bron, en hoeveel autonomie.</div>
+      <div class="doc-title__sub">Eén gebeurtenis, negen stappen – met bij elke stap: wat doet AI, wat doet de mens, welke bron, en hoeveel autonomie.</div>
     </div>
 
     <!-- Legend -->
@@ -60,7 +60,7 @@ export function renderKeten(): string {
     <!-- Sketch reference -->
     <div style="margin-top:6mm;display:flex;align-items:center;gap:5mm;background:var(--c-card);border:1px solid var(--c-border);padding:3mm 4mm;">
       <img src="/img-blueprint-flow.png" alt="schets" style="width:28mm;height:auto;opacity:.7;border-radius:1px;">
-      <div style="font-family:var(--font-mono);font-size:9.5px;color:#8a8069;">↳ werkschets ketenflow — zie bijlage schets 01</div>
+      <div style="font-family:var(--font-mono);font-size:9.5px;color:#8a8069;">↳ werkschets ketenflow – zie bijlage schets 01</div>
     </div>
   </div>
 

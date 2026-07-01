@@ -48,7 +48,7 @@ export function asset02(): string {
       <div style="display:grid;grid-template-columns:auto 1fr auto 1fr;gap:2mm 4mm;font-size:13px;border-bottom:1px dashed #8a8a82;padding-bottom:5mm;margin-bottom:6mm;">
         <span style="color:#777;">AAN:</span><span>Claimsbehandelaar ${d.notitie.auteur}</span><span style="color:#777;">DATUM:</span><span>${d.aiDecision.datum}</span>
         <span style="color:#777;">VAN:</span><span>AI Claims-engine</span><span style="color:#777;">DOSSIER:</span><span style="font-weight:700;">${d.displayNr}</span>
-        <span style="color:#777;">BETREFT:</span><span style="grid-column:span 3;">Beslisrecord ${d.aiDecision.id} — voorstel met escalatie</span>
+        <span style="color:#777;">BETREFT:</span><span style="grid-column:span 3;">Beslisrecord ${d.aiDecision.id} – voorstel met escalatie</span>
       </div>
       <div style="font-size:14px;font-weight:700;letter-spacing:.04em;">▸ VOORGESTELDE BESLISSING</div>
       <div style="font-size:13.5px;line-height:1.55;margin:2mm 0 6mm;">Claim grotendeels goedkeuren. Comfortkost afwijzen. Radiologiefactuur reserveren. EEN onderdeel wordt voorgelegd voor menselijke review.</div>
@@ -64,7 +64,7 @@ export function asset02(): string {
       </div>
       <div style="border:1.5px solid #262626;padding:4mm 5mm;margin-top:2mm;">
         <div style="font-size:14px;font-weight:700;letter-spacing:.04em;">▸ REDEN VAN ESCALATIE</div>
-        <div style="font-size:13.5px;line-height:1.55;margin-top:2mm;">Afwijkende combinatie van behandeling en waarborg. Franse procedurecode niet gemapt. Patiëntidentificatie radiologiefactuur onvoldoende. Ligt buiten de autonome marge — MENSELIJKE BEOORDELING VEREIST.</div>
+        <div style="font-size:13.5px;line-height:1.55;margin-top:2mm;">Afwijkende combinatie van behandeling en waarborg. Franse procedurecode niet gemapt. Patiëntidentificatie radiologiefactuur onvoldoende. Ligt buiten de autonome marge. MENSELIJKE BEOORDELING VEREIST.</div>
       </div>
       <div style="position:absolute;bottom:18mm;right:16mm;transform:rotate(-9deg);border:2.5px solid #2c6f7d;color:#2c6f7d;border-radius:2px;padding:2.5mm 5mm;font-size:11px;letter-spacing:.12em;opacity:.7;mix-blend-mode:multiply;text-align:center;">ONTVANGEN<br><span>${d.aiDecision.datum}</span></div>
     </div>
@@ -87,12 +87,12 @@ export function asset03(): string {
       <div style="color:#3a372e;">${d.verzekerde.naam}<br>${d.verzekerde.adres}<br>${d.verzekerde.postcode} ${d.verzekerde.woonplaats}</div>
       <div style="text-align:right;color:#8a8576;">Antwerpen,<br>${d.aiDecision.datum}</div>
     </div>
-    <div style="margin-top:10mm;font-size:13px;"><b>Betreft:</b> terugbetaling hospitalisatie — dossier <b style="font-family:var(--font-mono);color:var(--c-navy);">${d.nr}</b></div>
+    <div style="margin-top:10mm;font-size:13px;"><b>Betreft:</b> terugbetaling hospitalisatie – dossier <b style="font-family:var(--font-mono);color:var(--c-navy);">${d.nr}</b></div>
     <div style="margin-top:8mm;font-size:13.5px;line-height:1.65;color:#23211c;">
       <p style="margin:0 0 4.5mm;">Beste ${d.verzekerde.roepnaam},</p>
-      <p style="margin:0 0 4.5mm;">We hebben je dossier ontvangen en grotendeels kunnen beoordelen. Je hoefde niets opnieuw te bezorgen — we hadden alles wat we nodig hadden.</p>
-      <p style="margin:0 0 4.5mm;"><b>Wat we nu al goedkeuren:</b> de kosten van je spoedopname, operatie, medicatie en nazorgconsult — in totaal ${d.financieel.voorlopigVergoedbaar} (na aftrek eigen risico van ${d.financieel.eigenRisico}).</p>
-      <p style="margin:0 0 4.5mm;">Eén onderdeel kijken we nog persoonlijk na. Dat gaat over de radiologiefactuur van ${d.financieel.radiologie} — de identificatiekoppeling op dat document is onvolledig. Een collega beoordeelt dit en laat je weten wat de uitkomst is.</p>
+      <p style="margin:0 0 4.5mm;">We hebben je dossier ontvangen en grotendeels kunnen beoordelen. Je hoefde niets opnieuw te bezorgen. We hadden alles wat we nodig hadden.</p>
+      <p style="margin:0 0 4.5mm;"><b>Wat we nu al goedkeuren:</b> de kosten van je spoedopname, operatie, medicatie en nazorgconsult, in totaal ${d.financieel.voorlopigVergoedbaar} (na aftrek eigen risico van ${d.financieel.eigenRisico}).</p>
+      <p style="margin:0 0 4.5mm;">Eén onderdeel kijken we nog persoonlijk na. Dat gaat over de radiologiefactuur van ${d.financieel.radiologie}. De identificatiekoppeling op dat document is onvolledig. Een collega beoordeelt dit en laat je weten wat de uitkomst is.</p>
       <p style="margin:0 0 4.5mm;">De premium maaltijddienst (${d.financieel.premiumMaaltijd}) valt helaas niet onder je hospitalisatiedekking.</p>
       <p style="margin:0 0 4.5mm;">Je hoort hierover vóór ${d.laatsteUpdate.split(',')[0]} van ons. Heb je vragen? Je kunt altijd reageren in de Vanbreda-app of bellen.</p>
       <p style="margin:0 0 2mm;">Met vriendelijke groet,</p>
@@ -149,7 +149,7 @@ export function asset05(): string {
   <div style="position:relative;width:148mm;height:105mm;background:#f3ead0;box-shadow:0 10px 28px rgba(0,0,0,.32);transform:rotate(.8deg);overflow:hidden;font-family:var(--font-mono);color:#3a3320;">
     <div style="position:absolute;top:11mm;bottom:11mm;left:50%;width:1px;background:#cdbf99;"></div>
     <div style="position:absolute;left:0;top:0;width:50%;height:100%;padding:11mm 11mm;">
-      <div style="font-family:var(--font-serif);font-size:13px;line-height:1.5;color:#33302a;">Eén dag uit 2030: één gebeurtenis loopt vloeiend door Claims, Communicatie en B2B/B2I — als mens, data en AI als één geheel samenwerken.</div>
+      <div style="font-family:var(--font-serif);font-size:13px;line-height:1.5;color:#33302a;">Eén dag uit 2030: één gebeurtenis loopt vloeiend door Claims, Communicatie en B2B/B2I, als mens, data en AI als één geheel samenwerken.</div>
       <div style="position:absolute;bottom:11mm;left:11mm;font-size:22px;color:var(--c-navy);">${hw('— AE, voor Vanbreda', 'signature')}</div>
     </div>
     <div style="position:absolute;right:0;top:0;width:50%;height:100%;padding:9mm 11mm;">
